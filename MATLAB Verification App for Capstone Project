@@ -1,0 +1,2527 @@
+ classdef Verification_App < matlab.apps.AppBase
+
+    % Properties that correspond to app components
+    properties (Access = public)
+        UIFigure                        matlab.ui.Figure
+        TabGroup                        matlab.ui.container.TabGroup
+        LinearRailTestTab               matlab.ui.container.Tab
+        PlotsofOutputDataPanel          matlab.ui.container.Panel
+        TrialDataTable                  matlab.ui.control.Table
+        UIAxes_3                        matlab.ui.control.UIAxes
+        UIAxes_2                        matlab.ui.control.UIAxes
+        UIAxes                          matlab.ui.control.UIAxes
+        OverallResultsfromConditionPanel  matlab.ui.container.Panel
+        MeanAccmms2EditField            matlab.ui.control.NumericEditField
+        MeanAccmms2EditFieldLabel       matlab.ui.control.Label
+        AccSDmms2EditField              matlab.ui.control.NumericEditField
+        AccSDmms2EditFieldLabel         matlab.ui.control.Label
+        MeanVelocitymmsEditField        matlab.ui.control.NumericEditField
+        MeanVelocitymmsEditFieldLabel   matlab.ui.control.Label
+        VelocitySDmmsEditField          matlab.ui.control.NumericEditField
+        VelocitySDmmsEditFieldLabel     matlab.ui.control.Label
+        MeanPositionErrormmEditField    matlab.ui.control.NumericEditField
+        MeanPositionErrormmEditFieldLabel  matlab.ui.control.Label
+        PositionErrorSDmmEditField      matlab.ui.control.NumericEditField
+        PositionErrorSDmmEditFieldLabel  matlab.ui.control.Label
+        SettingstoAdjustandRecordOutputsPanel  matlab.ui.container.Panel
+        Accelerationmms2EditField_2     matlab.ui.control.NumericEditField
+        Accelerationmms2EditField_2Label  matlab.ui.control.Label
+        VelocitymmsEditField_2          matlab.ui.control.NumericEditField
+        VelocitymmsEditField_2Label     matlab.ui.control.Label
+        PositionmmEditField             matlab.ui.control.NumericEditField
+        PositionmmEditFieldLabel        matlab.ui.control.Label
+        ExpectedValueswhatitshouldbeLabel  matlab.ui.control.Label
+        Accelerationmms2EditField       matlab.ui.control.NumericEditField
+        Accelerationmms2EditFieldLabel  matlab.ui.control.Label
+        VelocitymmsEditField            matlab.ui.control.NumericEditField
+        VelocitymmsEditFieldLabel       matlab.ui.control.Label
+        PositionErrormmEditField        matlab.ui.control.NumericEditField
+        PositionErrormmEditFieldLabel   matlab.ui.control.Label
+        CyclesDropDown                  matlab.ui.control.DropDown
+        CyclesDropDownLabel             matlab.ui.control.Label
+        LoadDropDown                    matlab.ui.control.DropDown
+        LoadDropDownLabel               matlab.ui.control.Label
+        SpeedDropDown                   matlab.ui.control.DropDown
+        SpeedDropDownLabel              matlab.ui.control.Label
+        NotesfromTrialTextArea_7        matlab.ui.control.TextArea
+        NotesfromTrialTextArea_7Label   matlab.ui.control.Label
+        TrialCounterEditField_7         matlab.ui.control.NumericEditField
+        TrialCounterEditField_7Label    matlab.ui.control.Label
+        MeasuredOutputspertrialLabel    matlab.ui.control.Label
+        FactorsIndependentVariablesLabel  matlab.ui.control.Label
+        ClearCurrentTrialEntryButton_7  matlab.ui.control.Button
+        ExportDatatoCSVExcelButton_7    matlab.ui.control.Button
+        SaveTrialDataButton_7           matlab.ui.control.Button
+        GripTestTab                     matlab.ui.container.Tab
+        PlotsofOutputDataPanel_2        matlab.ui.container.Panel
+        UIAxes_23                       matlab.ui.control.UIAxes
+        UIAxes_5                        matlab.ui.control.UIAxes
+        UIAxes_4                        matlab.ui.control.UIAxes
+        OverallResultsfromConditionPanel_2  matlab.ui.container.Panel
+        MeanSlipPositionErrormmEditField  matlab.ui.control.NumericEditField
+        MeanSlipPositionErrormmEditFieldLabel  matlab.ui.control.Label
+        SlipPositionErrorSDmmEditField_2  matlab.ui.control.NumericEditField
+        SlipPositionErrorSDmmEditField_2Label  matlab.ui.control.Label
+        MeanTimingErrormsEditField      matlab.ui.control.NumericEditField
+        MeanTimingErrormsEditFieldLabel  matlab.ui.control.Label
+        TimingErrorSDmsEditField        matlab.ui.control.NumericEditField
+        TimingErrorSDmsEditFieldLabel   matlab.ui.control.Label
+        GripSuccessRateEditField        matlab.ui.control.NumericEditField
+        GripSuccessRateLabel            matlab.ui.control.Label
+        MeanDropPositionErrormmEditField  matlab.ui.control.NumericEditField
+        MeanDropPositionErrormmEditFieldLabel  matlab.ui.control.Label
+        DropPositionErrorSDmmEditField  matlab.ui.control.NumericEditField
+        DropPositionErrorSDmmEditFieldLabel  matlab.ui.control.Label
+        SettingstoAdjustandRecordOutputsPanel_2  matlab.ui.container.Panel
+        DropPositionErrormmEditField    matlab.ui.control.NumericEditField
+        DropPositionErrormmEditFieldLabel  matlab.ui.control.Label
+        DiditgripsuccessfullyCheckBox   matlab.ui.control.CheckBox
+        TimetolowerreleasecoverslipEditField  matlab.ui.control.NumericEditField
+        TimetolowerreleasecoverslipEditFieldLabel  matlab.ui.control.Label
+        DropPositionmmEditField         matlab.ui.control.NumericEditField
+        DropPositionmmEditFieldLabel    matlab.ui.control.Label
+        ExpectedValueswhatitshouldbeLabel_2  matlab.ui.control.Label
+        TimingErrormsEditField          matlab.ui.control.NumericEditField
+        TimingErrormsEditFieldLabel     matlab.ui.control.Label
+        CoverslipPositionErrormmEditField_2  matlab.ui.control.NumericEditField
+        CoverslipPositionErrormmEditField_2Label  matlab.ui.control.Label
+        LoweringSpeedDropDown           matlab.ui.control.DropDown
+        LoweringSpeedDropDownLabel      matlab.ui.control.Label
+        VacuumPressureDropDown          matlab.ui.control.DropDown
+        VacuumPressureDropDownLabel     matlab.ui.control.Label
+        NotesfromTrialTextArea_8        matlab.ui.control.TextArea
+        NotesfromTrialTextArea_8Label   matlab.ui.control.Label
+        TrialCounterEditField_8         matlab.ui.control.NumericEditField
+        TrialCounterEditField_8Label    matlab.ui.control.Label
+        MeasuredOutputspertrialLabel_2  matlab.ui.control.Label
+        FactorsIndependentVariablesLabel_2  matlab.ui.control.Label
+        ClearCurrentTrialEntryButton_8  matlab.ui.control.Button
+        ExportDatatoCSVExcelButton_8    matlab.ui.control.Button
+        SaveTrialDataButton_8           matlab.ui.control.Button
+        DripperTestTab                  matlab.ui.container.Tab
+        PlotsofOutputDataPanel_3        matlab.ui.container.Panel
+        UIAxes_19                       matlab.ui.control.UIAxes
+        UIAxes_18                       matlab.ui.control.UIAxes
+        UIAxes_8                        matlab.ui.control.UIAxes
+        UIAxes_7                        matlab.ui.control.UIAxes
+        UIAxes_6                        matlab.ui.control.UIAxes
+        OverallResultsfromConditionPanel_3  matlab.ui.container.Panel
+        AreaofSpreadMeanmm2EditField    matlab.ui.control.NumericEditField
+        AreaofSpreadMeanmm2EditFieldLabel  matlab.ui.control.Label
+        AreaofSpreadSDmm2EditField      matlab.ui.control.NumericEditField
+        AreaofSpreadSDmm2EditFieldLabel  matlab.ui.control.Label
+        VolumeDispensedMeanmLEditField  matlab.ui.control.NumericEditField
+        VolumeDispensedMeanmLEditFieldLabel  matlab.ui.control.Label
+        TimingSDtotaltimemsEditField    matlab.ui.control.NumericEditField
+        TimingSDtotaltimemsEditFieldLabel  matlab.ui.control.Label
+        TimingErrorSDendtimemsEditField  matlab.ui.control.NumericEditField
+        TimingErrorSDendtimemsEditFieldLabel  matlab.ui.control.Label
+        TimingErrorSDstarttimemsEditField  matlab.ui.control.NumericEditField
+        TimingErrorSDstarttimemsEditFieldLabel  matlab.ui.control.Label
+        VolumeDispensedSDLEditField     matlab.ui.control.NumericEditField
+        VolumeDispensedSDLEditFieldLabel  matlab.ui.control.Label
+        SettingstoAdjustandRecordOutputsPanel_3  matlab.ui.container.Panel
+        AreaofFinalSpreadmm2EditField   matlab.ui.control.NumericEditField
+        AreaofFinalSpreadmm2EditFieldLabel  matlab.ui.control.Label
+        AreaofFinalSpreadmm2EditField_2  matlab.ui.control.NumericEditField
+        AreaofFinalSpreadmm2EditField_2Label  matlab.ui.control.Label
+        TotaldispensetimesEditField     matlab.ui.control.NumericEditField
+        TotaldispensetimesEditFieldLabel  matlab.ui.control.Label
+        VolumeDispensedLEditField_2     matlab.ui.control.NumericEditField
+        VolumeDispensedLEditField_2Label  matlab.ui.control.Label
+        ExpectedValueswhatitshouldbeLabel_3  matlab.ui.control.Label
+        TimeDispensingVisiblyEndssEditField  matlab.ui.control.NumericEditField
+        TimeDispensingVisiblyEndssEditFieldLabel  matlab.ui.control.Label
+        TimeDispensingVisiblyStartssEditField  matlab.ui.control.NumericEditField
+        TimeDispensingVisiblyStartssEditFieldLabel  matlab.ui.control.Label
+        VolumeDispensedLEditField       matlab.ui.control.NumericEditField
+        VolumeDispensedLabel            matlab.ui.control.Label
+        ofNozzlesDropDown               matlab.ui.control.DropDown
+        ofNozzlesDropDownLabel          matlab.ui.control.Label
+        NozzleSizeDropDown              matlab.ui.control.DropDown
+        NozzleSizeDropDownLabel         matlab.ui.control.Label
+        DispenseTimeDropDown            matlab.ui.control.DropDown
+        DispenseTimeDropDownLabel       matlab.ui.control.Label
+        NotesfromTrialTextArea_9        matlab.ui.control.TextArea
+        NotesfromTrialTextArea_9Label   matlab.ui.control.Label
+        TrialCounterEditField_9         matlab.ui.control.NumericEditField
+        TrialCounterEditField_9Label    matlab.ui.control.Label
+        MeasuredOutputspertrialLabel_3  matlab.ui.control.Label
+        FactorsIndependentVariablesLabel_3  matlab.ui.control.Label
+        ClearCurrentTrialEntryButton_9  matlab.ui.control.Button
+        ExportDatatoCSVExcelButton_9    matlab.ui.control.Button
+        SaveTrialDataButton_9           matlab.ui.control.Button
+        TubingIntegrityTestTab          matlab.ui.container.Tab
+        PlotsofOutputDataPanel_4        matlab.ui.container.Panel
+        UIAxes_22                       matlab.ui.control.UIAxes
+        UIAxes_21                       matlab.ui.control.UIAxes
+        UIAxes_20                       matlab.ui.control.UIAxes
+        UIAxes_9                        matlab.ui.control.UIAxes
+        OverallResultsfromConditionPanel_4  matlab.ui.container.Panel
+        TimingErrorSDendtimemsEditField_2  matlab.ui.control.NumericEditField
+        TimingErrorSDendtimemsEditField_2Label  matlab.ui.control.Label
+        TimingErrorSDstarttimemsEditField_2  matlab.ui.control.NumericEditField
+        TimingErrorSDstarttimemsEditField_2Label  matlab.ui.control.Label
+        CyclesofnodefectsoccuringEditField  matlab.ui.control.NumericEditField
+        CycleswithnodefectsoccuringLabel  matlab.ui.control.Label
+        GripSuccessRateEditField_2      matlab.ui.control.NumericEditField
+        GripSuccessRateEditField_2Label  matlab.ui.control.Label
+        TimingSDtotaltimemsEditField_2  matlab.ui.control.NumericEditField
+        TimingSDtotaltimemsEditField_2Label  matlab.ui.control.Label
+        LeakRateSDmLminEditField        matlab.ui.control.NumericEditField
+        LeakRateSDmLminEditFieldLabel   matlab.ui.control.Label
+        SettingstoAdjustandRecordOutputsPanel_4  matlab.ui.container.Panel
+        VisualDefectsCheckBox           matlab.ui.control.CheckBox
+        GripSuccessfullyCheckBox        matlab.ui.control.CheckBox
+        DripperEndTimemsEditField       matlab.ui.control.NumericEditField
+        DripperEndTimemsEditFieldLabel  matlab.ui.control.Label
+        SubsystemDropDown               matlab.ui.control.DropDown
+        SubsystemDropDownLabel          matlab.ui.control.Label
+        DripperEndTimemsEditField_2     matlab.ui.control.NumericEditField
+        DripperEndTimemsEditField_2Label  matlab.ui.control.Label
+        DripperStartTimemsEditField_2   matlab.ui.control.NumericEditField
+        DripperStartTimemsEditField_2Label  matlab.ui.control.Label
+        ExpectedValueswhatitshouldbeLabel_4  matlab.ui.control.Label
+        DripperStartTimemsEditField     matlab.ui.control.NumericEditField
+        DripperStartTimemsEditFieldLabel  matlab.ui.control.Label
+        LeakRatemLminEditField          matlab.ui.control.NumericEditField
+        LeakRatemLminEditFieldLabel     matlab.ui.control.Label
+        TubeLengthDropDown              matlab.ui.control.DropDown
+        TubeLengthDropDownLabel         matlab.ui.control.Label
+        CyclesDropDown_6                matlab.ui.control.DropDown
+        CyclesDropDown_6Label           matlab.ui.control.Label
+        PressureDropDown                matlab.ui.control.DropDown
+        PressureDropDownLabel           matlab.ui.control.Label
+        NotesfromTrialTextArea_10       matlab.ui.control.TextArea
+        NotesfromTrialTextArea_10Label  matlab.ui.control.Label
+        TrialCounterEditField_10        matlab.ui.control.NumericEditField
+        TrialCounterEditField_10Label   matlab.ui.control.Label
+        MeasuredOutputspertrialLabel_4  matlab.ui.control.Label
+        FactorsIndependentVariablesLabel_4  matlab.ui.control.Label
+        ClearCurrentTrialEntryButton_10  matlab.ui.control.Button
+        ExportDatatoCSVExcelButton_10   matlab.ui.control.Button
+        SaveTrialDataButton_10          matlab.ui.control.Button
+        WearTestTab                     matlab.ui.container.Tab
+        PlotsofOutputDataPanel_5        matlab.ui.container.Panel
+        UIAxes_25                       matlab.ui.control.UIAxes
+        UIAxes_24                       matlab.ui.control.UIAxes
+        UIAxes_14                       matlab.ui.control.UIAxes
+        UIAxes_13                       matlab.ui.control.UIAxes
+        UIAxes_12                       matlab.ui.control.UIAxes
+        OverallResultsfromConditionPanel_5  matlab.ui.container.Panel
+        SlipPositionErrorSDmmEditField  matlab.ui.control.NumericEditField
+        SlipPositionErrorSDmmEditFieldLabel  matlab.ui.control.Label
+        RailVelocityErrorSDmmsEditField  matlab.ui.control.NumericEditField
+        RailVelocityErrorSDmmsEditFieldLabel  matlab.ui.control.Label
+        RailPositionErrorSDmmEditField  matlab.ui.control.NumericEditField
+        RailPositionErrorSDmmEditFieldLabel  matlab.ui.control.Label
+        DripperTotalTimeErrorSDmsEditField  matlab.ui.control.NumericEditField
+        DripperTotalTimeErrorSDmsEditFieldLabel  matlab.ui.control.Label
+        DripperEndTimeSDmsEditField     matlab.ui.control.NumericEditField
+        DripperEndTimeSDmsEditFieldLabel  matlab.ui.control.Label
+        DripperStartTimeErrorSDmsEditField  matlab.ui.control.NumericEditField
+        DripperStartTimeErrorSDmsEditFieldLabel  matlab.ui.control.Label
+        VolumeDispensedSDLEditField_2   matlab.ui.control.NumericEditField
+        VolumeDispensedSDLEditField_2Label  matlab.ui.control.Label
+        CyclethatwearstartstoshowEditField  matlab.ui.control.NumericEditField
+        CyclethatwearstartstoshowEditFieldLabel  matlab.ui.control.Label
+        GripSuccessRateEditField_3      matlab.ui.control.NumericEditField
+        GripSuccessRateEditField_3Label  matlab.ui.control.Label
+        SettingstoAdjustandRecordOutputsPanel_5  matlab.ui.container.Panel
+        CoverslipPositionErrormmEditField  matlab.ui.control.NumericEditField
+        CoverslipPositionErrormmLabel   matlab.ui.control.Label
+        RailVelocitymmsEditField        matlab.ui.control.NumericEditField
+        RailVelocitymmsEditFieldLabel   matlab.ui.control.Label
+        TimeDrippingVisiblyEndsmsEditField  matlab.ui.control.NumericEditField
+        TimeDrippingVisiblyEndsmsEditFieldLabel  matlab.ui.control.Label
+        GripSuccessfullyCheckBox_2      matlab.ui.control.CheckBox
+        VolumeofMediaDispensedLEditField  matlab.ui.control.NumericEditField
+        VolumeofMediaDispensedLEditFieldLabel  matlab.ui.control.Label
+        VisualDamageCheckBox            matlab.ui.control.CheckBox
+        DrippercycletimesEditField      matlab.ui.control.NumericEditField
+        DrippercycletimesEditFieldLabel  matlab.ui.control.Label
+        RailVelocitymmsEditField_2      matlab.ui.control.NumericEditField
+        RailVelocitymmsEditField_2Label  matlab.ui.control.Label
+        VolumeDispensedLEditField_3     matlab.ui.control.NumericEditField
+        VolumeDispensedLEditField_3Label  matlab.ui.control.Label
+        ExpectedValueswhatitshouldbeLabel_5  matlab.ui.control.Label
+        RailPositionErrormmEditField    matlab.ui.control.NumericEditField
+        RailPositionErrormmEditFieldLabel  matlab.ui.control.Label
+        TimeDrippingVisiblyStartsmsEditField  matlab.ui.control.NumericEditField
+        TimeDrippingVisiblyStartsmsEditFieldLabel  matlab.ui.control.Label
+        NotesfromTrialTextArea_11       matlab.ui.control.TextArea
+        NotesfromTrialTextArea_11Label  matlab.ui.control.Label
+        TrialCounterEditField_11        matlab.ui.control.NumericEditField
+        TrialCounterEditField_11Label   matlab.ui.control.Label
+        MeasuredOutputspertrialLabel_5  matlab.ui.control.Label
+        ClearCurrentTrialEntryButton_11  matlab.ui.control.Button
+        ExportDatatoCSVExcelButton_11   matlab.ui.control.Button
+        SaveTrialDataButton_11          matlab.ui.control.Button
+        SequenceTestTab                 matlab.ui.container.Tab
+        PlotsofOutputDataPanel_6        matlab.ui.container.Panel
+        UIAxes_17                       matlab.ui.control.UIAxes
+        UIAxes_16                       matlab.ui.control.UIAxes
+        UIAxes_15                       matlab.ui.control.UIAxes
+        OverallResultsfromConditionPanel_6  matlab.ui.container.Panel
+        SuccessRateEditField            matlab.ui.control.NumericEditField
+        SuccessRateEditFieldLabel       matlab.ui.control.Label
+        CycleTimeSDmsEditField          matlab.ui.control.NumericEditField
+        CycleTimeSDmsEditFieldLabel     matlab.ui.control.Label
+        CycleTimeMeansEditField         matlab.ui.control.NumericEditField
+        CycleTimeMeansEditFieldLabel    matlab.ui.control.Label
+        ofTimesDeviceFailedEditField    matlab.ui.control.NumericEditField
+        ofTimesDeviceFailedEditFieldLabel  matlab.ui.control.Label
+        TimingErrorSDmsEditField_2      matlab.ui.control.NumericEditField
+        TimingErrorSDmsEditField_2Label  matlab.ui.control.Label
+        SettingstoAdjustandRecordOutputsPanel_6  matlab.ui.container.Panel
+        WerethereanydelaysorcollisionsCheckBox  matlab.ui.control.CheckBox
+        DidtheDeviceFailShowanErrorCheckBox  matlab.ui.control.CheckBox
+        TotalCycleTimesEditField_2      matlab.ui.control.NumericEditField
+        TotalCycleTimesEditField_2Label  matlab.ui.control.Label
+        ExpectedValueswhatitshouldbeLabel_6  matlab.ui.control.Label
+        TotalCycleTimesEditField        matlab.ui.control.NumericEditField
+        TotalCycleTimesEditFieldLabel   matlab.ui.control.Label
+        ofCorrectStepsEditField         matlab.ui.control.NumericEditField
+        ofCorrectStepsEditFieldLabel    matlab.ui.control.Label
+        TimingErrormsEditField_2        matlab.ui.control.NumericEditField
+        TimingErrormsEditField_2Label   matlab.ui.control.Label
+        PressureDropDown_2              matlab.ui.control.DropDown
+        PressureDropDown_2Label         matlab.ui.control.Label
+        RailSpeedDropDown               matlab.ui.control.DropDown
+        RailSpeedDropDownLabel          matlab.ui.control.Label
+        TimingAdjustmentDropDown        matlab.ui.control.DropDown
+        TimingAdjustmentDropDownLabel   matlab.ui.control.Label
+        NotesfromTrialTextArea_12       matlab.ui.control.TextArea
+        NotesfromTrialTextArea_12Label  matlab.ui.control.Label
+        TrialCounterEditField_12        matlab.ui.control.NumericEditField
+        TrialCounterEditField_12Label   matlab.ui.control.Label
+        MeasuredOutputspertrialLabel_6  matlab.ui.control.Label
+        FactorsIndependentVariablesLabel_6  matlab.ui.control.Label
+        ClearCurrentTrialEntryButton_12  matlab.ui.control.Button
+        ExportDatatoCSVExcelButton_12   matlab.ui.control.Button
+        SaveTrialDataButton_12          matlab.ui.control.Button
+    end
+
+    % Callbacks that handle component events
+    methods (Access = private)
+
+        % Code that executes after component creation
+        function startupFcn(app)
+            movegui(app.UIFigure,'center');
+        end
+
+        % Cell edit callback: TrialDataTable
+        function TrialDataTableCellEdit(app, event)
+  
+            
+        end
+
+        % Button pushed function: SaveTrialDataButton_7
+        function SaveTrialDataButton_1Pushed(app, event)
+            posErr = app.PositionErrormmEditField.Value;
+            velErr = app.VelocitymmsEditField.Value - app.VelocitymmsEditField_2.Value;
+            accErr = app.Accelerationmms2EditField.Value - app.Accelerationmms2EditField_2.Value;
+            newRow = table(...
+                app.TrialCounterEditField_7.Value, ...
+                string(app.SpeedDropDown.Value), ...
+                string(app.LoadDropDown.Value), ...
+                string(app.CyclesDropDown.Value), ...
+                posErr,velErr,accErr, ...
+                app.PositionmmEditField.Value, ...
+                app.VelocitymmsEditField_2.Value, ...
+                app.Accelerationmms2EditField_2.Value, ...
+                string(app.NotesfromTrialTextArea_7.Value), ...
+                'VariableNames',{'Trial','Speed','Load','Cycles','PosErr','VelErr','AccErr','ExpPos','ExpVel','ExpAcc','Notes'});
+            if isempty(app.TrialDataTable)
+                app.TrialDataTable.Data = newRow;
+            else 
+                app.TrialDataTable.Data = [app.TrialDataTable.Data; newRow];
+            end
+            data = app.TrialDataTable.Data;
+            n = height(data);
+            app.MeanPositionErrormmEditField.Value = mean(data.PosErr);
+            app.PositionErrorSDmmEditField.Value = sqrt(sum(data.PosErr.^2)/n);
+            app.MeanVelocitymmsEditField.Value = mean(data.VelErr);
+            app.VelocitySDmmsEditField.Value = sqrt(sum(data.VelErr.^2)/n);
+            app.MeanAccmms2EditField.Value = mean(data.AccErr);
+            app.AccSDmms2EditField.Value = sqrt(sum(data.AccErr.^2)/n);
+            plot(app.UIAxes,data.Trial,data.PosErr,'-o');
+            plot(app.UIAxes_2,data.Trial, data.VelErr,'-o');
+            plot(app.UIAxes_3,data.Trial, data.AccErr,'-o');
+            app.TrialCounterEditField_7.Value = app.TrialCounterEditField_7.Value + 1;
+            app.ClearCurrentTrialEntryButton_1Pushed();
+        end
+
+        % Button pushed function: ClearCurrentTrialEntryButton_7
+        function ClearCurrentTrialEntryButton_1Pushed(app, event)
+            app.PositionErrormmEditField.Value = 0;
+            app.VelocitymmsEditField.Value = 0;
+            app.Accelerationmms2EditField.Value = 0;
+            app.PositionmmEditField.Value = 0;
+            app.VelocitymmsEditField_2.Value = 0;
+            app.Accelerationmms2EditField_2.Value = 0;
+            app.NotesfromTrialTextArea_7.Value = "";
+        end
+
+        % Button pushed function: ExportDatatoCSVExcelButton_7
+        function ExportDatatoCSVExcelButton_1Pushed(app, event)
+            if isempty(app.TrialDataTable)
+                uialert(app.UIFigure,'No data to export!','Export Error');
+                return;
+            end
+            [file,path] = uiputfile({'*.csv';'*.xlsx'},'Save Trial Data');
+            if isequal(file,0)
+                return;
+            end
+            fullPath = fullfile(path,file)
+            summaryHeader = {'','';'Overall Results',''};
+            summaryData = {
+                'Mean Position Error (mm)',app.MeanPositionErrormmEditField.Value;
+                'Position Error SD (mm)', app.PositionErrorSDmmEditField.Value;
+                'Mean Velocity Error (mm/s)', app.MeanVelocitymmsEditField.Value;
+                'Velocity Error SD (mm/s)', app.VelocitySDmmsEditField.Value;
+                'Mean Accel Error (mm/s^2)', app.MeanAccmms2EditField.Value;
+                'Accel Error SD (mm/s^2)', app.AccSDmms2EditField.Value};
+            finalSummary = [summaryHeader; summaryData];
+            writetable(app.TrialDataTable.Data,fullPath);
+            writecell(finalSummary, fullPath,'WriteMode','append');
+            app.TrialDataTable.Data = [];
+            app.TrialCounterEditField_7.Value = 1;
+            app.ClearCurrentTrialEntryButton_1Pushed();
+            cla(app.UIAxes);
+            cla(app.UIAxes_2);
+            cla(app.UIAxes_3);
+            app.MeanPositionErrormmEditField.Value = 0;
+            app.PositionErrorSDmmEditField.Value = 0;
+            app.VelocitySDmmsEditField.Value = 0;
+            app.MeanVelocitymmsEditField.Value = 0;
+            app.AccSDmms2EditField.Value = 0;
+            app.MeanAccmms2EditField.Value = 0;
+        end
+
+        % Button pushed function: SaveTrialDataButton_8
+        function SaveTrialButton_2Pushed(app, event)
+            newRow = table(...
+                app.TrialCounterEditField_8.Value, ...
+                string(app.VacuumPressureDropDown.Value), ...
+                string(app.LoweringSpeedDropDown.Value), ...
+                app.DiditgripsuccessfullyCheckBox.Value, ...
+                app.CoverslipPositionErrormmEditField_2.Value, ...
+                app.TimingErrormsEditField.Value, ...
+                app.DropPositionErrormmEditField.Value, ...
+                app.DropPositionmmEditField.Value, ...
+                app.TimetolowerreleasecoverslipEditField.Value, ...
+                string(app.NotesfromTrialTextArea_8.Value), ...
+                'VariableNames',{'Trial','Vacuum','Speed','GripSuccess','SlipErr','TimingErr','DropErr','ExpDropPos','ExpTime','Notes'});
+            if isempty(app.TrialDataTable.Data) || ~istable(app.TrialDataTable.Data)
+                app.TrialDataTable.Data = newRow;
+            else 
+                app.TrialDataTable.Data = [app.TrialDataTable.Data; newRow];
+            end
+            data = app.TrialDataTable.Data;
+            n = height(data);
+            app.MeanSlipPositionErrormmEditField.Value = mean(data.SlipErr);
+            app.SlipPositionErrorSDmmEditField.Value = sqrt(sum(data.SlipErr.^2)/n);
+            app.GripSuccessRateEditField.Value = (sum(data.GripSuccess)/n) * 100;
+            app.MeanTimingErrormsEditField.Value = mean(data.TimingErr);
+            app.TimingErrorSDmsEditField.Value =sqrt(sum(data.DropErr.^2)/n);
+            app.MeanDropPositionErrormmEditField.Value = mean(data.TimingErr);
+            app.DropPositionErrorSDmmEditField.Value = sqrt(sum(data.DropErr.^2)/n);
+            plot(app.UIAxes_4,data.Trial,data.SlipErr,'-o');
+            plot(app.UIAxes_5,data.Trial,data.TimingErr,'-o');
+            plot(app.UIAxes_23,data.Trial,data.DropErr,'-o');
+            app.TrialCounterEditField_8.Value = app.TrialCounterEditField_8.Value + 1;
+            app.ClearCurrentTrialEntryButton_2Pushed();
+        end
+
+        % Button pushed function: ClearCurrentTrialEntryButton_8
+        function ClearCurrentTrialEntryButton_2Pushed(app, event)
+            app.DiditgripsuccessfullyCheckBox.Value = false;
+            app.CoverslipPositionErrormmEditField_2.Value = 0;
+            app.TimingErrormsEditField.Value = 0;
+            app.DropPositionErrormmEditField.Value = 0;
+            app.DropPositionmmEditField.Value = 0;
+            app.TimetolowerreleasecoverslipEditField.Value = 0;
+            app.NotesfromTrialTextArea_8.Value = "";
+        end
+
+        % Button pushed function: ExportDatatoCSVExcelButton_8
+        function ExportDatatoCSVExcelButton_2Pushed(app, event)
+            if isempty(app.TrialDataTable.Data)
+                uialert(app.UIFigure,'No data to export!','Export Error');
+                return;
+            end
+            [file,path] = uiputfile({'*.csv','*.xlsx'},'Save Grip Test Data');
+            if isequal(file,0),
+                return;
+            end 
+            fullPath = fullfile(path,file);
+            summaryHeader = {'',''; 'Overall Results',''};
+            summaryData = {
+                'Mean Slip Position Error (mm)', app.MeanSlipPositionErrormmEditField.Value;
+                'Slip Position Error SD (mm)', app.SlipPositionErrorSDmmEditField.Value;
+                'Grip Success Rate (%)', app.GripSuccessRateEditField.Value;
+                'Mean Timing Error (ms)',app.MeanTimingErrormsEditField.Value;
+                'Timing Error SD (ms)',app.TimingErrorSDmsEditField.Value;
+                'Mean Drop Position Error (mm)',app.MeanDropPositionErrormmEditField.Value;
+                'Drop Position Error SD (mm)', app.DropPositionErrorSDmmEditField.Value};
+            finalSummary = [summaryHeader;summaryData];
+            writetable(app.TrialDataTable.Data,fullPath);
+            writecell(finalSummary,fullPath,'WriteMode','append');
+            app.TrialDataTable.Data = [];
+            app.TrialCounterEditField_8.Value = 1;
+            app.ClearCurrentTrialEntryButton_2Pushed();
+            cla(app.UIAxes_4);
+            cla(app.UIAxes_5);
+            cla(app.UIAxes_23);
+            app.MeanSlipPositionErrormmEditField.Value = 0;
+            app.SlipPositionErrorSDmmEditField.Value = 0;
+            app.GripSuccessRateEditField.Value = 0;
+            app.MeanTimingErrormsEditField.Value = 0;
+            app.TimingErrorSDmsEditField.Value = 0;
+            app.MeanDropPositionErrormmEditField.Value = 0;
+            app.DropPositionErrorSDmmEditField.Value = 0;
+        end
+
+        % Button pushed function: SaveTrialDataButton_9
+        function SaveTrialDataButton_3Pushed(app, event)
+            measVol = app.VolumeDispensedLEditField.Value;
+            expVol = app.VolumeDispensedLEditField_2.Value;
+            volErr = measVol - expVol;
+            measStart = app.TimeDispensingVisiblyStartssEditField.Value;
+            measEnd = app.TimeDispensingVisiblyEndssEditField.Value;
+            measTotal = measEnd - measStart;
+            expTotal = app.TotaldispensetimesEditField.Value;
+            startErr_ms = measStart * 1000;
+            endErr_ms = (measEnd - expTotal) * 1000;
+            totalErr_ms = (measTotal - expTotal) * 1000;
+            measArea = app.AreaofFinalSpreadmm2EditField.Value;
+            expArea = app.AreaofFinalSpreadmm2EditField_2.Value;
+            areaErr = measArea - expArea;
+            newRow = table(...
+                app.TrialCounterEditField_9.Value, ...
+                string(app.DispenseTimeDropDown.Value),...
+                string(app.NozzleSizeDropDown.Value), ...
+                string(app.ofNozzlesDropDown.Value), ...
+                volErr,startErr_ms,endErr_ms,totalErr_ms,areaErr,measVol,measArea, ...
+                string(app.NotesfromTrialTextArea_9.Value), ...
+                'VariableNames',{'Trial','DispTime','NozzleSize','NumNozzles','VolErr','StartErr','EndErr','TotalErr','AreaErr','Vol','Area','Notes'});
+            if isempty(app.TrialDataTable.Data) || ~istable(app.TrialDataTable.Data)
+                app.TrialDataTable.Data = newRow;
+            else
+                app.TrialDataTable.Data = [app.TrialDataTable.Data; newRow];
+            end
+            data = app.TrialDataTable.Data;
+            n = height(data);
+            app.VolumeDispensedMeanmLEditField.Value = mean(data.Vol);
+            app.VolumeDispensedSDLEditField.Value = sqrt(sum(data.VolErr.^2)/n);
+            app.TimingErrorSDstarttimemsEditField.Value = sqrt(sum(data.StartErr.^2)/n);
+            app.TimingErrorSDendtimemsEditField.Value = sqrt(sum(data.EndErr.^2)/n);
+            app.TimingSDtotaltimemsEditField.Value = sqrt(sum(data.TotalErr.^2)/n);
+            app.AreaofSpreadMeanmm2EditField.Value = mean(data.Area);
+            app.AreaofSpreadSDmm2EditField.Value = sqrt(sum(data.AreaErr.^2)/n);
+            plot(app.UIAxes_6,data.Trial,data.VolErr,'-o');
+            plot(app.UIAxes_7, data.Trial,data.StartErr,'-o');
+            plot(app.UIAxes_18,data.Trial,data.EndErr,'-o');
+            plot(app.UIAxes_19,data.Trial,data.TotalErr,'-o');
+            plot(app.UIAxes_8,data.Trial,data.AreaErr, '-o');
+            app.TrialCounterEditField_9.Value = app.TrialCounterEditField_9.Value + 1;
+            app.ClearCurrentTrialEntryButton_3Pushed();
+        end
+
+        % Button pushed function: ClearCurrentTrialEntryButton_9
+        function ClearCurrentTrialEntryButton_3Pushed(app, event)
+            app.VolumeDispensedLEditField.Value = 0;
+            app.TimeDispensingVisiblyStartssEditField.Value = 0;
+            app.TimeDispensingVisiblyEndssEditField.Value = 0;
+            app.AreaofFinalSpreadmm2EditField.Value = 0;
+            app.NotesfromTrialTextArea_9.Value = "";
+        end
+
+        % Button pushed function: ExportDatatoCSVExcelButton_9
+        function ExportDatatoCSVExcelButton_3Pushed(app, event)
+            if isempty(app.TrialDataTable.Data)
+                uialert(app.UIFigure,'No data to export!','Export Error');
+                return;
+            end 
+            [file, path] = uiputfile({'*.csv';'*.xlsx'},'Save Dripper Test Data');
+            if isequal(file,0)
+                return;
+            end
+            fullPath = fullfile(path,file);
+            summaryHeader = {'','';'Overall Results',''};
+            summaryData = {
+                'Volume Dispensed Mean (mL)', app.VolumeDispensedMeanmLEditField.Value;
+                'Volume Dispensed SD (uL)', app.VolumeDispensedSDLEditField.Value;
+                'Timing Error SD (start) (ms)', app.TimingErrorSDstarttimemsEditField.Value;
+                'Timing Error SD (end) (ms)',app.TimingErrorSDendtimemsEditField.Value;
+                'Timing SD (total time) (ms)',app.TimingSDtotaltimemsEditField.Value;
+                'Area of Spread Mean (mm^2)',app.AreaofSpreadMeanmm2EditField.Value;
+                'Area of Spread SD (mm^2)',app.AreaofSpreadSDmm2EditField.Value};
+            finalSummary = [summaryHeader;summaryData];
+            writetable(app.TrialDataTable.Data,fullPath);
+            writecell(finalSummary,fullPath,'WriteMode','append');
+            app.TrialDataTable.Data = [];
+            app.TrialCounterEditField_9.Value = 1;
+            app.ClearCurrentTrialEntryButton_3Pushed();
+            cla(app.UIAxes_6);
+            cla(app.UIAxes_7);
+            cla(app.UIAxes_18);
+            cla(app.UIAxes_19);
+            cla(app.UIAxes_8);
+            app.VolumeDispensedMeanmLEditField.Value = 0;
+            app.VolumeDispensedSDLEditField.Value = 0;
+            app.TimingErrorSDstarttimemsEditField.Value = 0;
+            app.TimingErrorSDendtimemsEditField.Value = 0;
+            app.TimingSDtotaltimemsEditField.Value = 0;
+            app.AreaofSpreadMeanmm2EditField.Value = 0;
+            app.AreaofSpreadSDmm2EditField.Value = 0;
+        end
+
+        % Button pushed function: SaveTrialDataButton_10
+        function SaveTrialDataButton_4Pushed(app, event)
+           leakErr = app.LeakRatemLminEditField.Value;
+           startErr = app.DripperStartTimemsEditField.Value - app.DripperStartTimemsEditField_2.Value;
+           endErr = app.DripperEndTimemsEditField.Value - app.DripperEndTimemsEditField_2.Value;
+           measTotal = app.DripperEndTimemsEditField.Value - app.DripperStartTimemsEditField.Value;
+           expTotal = app.DripperEndTimemsEditField_2.Value - app.DripperStartTimemsEditField_2.Value;
+           totalErr = measTotal - expTotal;
+           newRow = table(app.TrialCounterEditField_10.Value, ...
+               string(app.SubsystemDropDown.Value), string(app.PressureDropDown.Value), ...
+               string(app.CyclesDropDown_6.Value), string(app.TubeLengthDropDown.Value), ...
+               leakErr, startErr, endErr, totalErr, ...
+               app.GripSuccessfullyCheckBox.Value, ~app.VisualDefectsCheckBox.Value, string(app.NotesfromTrialTextArea_10.Value), ...
+               'VariableNames',{'Trial','Subsystem','Pressure','Cycles','Length','LeakErr','StartErr','EndErr','TotalErr','GripSuccess','NoDefects','Notes'});
+           if isempty(app.TrialDataTable.Data) || ~istable(app.TrialDataTable.Data)
+               app.TrialDataTable.Data = newRow;
+           else
+               existingNames = app.TrialDataTable.Data.Properties.VariableNames;
+               newNames = newRow.Properties.VariableNames; 
+               if ~isequal(existingNames, newNames)
+                   app.TrialDataTable.Data = newRow;
+                   app.TrialCounterEditField_10.Value = 1;
+                   newRow.Trial = 1; 
+               else
+                   app.TrialDataTable.Data = [app.TrialDataTable.Data; newRow];
+               end
+           end
+           data = app.TrialDataTable.Data;
+           n = height(data);
+           app.LeakRateSDmLminEditField.Value = sqrt(sum(data.LeakErr.^2)/n);
+           app.TimingErrorSDstarttimemsEditField_2.Value = sqrt(sum(data.StartErr.^2)/n);
+           app.TimingErrorSDendtimemsEditField_2.Value = sqrt(sum(data.EndErr.^2)/n);
+           app.TimingSDtotaltimemsEditField_2.Value = sqrt(sum(data.TotalErr.^2)/n);
+           app.GripSuccessRateEditField_2.Value = (sum(data.GripSuccess)/n) * 100;
+           app.CyclesofnodefectsoccuringEditField.Value = (sum(data.NoDefects)/n) * 100;
+           plot(app.UIAxes_20, data.Trial, data.StartErr, '-o');
+           plot(app.UIAxes_21, data.Trial, data.EndErr, '-o');
+           plot(app.UIAxes_9, data.Trial, data.LeakErr, '-o');
+           plot(app.UIAxes_22, data.Trial, data.TotalErr, '-o');
+           app.TrialCounterEditField_10.Value = app.TrialCounterEditField_10.Value + 1;
+           app.ClearCurrentTrialEntryButton_4Pushed();
+        end
+
+        % Button pushed function: ClearCurrentTrialEntryButton_10
+        function ClearCurrentTrialEntryButton_4Pushed(app, event)
+            app.LeakRatemLminEditField.Value = 0;
+            app.DripperStartTimemsEditField.Value = 0;
+            app.DripperEndTimemsEditField.Value = 0;
+            app.DripperStartTimemsEditField_2.Value = 0;
+            app.DripperEndTimemsEditField_2.Value = 0; 
+            app.GripSuccessfullyCheckBox.Value = false;
+            app.VisualDefectsCheckBox.Value = false;
+            app.NotesfromTrialTextArea_10.Value = "";
+        end
+
+        % Button pushed function: ExportDatatoCSVExcelButton_10
+        function ExportDatatoCSVExcelButton_4Pushed(app, event)
+            if isempty(app.TrialDataTable.Data)
+                uialert(app.UIFigure,'No data to export!','Export Error');
+                return;
+            end 
+            [file, path] = uiputfile({'*.csv';'*.xlsx'},'SaveTubing Test Data');
+            if isequal(file,0)
+                return;
+            end
+            fullPath = fullfile(path,file);
+            summaryHeader = {'','';'Overall Results',''};
+            summaryData = {
+                'Leak Rate SD (mL/min)', app.LeakRateSDmLminEditField.Value;
+                'Timing Error SD (start) (ms)', app.TimingErrorSDstarttimemsEditField_2.Value;
+                'Timing Error SD (end) (ms)', app.TimingErrorSDendtimemsEditField_2.Value;
+                'Timing SD (total time) (ms)', app.TimingSDtotaltimemsEditField_2.Value;
+                'Grip Success Rate (%)', app.GripSuccessRateEditField_2.Value;
+                '% Cycles No Defects', app.CyclesofnodefectsoccuringEditField.Value};
+            finalSummary = [summaryHeader;summaryData];
+            writetable(app.TrialDataTable.Data,fullPath);
+            writecell(finalSummary,fullPath,'WriteMode','append');
+            app.TrialDataTable.Data = [];
+            app.TrialCounterEditField_10.Value = 1;
+            app.ClearCurrentTrialEntryButton_4Pushed(); 
+            app.LeakRateSDmLminEditField.Value = 0
+            app.TimingErrorSDstarttimemsEditField_2.Value = 0;
+            app.TimingErrorSDendtimemsEditField_2.Value= 0;
+            app.GripSuccessRateEditField_2.Value = 0;
+            app.CyclesofnodefectsoccuringEditField.Value = 0;
+            cla(app.UIAxes_20);
+            cla(app.UIAxes_21);
+            cla(app.UIAxes_9);
+            cla(app.UIAxes_22);
+        end
+
+        % Button pushed function: SaveTrialDataButton_11
+        function SaveTrialDataButton_5Pushed(app, event)
+            volErr = app.VolumeofMediaDispensedLEditField.Value - app.VolumeDispensedLEditField_3.Value;
+            velErr = app.RailVelocitymmsEditField.Value - app.RailVelocitymmsEditField_2.Value;
+            slipErr = app.CoverslipPositionErrormmEditField.Value;
+            posErr = app.RailPositionErrormmEditField.Value;
+            measStart = app.TimeDrippingVisiblyStartsmsEditField.Value;
+            measEnd = app.TimeDrippingVisiblyEndsmsEditField.Value;
+            measTotal = (measEnd - measStart) / 1000;
+            expTotal = app.DrippercycletimesEditField.Value;
+            totalTimeErr_ms = (measTotal - expTotal) * 1000;
+            newRow = table(app.TrialCounterEditField_11.Value, ...
+                volErr,totalTimeErr_ms,posErr, slipErr,velErr, ...
+                measStart, measEnd, ...
+                app.GripSuccessfullyCheckBox_2.Value,app.VisualDamageCheckBox.Value,string(app.NotesfromTrialTextArea_11.Value), ...
+                'VariableNames',{'Trial','VolErr','TimeErr','PosErr','SlipErr','VelErr','Start','End','GripSuccess','Wear','Notes'});
+            if isempty(app.TrialDataTable.Data) || ~istable(app.TrialDataTable.Data)
+                app.TrialDataTable.Data = newRow;
+            else
+                app.TrialDataTable.Data = [app.TrialDataTable.Data; newRow];
+            end
+            data = app.TrialDataTable.Data;
+            n = height(data);
+            app.VolumeDispensedSDLEditField_2.Value = sqrt(sum(data.VolErr.^2)/n);
+            app.DripperTotalTimeErrorSDmsEditField.Value = sqrt(sum(data.TimeErr.^2)/n);
+            app.RailPositionErrorSDmmEditField.Value = sqrt(sum(data.PosErr.^2)/n);
+            app.SlipPositionErrorSDmmEditField.Value = sqrt(sum(data.SlipErr.^2)/n);
+            app.RailVelocityErrorSDmmsEditField.Value = sqrt(sum(data.VelErr.^2)/n);
+            app.DripperStartTimeErrorSDmsEditField.Value = std(data.Start);
+            app.DripperEndTimeSDmsEditField.Value = std(data.End);
+            app.GripSuccessRateEditField_3.Value = (sum(data.GripSuccess)/n) * 100;
+            if app.VisualDamageCheckBox.Value && app.CyclethatwearstartstoshowEditField.Value == 0
+                app.CyclethatwearstartstoshowEditField.Value = app.TrialCounterEditField_11.Value;
+            end
+            plot(app.UIAxes_12, data.Trial,data.VolErr,'-o');
+            plot(app.UIAxes_13, data.Trial,data.TimeErr,'-o');
+            plot(app.UIAxes_14,data.Trial,data.PosErr,'-o');
+            plot(app.UIAxes_24,data.Trial,data.SlipErr,'-o');
+            plot(app.UIAxes_25,data.Trial,data.VelErr,'-o');
+            app.TrialCounterEditField_11.Value = app.TrialCounterEditField_11.Value + 1
+            app.ClearCurrentTrialEntryButton_5Pushed();
+        end
+
+        % Button pushed function: ClearCurrentTrialEntryButton_11
+        function ClearCurrentTrialEntryButton_5Pushed(app, event)
+            app.VolumeofMediaDispensedLEditField.Value = 0;
+            app.TimeDrippingVisiblyStartsmsEditField.Value = 0;
+            app.TimeDrippingVisiblyEndsmsEditField.Value = 0;
+            app.RailPositionErrormmEditField.Value = 0;
+            app.RailVelocitymmsEditField.Value = 0;
+            app.CoverslipPositionErrormmEditField.Value = 0;
+            app.GripSuccessfullyCheckBox_2.Value = false;
+            app.VisualDamageCheckBox.Value = false;
+            app.NotesfromTrialTextArea_11.Value = "";
+        end
+
+        % Button pushed function: ExportDatatoCSVExcelButton_11
+        function ExportDatatoCSVExcelButton_5Pushed(app, event)
+            if isempty(app.TrialDataTable.Data)
+                uialert(app.UIFigure,'No data to export!','Export Error');
+                return;
+            end 
+            [file, path] = uiputfile({'*.csv';'*.xlsx'},'SaveTubing Test Data');
+            if isequal(file,0)
+                return;
+            end
+            fullPath = fullfile(path,file);
+            summaryHeader = {'','';'Overall Results',''};
+            summaryData = {
+                'Grip Success Rate (%)', app.GripSuccessRateEditField_3.Value;
+                'Cycle that Wear Starts',app.CyclethatwearstartstoshowEditField.Value;
+                'Volume Dispensed SD (uL)', app.VolumeDispensedSDLEditField.Value;
+                'Dripper Start SD (ms)', app.DripperStartTimeErrorSDmsEditField.Value;
+                'Dripper End SD (ms)', app.DripperEndTimeSDmsEditField.Value;
+                'Dripper Total Time SD (ms)', app.DripperTotalTimeErrorSDmsEditField.Value;
+                'Rail Position SD (mm)', app.RailPositionErrorSDmmEditField.Value;
+                'Rail Velocity SD (mm/s)',app.RailVelocityErrorSDmmsEditField.Value;
+                'Slip Position SD (mm)', app.SlipPositionErrorSDmmEditField.Value};
+            finalSummary = [summaryHeader;summaryData];
+            writetable(app.TrialDataTable.Data,fullPath);
+            writecell(finalSummary,fullPath,'WriteMode','append');
+            app.TrialDataTable.Data = [];
+            app.TrialCounterEditField_11.Value = 1;
+            app.ClearCurrentTrialEntryButton_5Pushed();
+            app.GripSuccessRateEditField_3.Value = 0;
+            app.CyclethatwearstartstoshowEditField.Value = 0;
+            app.VolumeDispensedSDLEditField_2.Value = 0;
+            app.DripperStartTimeErrorSDmsEditField.Value = 0;
+            app.DripperEndTimeSDmsEditField.Value = 0;
+            app.DripperTotalTimeErrorSDmsEditField.Value = 0;
+            app.RailPositionErrorSDmmEditField.Value = 0;
+            app.RailVelocityErrorSDmmsEditField.Value = 0;
+            app.SlipPositionErrorSDmmEditField.Value = 0;
+            cla(app.UIAxes_12);
+            cla(app.UIAxes_13);
+            cla(app.UIAxes_14);
+            cla(app.UIAxes_24);
+            cla(app.UIAxes_25);
+        end
+
+        % Button pushed function: SaveTrialDataButton_12
+        function SaveTrialDataButton_6Pushed(app, event)
+            cycleTimeErr = app.TotalCycleTimesEditField.Value - app.TotalCycleTimesEditField_2.Value;
+            isFailure = app.DidtheDeviceFailShowanErrorCheckBox.Value || app.WerethereanydelaysorcollisionsCheckBox.Value;
+            isSuccess = ~isFailure;
+            newRow = table(app.TrialCounterEditField_12.Value, ...
+                string(app.TimingAdjustmentDropDown.Value), ...
+                string(app.RailSpeedDropDown.Value), ...
+                string(app.PressureDropDown_2.Value), ...
+                app.TimingErrormsEditField_2.Value, ...
+                app.ofCorrectStepsEditField.Value, ...
+                app.TotalCycleTimesEditField.Value, ...
+                cycleTimeErr, double(isSuccess),double(app.DidtheDeviceFailShowanErrorCheckBox.Value), ...
+                string(app.NotesfromTrialTextArea_12.Value), ...
+                'VariableNames',{'Trial','Adjustment','Speed','Pressure','TimingErr','Steps','CycleTime','CycleErr','Success','Failed','Notes'});
+            if isempty(app.TrialDataTable.Data) || ~istable(app.TrialDataTable.Data)
+                app.TrialDataTable.Data = newRow;
+            else
+                app.TrialDataTable.Data = [app.TrialDataTable.Data; newRow];
+            end
+            data = app.TrialDataTable.Data;
+            n = height(data);
+            app.TimingErrorSDmsEditField_2.Value = sqrt(sum(data.TimingErr.^2)/n);
+            app.CycleTimeMeansEditField.Value = mean(data.CycleTime);
+            app.CycleTimeSDmsEditField.Value = sqrt(sum(data.CycleErr.^2)/n);
+            app.ofTimesDeviceFailedEditField.Value = sum(data.Failed);
+            app.SuccessRateEditField.Value = (sum(data.Success)/n) * 100;
+            plot(app.UIAxes_15,data.Trial,data.TimingErr,'-o');
+            plot(app.UIAxes_16,data.Trial,data.Steps,'-o');
+            plot(app.UIAxes_17,data.Trial,data.CycleTime,'-o');
+            app.TrialCounterEditField_12.Value = app.TrialCounterEditField_12.Value + 1
+            app.ClearCurrentTrialEntryButton_6Pushed();
+        end
+
+        % Button pushed function: ClearCurrentTrialEntryButton_12
+        function ClearCurrentTrialEntryButton_6Pushed(app, event)
+            app.TimingErrormsEditField_2.Value = 0;
+            app.ofCorrectStepsEditField.Value = 0;
+            app.TotalCycleTimesEditField.Value = 0;
+            app.DidtheDeviceFailShowanErrorCheckBox.Value = false;
+            app.WerethereanydelaysorcollisionsCheckBox.Value = false;
+            app.NotesfromTrialTextArea_12.Value = "";
+        end
+
+        % Button pushed function: ExportDatatoCSVExcelButton_12
+        function ExportDatatoCsvExcelButton_6Pushed(app, event)
+            if isempty(app.TrialDataTable.Data)
+                uialert(app.UIFigure,'No data to export!','Export Error');
+                return;
+            end 
+            [file, path] = uiputfile({'*.csv';'*.xlsx'},'SaveTubing Test Data');
+            if isequal(file,0)
+                return;
+            end
+            fullPath = fullfile(path,file);
+            summaryHeader = {'','';'Overall Results',''};
+            summaryData = {
+                'Timing Error SD (ms)', app.TimingErrorSDmsEditField_2.Value;
+                '# of Device Failures', app.ofTimesDeviceFailedEditField.Value;
+                'Mean Cycle Time (s)', app.CycleTimeMeansEditField.Value;
+                'Cycle Time SD (ms)', app.CycleTimeSDmsEditField.Value;
+                'Success Rate (%)', app.SuccessRateEditField.Value};
+            finalSummary = [summaryHeader;summaryData];
+            writetable(app.TrialDataTable.Data,fullPath);
+            writecell(finalSummary,fullPath,'WriteMode','append');
+            app.TrialDataTable.Data = [];
+            app.TrialCounterEditField_11.Value = 1;
+            app.ClearCurrentTrialEntryButton_6Pushed();
+            app.TimingErrorSDmsEditField_2.Value = 0;
+            app.ofTimesDeviceFailedEditField.Value = 0;
+            app.CycleTimeMeansEditField.Value = 0;
+            app.CycleTimeSDmsEditField.Value = 0;
+            app.SuccessRateEditField.Value = 0;
+            cla(app.UIAxes_15);
+            cla(app.UIAxes_16);
+            cla(app.UIAxes_17);
+        end
+    end
+
+    % Component initialization
+    methods (Access = private)
+
+        % Create UIFigure and components
+        function createComponents(app)
+
+            % Create UIFigure and hide until all components are created
+            app.UIFigure = uifigure('Visible', 'off');
+            app.UIFigure.Position = [100 100 968 784];
+            app.UIFigure.Name = 'MATLAB App';
+
+            % Create TabGroup
+            app.TabGroup = uitabgroup(app.UIFigure);
+            app.TabGroup.Position = [1 -64 968 849];
+
+            % Create LinearRailTestTab
+            app.LinearRailTestTab = uitab(app.TabGroup);
+            app.LinearRailTestTab.Title = 'Linear Rail Test';
+            app.LinearRailTestTab.BackgroundColor = [0.851 0.3255 0.098];
+            app.LinearRailTestTab.ForegroundColor = [0 0 1];
+
+            % Create SettingstoAdjustandRecordOutputsPanel
+            app.SettingstoAdjustandRecordOutputsPanel = uipanel(app.LinearRailTestTab);
+            app.SettingstoAdjustandRecordOutputsPanel.Title = 'Settings to Adjust and Record Outputs ';
+            app.SettingstoAdjustandRecordOutputsPanel.BackgroundColor = [1 0.6431 0.4902];
+            app.SettingstoAdjustandRecordOutputsPanel.Position = [1 584 966 241];
+
+            % Create SaveTrialDataButton_7
+            app.SaveTrialDataButton_7 = uibutton(app.SettingstoAdjustandRecordOutputsPanel, 'push');
+            app.SaveTrialDataButton_7.ButtonPushedFcn = createCallbackFcn(app, @SaveTrialDataButton_1Pushed, true);
+            app.SaveTrialDataButton_7.Position = [8 150 189 23];
+            app.SaveTrialDataButton_7.Text = 'Save Trial Data';
+
+            % Create ExportDatatoCSVExcelButton_7
+            app.ExportDatatoCSVExcelButton_7 = uibutton(app.SettingstoAdjustandRecordOutputsPanel, 'push');
+            app.ExportDatatoCSVExcelButton_7.ButtonPushedFcn = createCallbackFcn(app, @ExportDatatoCSVExcelButton_1Pushed, true);
+            app.ExportDatatoCSVExcelButton_7.Position = [8 95 90 44];
+            app.ExportDatatoCSVExcelButton_7.Text = {'Export Data to '; 'CSV/Excel'};
+
+            % Create ClearCurrentTrialEntryButton_7
+            app.ClearCurrentTrialEntryButton_7 = uibutton(app.SettingstoAdjustandRecordOutputsPanel, 'push');
+            app.ClearCurrentTrialEntryButton_7.ButtonPushedFcn = createCallbackFcn(app, @ClearCurrentTrialEntryButton_1Pushed, true);
+            app.ClearCurrentTrialEntryButton_7.Position = [109 95 88 44];
+            app.ClearCurrentTrialEntryButton_7.Text = {'Clear Current '; 'Trial Entry '};
+
+            % Create FactorsIndependentVariablesLabel
+            app.FactorsIndependentVariablesLabel = uilabel(app.SettingstoAdjustandRecordOutputsPanel);
+            app.FactorsIndependentVariablesLabel.Position = [252 181 176 22];
+            app.FactorsIndependentVariablesLabel.Text = 'Factors (Independent Variables)';
+
+            % Create MeasuredOutputspertrialLabel
+            app.MeasuredOutputspertrialLabel = uilabel(app.SettingstoAdjustandRecordOutputsPanel);
+            app.MeasuredOutputspertrialLabel.Position = [519 181 155 22];
+            app.MeasuredOutputspertrialLabel.Text = 'Measured Outputs (per trial)';
+
+            % Create TrialCounterEditField_7Label
+            app.TrialCounterEditField_7Label = uilabel(app.SettingstoAdjustandRecordOutputsPanel);
+            app.TrialCounterEditField_7Label.HorizontalAlignment = 'right';
+            app.TrialCounterEditField_7Label.Position = [8 185 74 22];
+            app.TrialCounterEditField_7Label.Text = 'Trial Counter';
+
+            % Create TrialCounterEditField_7
+            app.TrialCounterEditField_7 = uieditfield(app.SettingstoAdjustandRecordOutputsPanel, 'numeric');
+            app.TrialCounterEditField_7.Position = [97 181 100 30];
+            app.TrialCounterEditField_7.Value = 1;
+
+            % Create NotesfromTrialTextArea_7Label
+            app.NotesfromTrialTextArea_7Label = uilabel(app.SettingstoAdjustandRecordOutputsPanel);
+            app.NotesfromTrialTextArea_7Label.HorizontalAlignment = 'right';
+            app.NotesfromTrialTextArea_7Label.Position = [8 47 67 30];
+            app.NotesfromTrialTextArea_7Label.Text = {'Notes from '; 'Trial '};
+
+            % Create NotesfromTrialTextArea_7
+            app.NotesfromTrialTextArea_7 = uitextarea(app.SettingstoAdjustandRecordOutputsPanel);
+            app.NotesfromTrialTextArea_7.Position = [81 19 116 60];
+
+            % Create SpeedDropDownLabel
+            app.SpeedDropDownLabel = uilabel(app.SettingstoAdjustandRecordOutputsPanel);
+            app.SpeedDropDownLabel.HorizontalAlignment = 'right';
+            app.SpeedDropDownLabel.Position = [253 141 40 22];
+            app.SpeedDropDownLabel.Text = 'Speed';
+
+            % Create SpeedDropDown
+            app.SpeedDropDown = uidropdown(app.SettingstoAdjustandRecordOutputsPanel);
+            app.SpeedDropDown.Items = {'Slow Speed', 'Medium Speed ', 'Fast Speed'};
+            app.SpeedDropDown.Position = [308 141 100 22];
+            app.SpeedDropDown.Value = 'Slow Speed';
+
+            % Create LoadDropDownLabel
+            app.LoadDropDownLabel = uilabel(app.SettingstoAdjustandRecordOutputsPanel);
+            app.LoadDropDownLabel.HorizontalAlignment = 'right';
+            app.LoadDropDownLabel.Position = [261 106 32 22];
+            app.LoadDropDownLabel.Text = 'Load';
+
+            % Create LoadDropDown
+            app.LoadDropDown = uidropdown(app.SettingstoAdjustandRecordOutputsPanel);
+            app.LoadDropDown.Items = {'Empty ', 'Loaded (Slide) ', 'Loaded (SC + Slip)'};
+            app.LoadDropDown.Position = [308 106 100 22];
+            app.LoadDropDown.Value = 'Empty ';
+
+            % Create CyclesDropDownLabel
+            app.CyclesDropDownLabel = uilabel(app.SettingstoAdjustandRecordOutputsPanel);
+            app.CyclesDropDownLabel.HorizontalAlignment = 'right';
+            app.CyclesDropDownLabel.Position = [252 73 41 22];
+            app.CyclesDropDownLabel.Text = 'Cycles';
+
+            % Create CyclesDropDown
+            app.CyclesDropDown = uidropdown(app.SettingstoAdjustandRecordOutputsPanel);
+            app.CyclesDropDown.Items = {'3', '7', '15'};
+            app.CyclesDropDown.Position = [308 73 100 22];
+            app.CyclesDropDown.Value = '3';
+
+            % Create PositionErrormmEditFieldLabel
+            app.PositionErrormmEditFieldLabel = uilabel(app.SettingstoAdjustandRecordOutputsPanel);
+            app.PositionErrormmEditFieldLabel.HorizontalAlignment = 'right';
+            app.PositionErrormmEditFieldLabel.Position = [488 141 109 22];
+            app.PositionErrormmEditFieldLabel.Text = 'Position Error (mm)';
+
+            % Create PositionErrormmEditField
+            app.PositionErrormmEditField = uieditfield(app.SettingstoAdjustandRecordOutputsPanel, 'numeric');
+            app.PositionErrormmEditField.Position = [610 141 65 22];
+
+            % Create VelocitymmsEditFieldLabel
+            app.VelocitymmsEditFieldLabel = uilabel(app.SettingstoAdjustandRecordOutputsPanel);
+            app.VelocitymmsEditFieldLabel.HorizontalAlignment = 'right';
+            app.VelocitymmsEditFieldLabel.Position = [510 106 87 22];
+            app.VelocitymmsEditFieldLabel.Text = 'Velocity (mm/s)';
+
+            % Create VelocitymmsEditField
+            app.VelocitymmsEditField = uieditfield(app.SettingstoAdjustandRecordOutputsPanel, 'numeric');
+            app.VelocitymmsEditField.Position = [610 106 65 22];
+
+            % Create Accelerationmms2EditFieldLabel
+            app.Accelerationmms2EditFieldLabel = uilabel(app.SettingstoAdjustandRecordOutputsPanel);
+            app.Accelerationmms2EditFieldLabel.HorizontalAlignment = 'right';
+            app.Accelerationmms2EditFieldLabel.Position = [473 73 124 22];
+            app.Accelerationmms2EditFieldLabel.Text = 'Acceleration (mm/s^2)';
+
+            % Create Accelerationmms2EditField
+            app.Accelerationmms2EditField = uieditfield(app.SettingstoAdjustandRecordOutputsPanel, 'numeric');
+            app.Accelerationmms2EditField.Position = [610 73 65 22];
+
+            % Create ExpectedValueswhatitshouldbeLabel
+            app.ExpectedValueswhatitshouldbeLabel = uilabel(app.SettingstoAdjustandRecordOutputsPanel);
+            app.ExpectedValueswhatitshouldbeLabel.Position = [739 185 197 22];
+            app.ExpectedValueswhatitshouldbeLabel.Text = 'Expected Values (what it should be)';
+
+            % Create PositionmmEditFieldLabel
+            app.PositionmmEditFieldLabel = uilabel(app.SettingstoAdjustandRecordOutputsPanel);
+            app.PositionmmEditFieldLabel.HorizontalAlignment = 'right';
+            app.PositionmmEditFieldLabel.Position = [769 142 79 22];
+            app.PositionmmEditFieldLabel.Text = 'Position (mm)';
+
+            % Create PositionmmEditField
+            app.PositionmmEditField = uieditfield(app.SettingstoAdjustandRecordOutputsPanel, 'numeric');
+            app.PositionmmEditField.Position = [861 142 65 22];
+
+            % Create VelocitymmsEditField_2Label
+            app.VelocitymmsEditField_2Label = uilabel(app.SettingstoAdjustandRecordOutputsPanel);
+            app.VelocitymmsEditField_2Label.HorizontalAlignment = 'right';
+            app.VelocitymmsEditField_2Label.Position = [761 106 87 22];
+            app.VelocitymmsEditField_2Label.Text = 'Velocity (mm/s)';
+
+            % Create VelocitymmsEditField_2
+            app.VelocitymmsEditField_2 = uieditfield(app.SettingstoAdjustandRecordOutputsPanel, 'numeric');
+            app.VelocitymmsEditField_2.Position = [861 106 65 22];
+
+            % Create Accelerationmms2EditField_2Label
+            app.Accelerationmms2EditField_2Label = uilabel(app.SettingstoAdjustandRecordOutputsPanel);
+            app.Accelerationmms2EditField_2Label.HorizontalAlignment = 'right';
+            app.Accelerationmms2EditField_2Label.Position = [724 73 124 22];
+            app.Accelerationmms2EditField_2Label.Text = 'Acceleration (mm/s^2)';
+
+            % Create Accelerationmms2EditField_2
+            app.Accelerationmms2EditField_2 = uieditfield(app.SettingstoAdjustandRecordOutputsPanel, 'numeric');
+            app.Accelerationmms2EditField_2.Position = [861 73 65 22];
+
+            % Create OverallResultsfromConditionPanel
+            app.OverallResultsfromConditionPanel = uipanel(app.LinearRailTestTab);
+            app.OverallResultsfromConditionPanel.Title = 'Overall Results from Condition';
+            app.OverallResultsfromConditionPanel.BackgroundColor = [0.5412 0.5961 0.949];
+            app.OverallResultsfromConditionPanel.Position = [1 1 260 584];
+
+            % Create PositionErrorSDmmEditFieldLabel
+            app.PositionErrorSDmmEditFieldLabel = uilabel(app.OverallResultsfromConditionPanel);
+            app.PositionErrorSDmmEditFieldLabel.HorizontalAlignment = 'right';
+            app.PositionErrorSDmmEditFieldLabel.Position = [13 522 129 22];
+            app.PositionErrorSDmmEditFieldLabel.Text = 'Position Error SD (mm)';
+
+            % Create PositionErrorSDmmEditField
+            app.PositionErrorSDmmEditField = uieditfield(app.OverallResultsfromConditionPanel, 'numeric');
+            app.PositionErrorSDmmEditField.Position = [159 522 62 22];
+
+            % Create MeanPositionErrormmEditFieldLabel
+            app.MeanPositionErrormmEditFieldLabel = uilabel(app.OverallResultsfromConditionPanel);
+            app.MeanPositionErrormmEditFieldLabel.HorizontalAlignment = 'right';
+            app.MeanPositionErrormmEditFieldLabel.Position = [0 481 142 22];
+            app.MeanPositionErrormmEditFieldLabel.Text = 'Mean Position Error (mm)';
+
+            % Create MeanPositionErrormmEditField
+            app.MeanPositionErrormmEditField = uieditfield(app.OverallResultsfromConditionPanel, 'numeric');
+            app.MeanPositionErrormmEditField.Position = [159 481 62 22];
+
+            % Create VelocitySDmmsEditFieldLabel
+            app.VelocitySDmmsEditFieldLabel = uilabel(app.OverallResultsfromConditionPanel);
+            app.VelocitySDmmsEditFieldLabel.HorizontalAlignment = 'right';
+            app.VelocitySDmmsEditFieldLabel.Position = [35 440 107 22];
+            app.VelocitySDmmsEditFieldLabel.Text = 'Velocity SD (mm/s)';
+
+            % Create VelocitySDmmsEditField
+            app.VelocitySDmmsEditField = uieditfield(app.OverallResultsfromConditionPanel, 'numeric');
+            app.VelocitySDmmsEditField.Position = [159 440 62 22];
+
+            % Create MeanVelocitymmsEditFieldLabel
+            app.MeanVelocitymmsEditFieldLabel = uilabel(app.OverallResultsfromConditionPanel);
+            app.MeanVelocitymmsEditFieldLabel.HorizontalAlignment = 'right';
+            app.MeanVelocitymmsEditFieldLabel.Position = [18 401 124 22];
+            app.MeanVelocitymmsEditFieldLabel.Text = ' Mean Velocity (mm/s)';
+
+            % Create MeanVelocitymmsEditField
+            app.MeanVelocitymmsEditField = uieditfield(app.OverallResultsfromConditionPanel, 'numeric');
+            app.MeanVelocitymmsEditField.Position = [159 401 62 22];
+
+            % Create AccSDmms2EditFieldLabel
+            app.AccSDmms2EditFieldLabel = uilabel(app.OverallResultsfromConditionPanel);
+            app.AccSDmms2EditFieldLabel.HorizontalAlignment = 'right';
+            app.AccSDmms2EditFieldLabel.Position = [41 360 101 22];
+            app.AccSDmms2EditFieldLabel.Text = 'Acc. SD (mm/s^2)';
+
+            % Create AccSDmms2EditField
+            app.AccSDmms2EditField = uieditfield(app.OverallResultsfromConditionPanel, 'numeric');
+            app.AccSDmms2EditField.Position = [159 360 62 22];
+
+            % Create MeanAccmms2EditFieldLabel
+            app.MeanAccmms2EditFieldLabel = uilabel(app.OverallResultsfromConditionPanel);
+            app.MeanAccmms2EditFieldLabel.HorizontalAlignment = 'right';
+            app.MeanAccmms2EditFieldLabel.Position = [28 319 114 22];
+            app.MeanAccmms2EditFieldLabel.Text = 'Mean Acc. (mm/s^2)';
+
+            % Create MeanAccmms2EditField
+            app.MeanAccmms2EditField = uieditfield(app.OverallResultsfromConditionPanel, 'numeric');
+            app.MeanAccmms2EditField.Position = [159 319 62 22];
+
+            % Create PlotsofOutputDataPanel
+            app.PlotsofOutputDataPanel = uipanel(app.LinearRailTestTab);
+            app.PlotsofOutputDataPanel.Title = 'Plots of Output Data ';
+            app.PlotsofOutputDataPanel.BackgroundColor = [1 0.4118 0.1608];
+            app.PlotsofOutputDataPanel.Position = [262 0 705 585];
+
+            % Create UIAxes
+            app.UIAxes = uiaxes(app.PlotsofOutputDataPanel);
+            title(app.UIAxes, 'Position Error (mm)')
+            xlabel(app.UIAxes, 'Trial #')
+            ylabel(app.UIAxes, 'Position Error (mm)')
+            zlabel(app.UIAxes, 'Z')
+            app.UIAxes.Position = [19 359 300 185];
+
+            % Create UIAxes_2
+            app.UIAxes_2 = uiaxes(app.PlotsofOutputDataPanel);
+            title(app.UIAxes_2, 'Velocity Error (mm/s)')
+            xlabel(app.UIAxes_2, 'Trial #')
+            ylabel(app.UIAxes_2, 'Velocity Error (mm/s)')
+            zlabel(app.UIAxes_2, 'Z')
+            app.UIAxes_2.Position = [349 359 300 185];
+
+            % Create UIAxes_3
+            app.UIAxes_3 = uiaxes(app.PlotsofOutputDataPanel);
+            title(app.UIAxes_3, 'Acceleration Error (mm/s^2)')
+            xlabel(app.UIAxes_3, 'Trial #')
+            ylabel(app.UIAxes_3, 'Acc. Error (mm/s^2)')
+            zlabel(app.UIAxes_3, 'Z')
+            app.UIAxes_3.Position = [182 136 300 185];
+
+            % Create TrialDataTable
+            app.TrialDataTable = uitable(app.PlotsofOutputDataPanel);
+            app.TrialDataTable.ColumnName = {'Column 1'; 'Column 2'; 'Column 3'; 'Column 4'};
+            app.TrialDataTable.RowName = {};
+            app.TrialDataTable.CellEditCallback = createCallbackFcn(app, @TrialDataTableCellEdit, true);
+            app.TrialDataTable.Position = [9 1 16 22];
+
+            % Create GripTestTab
+            app.GripTestTab = uitab(app.TabGroup);
+            app.GripTestTab.Title = 'Grip Test';
+            app.GripTestTab.BackgroundColor = [1 0.4118 0.1608];
+            app.GripTestTab.ForegroundColor = [0 0 1];
+
+            % Create SettingstoAdjustandRecordOutputsPanel_2
+            app.SettingstoAdjustandRecordOutputsPanel_2 = uipanel(app.GripTestTab);
+            app.SettingstoAdjustandRecordOutputsPanel_2.Title = 'Settings to Adjust and Record Outputs ';
+            app.SettingstoAdjustandRecordOutputsPanel_2.BackgroundColor = [1 0.6431 0.4902];
+            app.SettingstoAdjustandRecordOutputsPanel_2.Position = [1 584 966 241];
+
+            % Create SaveTrialDataButton_8
+            app.SaveTrialDataButton_8 = uibutton(app.SettingstoAdjustandRecordOutputsPanel_2, 'push');
+            app.SaveTrialDataButton_8.ButtonPushedFcn = createCallbackFcn(app, @SaveTrialButton_2Pushed, true);
+            app.SaveTrialDataButton_8.Position = [8 150 189 23];
+            app.SaveTrialDataButton_8.Text = 'Save Trial Data';
+
+            % Create ExportDatatoCSVExcelButton_8
+            app.ExportDatatoCSVExcelButton_8 = uibutton(app.SettingstoAdjustandRecordOutputsPanel_2, 'push');
+            app.ExportDatatoCSVExcelButton_8.ButtonPushedFcn = createCallbackFcn(app, @ExportDatatoCSVExcelButton_2Pushed, true);
+            app.ExportDatatoCSVExcelButton_8.Position = [8 95 90 44];
+            app.ExportDatatoCSVExcelButton_8.Text = {'Export Data to '; 'CSV/Excel'};
+
+            % Create ClearCurrentTrialEntryButton_8
+            app.ClearCurrentTrialEntryButton_8 = uibutton(app.SettingstoAdjustandRecordOutputsPanel_2, 'push');
+            app.ClearCurrentTrialEntryButton_8.ButtonPushedFcn = createCallbackFcn(app, @ClearCurrentTrialEntryButton_2Pushed, true);
+            app.ClearCurrentTrialEntryButton_8.Position = [109 95 88 44];
+            app.ClearCurrentTrialEntryButton_8.Text = {'Clear Current '; 'Trial Entry '};
+
+            % Create FactorsIndependentVariablesLabel_2
+            app.FactorsIndependentVariablesLabel_2 = uilabel(app.SettingstoAdjustandRecordOutputsPanel_2);
+            app.FactorsIndependentVariablesLabel_2.Position = [252 181 176 22];
+            app.FactorsIndependentVariablesLabel_2.Text = 'Factors (Independent Variables)';
+
+            % Create MeasuredOutputspertrialLabel_2
+            app.MeasuredOutputspertrialLabel_2 = uilabel(app.SettingstoAdjustandRecordOutputsPanel_2);
+            app.MeasuredOutputspertrialLabel_2.Position = [519 181 155 22];
+            app.MeasuredOutputspertrialLabel_2.Text = 'Measured Outputs (per trial)';
+
+            % Create TrialCounterEditField_8Label
+            app.TrialCounterEditField_8Label = uilabel(app.SettingstoAdjustandRecordOutputsPanel_2);
+            app.TrialCounterEditField_8Label.HorizontalAlignment = 'right';
+            app.TrialCounterEditField_8Label.Position = [8 185 74 22];
+            app.TrialCounterEditField_8Label.Text = 'Trial Counter';
+
+            % Create TrialCounterEditField_8
+            app.TrialCounterEditField_8 = uieditfield(app.SettingstoAdjustandRecordOutputsPanel_2, 'numeric');
+            app.TrialCounterEditField_8.Position = [97 181 100 30];
+            app.TrialCounterEditField_8.Value = 1;
+
+            % Create NotesfromTrialTextArea_8Label
+            app.NotesfromTrialTextArea_8Label = uilabel(app.SettingstoAdjustandRecordOutputsPanel_2);
+            app.NotesfromTrialTextArea_8Label.HorizontalAlignment = 'right';
+            app.NotesfromTrialTextArea_8Label.Position = [8 47 67 30];
+            app.NotesfromTrialTextArea_8Label.Text = {'Notes from '; 'Trial '};
+
+            % Create NotesfromTrialTextArea_8
+            app.NotesfromTrialTextArea_8 = uitextarea(app.SettingstoAdjustandRecordOutputsPanel_2);
+            app.NotesfromTrialTextArea_8.Position = [81 19 116 60];
+
+            % Create VacuumPressureDropDownLabel
+            app.VacuumPressureDropDownLabel = uilabel(app.SettingstoAdjustandRecordOutputsPanel_2);
+            app.VacuumPressureDropDownLabel.HorizontalAlignment = 'right';
+            app.VacuumPressureDropDownLabel.Position = [214 142 99 22];
+            app.VacuumPressureDropDownLabel.Text = 'Vacuum Pressure';
+
+            % Create VacuumPressureDropDown
+            app.VacuumPressureDropDown = uidropdown(app.SettingstoAdjustandRecordOutputsPanel_2);
+            app.VacuumPressureDropDown.Items = {'Low ', 'Medium ', 'High'};
+            app.VacuumPressureDropDown.Position = [328 142 100 22];
+            app.VacuumPressureDropDown.Value = 'Low ';
+
+            % Create LoweringSpeedDropDownLabel
+            app.LoweringSpeedDropDownLabel = uilabel(app.SettingstoAdjustandRecordOutputsPanel_2);
+            app.LoweringSpeedDropDownLabel.HorizontalAlignment = 'right';
+            app.LoweringSpeedDropDownLabel.Position = [221 106 92 22];
+            app.LoweringSpeedDropDownLabel.Text = 'Lowering Speed';
+
+            % Create LoweringSpeedDropDown
+            app.LoweringSpeedDropDown = uidropdown(app.SettingstoAdjustandRecordOutputsPanel_2);
+            app.LoweringSpeedDropDown.Items = {'Slow ', 'Medium ', 'Fast'};
+            app.LoweringSpeedDropDown.Position = [328 106 100 22];
+            app.LoweringSpeedDropDown.Value = 'Slow ';
+
+            % Create CoverslipPositionErrormmEditField_2Label
+            app.CoverslipPositionErrormmEditField_2Label = uilabel(app.SettingstoAdjustandRecordOutputsPanel_2);
+            app.CoverslipPositionErrormmEditField_2Label.HorizontalAlignment = 'right';
+            app.CoverslipPositionErrormmEditField_2Label.Position = [431 106 166 22];
+            app.CoverslipPositionErrormmEditField_2Label.Text = ' Coverslip Position Error (mm)';
+
+            % Create CoverslipPositionErrormmEditField_2
+            app.CoverslipPositionErrormmEditField_2 = uieditfield(app.SettingstoAdjustandRecordOutputsPanel_2, 'numeric');
+            app.CoverslipPositionErrormmEditField_2.Position = [610 106 65 22];
+
+            % Create TimingErrormsEditFieldLabel
+            app.TimingErrormsEditFieldLabel = uilabel(app.SettingstoAdjustandRecordOutputsPanel_2);
+            app.TimingErrormsEditFieldLabel.HorizontalAlignment = 'right';
+            app.TimingErrormsEditFieldLabel.Position = [499 73 98 22];
+            app.TimingErrormsEditFieldLabel.Text = 'Timing Error (ms)';
+
+            % Create TimingErrormsEditField
+            app.TimingErrormsEditField = uieditfield(app.SettingstoAdjustandRecordOutputsPanel_2, 'numeric');
+            app.TimingErrormsEditField.Position = [610 73 65 22];
+
+            % Create ExpectedValueswhatitshouldbeLabel_2
+            app.ExpectedValueswhatitshouldbeLabel_2 = uilabel(app.SettingstoAdjustandRecordOutputsPanel_2);
+            app.ExpectedValueswhatitshouldbeLabel_2.Position = [739 185 197 22];
+            app.ExpectedValueswhatitshouldbeLabel_2.Text = 'Expected Values (what it should be)';
+
+            % Create DropPositionmmEditFieldLabel
+            app.DropPositionmmEditFieldLabel = uilabel(app.SettingstoAdjustandRecordOutputsPanel_2);
+            app.DropPositionmmEditFieldLabel.HorizontalAlignment = 'right';
+            app.DropPositionmmEditFieldLabel.Position = [755 142 108 22];
+            app.DropPositionmmEditFieldLabel.Text = 'Drop Position (mm)';
+
+            % Create DropPositionmmEditField
+            app.DropPositionmmEditField = uieditfield(app.SettingstoAdjustandRecordOutputsPanel_2, 'numeric');
+            app.DropPositionmmEditField.Position = [874 141 52 22];
+
+            % Create TimetolowerreleasecoverslipEditFieldLabel
+            app.TimetolowerreleasecoverslipEditFieldLabel = uilabel(app.SettingstoAdjustandRecordOutputsPanel_2);
+            app.TimetolowerreleasecoverslipEditFieldLabel.HorizontalAlignment = 'right';
+            app.TimetolowerreleasecoverslipEditFieldLabel.Position = [683 106 180 22];
+            app.TimetolowerreleasecoverslipEditFieldLabel.Text = 'Time to lower + release coverslip';
+
+            % Create TimetolowerreleasecoverslipEditField
+            app.TimetolowerreleasecoverslipEditField = uieditfield(app.SettingstoAdjustandRecordOutputsPanel_2, 'numeric');
+            app.TimetolowerreleasecoverslipEditField.Position = [874 106 52 22];
+
+            % Create DiditgripsuccessfullyCheckBox
+            app.DiditgripsuccessfullyCheckBox = uicheckbox(app.SettingstoAdjustandRecordOutputsPanel_2);
+            app.DiditgripsuccessfullyCheckBox.Text = 'Did it grip successfully? ';
+            app.DiditgripsuccessfullyCheckBox.Position = [521 138 151 29];
+
+            % Create DropPositionErrormmEditFieldLabel
+            app.DropPositionErrormmEditFieldLabel = uilabel(app.SettingstoAdjustandRecordOutputsPanel_2);
+            app.DropPositionErrormmEditFieldLabel.HorizontalAlignment = 'right';
+            app.DropPositionErrormmEditFieldLabel.Position = [456 42 138 22];
+            app.DropPositionErrormmEditFieldLabel.Text = 'Drop Position Error (mm)';
+
+            % Create DropPositionErrormmEditField
+            app.DropPositionErrormmEditField = uieditfield(app.SettingstoAdjustandRecordOutputsPanel_2, 'numeric');
+            app.DropPositionErrormmEditField.Position = [607 42 65 22];
+
+            % Create OverallResultsfromConditionPanel_2
+            app.OverallResultsfromConditionPanel_2 = uipanel(app.GripTestTab);
+            app.OverallResultsfromConditionPanel_2.Title = 'Overall Results from Condition';
+            app.OverallResultsfromConditionPanel_2.BackgroundColor = [0.5412 0.5961 0.949];
+            app.OverallResultsfromConditionPanel_2.Position = [1 1 260 584];
+
+            % Create DropPositionErrorSDmmEditFieldLabel
+            app.DropPositionErrorSDmmEditFieldLabel = uilabel(app.OverallResultsfromConditionPanel_2);
+            app.DropPositionErrorSDmmEditFieldLabel.HorizontalAlignment = 'right';
+            app.DropPositionErrorSDmmEditFieldLabel.Position = [20 520 158 22];
+            app.DropPositionErrorSDmmEditFieldLabel.Text = 'Drop Position Error SD (mm)';
+
+            % Create DropPositionErrorSDmmEditField
+            app.DropPositionErrorSDmmEditField = uieditfield(app.OverallResultsfromConditionPanel_2, 'numeric');
+            app.DropPositionErrorSDmmEditField.Position = [192 521 43 22];
+
+            % Create MeanDropPositionErrormmEditFieldLabel
+            app.MeanDropPositionErrormmEditFieldLabel = uilabel(app.OverallResultsfromConditionPanel_2);
+            app.MeanDropPositionErrormmEditFieldLabel.HorizontalAlignment = 'right';
+            app.MeanDropPositionErrormmEditFieldLabel.Position = [2 481 175 22];
+            app.MeanDropPositionErrormmEditFieldLabel.Text = ' Mean Drop Position Error (mm)';
+
+            % Create MeanDropPositionErrormmEditField
+            app.MeanDropPositionErrormmEditField = uieditfield(app.OverallResultsfromConditionPanel_2, 'numeric');
+            app.MeanDropPositionErrormmEditField.Position = [191 481 42 22];
+
+            % Create GripSuccessRateLabel
+            app.GripSuccessRateLabel = uilabel(app.OverallResultsfromConditionPanel_2);
+            app.GripSuccessRateLabel.HorizontalAlignment = 'right';
+            app.GripSuccessRateLabel.Position = [50 440 127 22];
+            app.GripSuccessRateLabel.Text = 'Grip Success Rate (%)';
+
+            % Create GripSuccessRateEditField
+            app.GripSuccessRateEditField = uieditfield(app.OverallResultsfromConditionPanel_2, 'numeric');
+            app.GripSuccessRateEditField.Position = [189 440 43 22];
+
+            % Create TimingErrorSDmsEditFieldLabel
+            app.TimingErrorSDmsEditFieldLabel = uilabel(app.OverallResultsfromConditionPanel_2);
+            app.TimingErrorSDmsEditFieldLabel.HorizontalAlignment = 'right';
+            app.TimingErrorSDmsEditFieldLabel.Position = [63 401 118 22];
+            app.TimingErrorSDmsEditFieldLabel.Text = 'Timing Error SD (ms)';
+
+            % Create TimingErrorSDmsEditField
+            app.TimingErrorSDmsEditField = uieditfield(app.OverallResultsfromConditionPanel_2, 'numeric');
+            app.TimingErrorSDmsEditField.Position = [189 401 45 22];
+
+            % Create MeanTimingErrormsEditFieldLabel
+            app.MeanTimingErrormsEditFieldLabel = uilabel(app.OverallResultsfromConditionPanel_2);
+            app.MeanTimingErrormsEditFieldLabel.HorizontalAlignment = 'right';
+            app.MeanTimingErrormsEditFieldLabel.Position = [49 364 131 22];
+            app.MeanTimingErrormsEditFieldLabel.Text = 'Mean Timing Error (ms)';
+
+            % Create MeanTimingErrormsEditField
+            app.MeanTimingErrormsEditField = uieditfield(app.OverallResultsfromConditionPanel_2, 'numeric');
+            app.MeanTimingErrormsEditField.Position = [189 364 46 22];
+
+            % Create SlipPositionErrorSDmmEditField_2Label
+            app.SlipPositionErrorSDmmEditField_2Label = uilabel(app.OverallResultsfromConditionPanel_2);
+            app.SlipPositionErrorSDmmEditField_2Label.HorizontalAlignment = 'right';
+            app.SlipPositionErrorSDmmEditField_2Label.Position = [25 328 152 22];
+            app.SlipPositionErrorSDmmEditField_2Label.Text = 'Slip Position Error SD (mm)';
+
+            % Create SlipPositionErrorSDmmEditField_2
+            app.SlipPositionErrorSDmmEditField_2 = uieditfield(app.OverallResultsfromConditionPanel_2, 'numeric');
+            app.SlipPositionErrorSDmmEditField_2.Position = [191 329 43 22];
+
+            % Create MeanSlipPositionErrormmEditFieldLabel
+            app.MeanSlipPositionErrormmEditFieldLabel = uilabel(app.OverallResultsfromConditionPanel_2);
+            app.MeanSlipPositionErrormmEditFieldLabel.HorizontalAlignment = 'right';
+            app.MeanSlipPositionErrormmEditFieldLabel.Position = [9 287 169 22];
+            app.MeanSlipPositionErrormmEditFieldLabel.Text = ' Mean Slip Position Error (mm)';
+
+            % Create MeanSlipPositionErrormmEditField
+            app.MeanSlipPositionErrormmEditField = uieditfield(app.OverallResultsfromConditionPanel_2, 'numeric');
+            app.MeanSlipPositionErrormmEditField.Position = [192 287 42 22];
+
+            % Create PlotsofOutputDataPanel_2
+            app.PlotsofOutputDataPanel_2 = uipanel(app.GripTestTab);
+            app.PlotsofOutputDataPanel_2.Title = 'Plots of Output Data ';
+            app.PlotsofOutputDataPanel_2.BackgroundColor = [1 0.4118 0.1608];
+            app.PlotsofOutputDataPanel_2.Position = [262 0 705 585];
+
+            % Create UIAxes_4
+            app.UIAxes_4 = uiaxes(app.PlotsofOutputDataPanel_2);
+            title(app.UIAxes_4, ' Coverslip Position Error (mm)')
+            xlabel(app.UIAxes_4, 'Trial #')
+            ylabel(app.UIAxes_4, 'Position Error (mm)')
+            zlabel(app.UIAxes_4, 'Z')
+            app.UIAxes_4.Position = [19 359 300 185];
+
+            % Create UIAxes_5
+            app.UIAxes_5 = uiaxes(app.PlotsofOutputDataPanel_2);
+            title(app.UIAxes_5, 'Timing Error (ms)')
+            xlabel(app.UIAxes_5, 'Trial #')
+            ylabel(app.UIAxes_5, 'Timing Error (ms)')
+            zlabel(app.UIAxes_5, 'Z')
+            app.UIAxes_5.Position = [349 359 300 185];
+
+            % Create UIAxes_23
+            app.UIAxes_23 = uiaxes(app.PlotsofOutputDataPanel_2);
+            title(app.UIAxes_23, ' Drop Position Error (mm)')
+            xlabel(app.UIAxes_23, 'Trial #')
+            ylabel(app.UIAxes_23, 'Drop Error (mm)')
+            zlabel(app.UIAxes_23, 'Z')
+            app.UIAxes_23.Position = [182 145 300 185];
+
+            % Create DripperTestTab
+            app.DripperTestTab = uitab(app.TabGroup);
+            app.DripperTestTab.Title = 'Dripper Test';
+            app.DripperTestTab.BackgroundColor = [1 0.4118 0.1608];
+            app.DripperTestTab.ForegroundColor = [0 0 1];
+
+            % Create SettingstoAdjustandRecordOutputsPanel_3
+            app.SettingstoAdjustandRecordOutputsPanel_3 = uipanel(app.DripperTestTab);
+            app.SettingstoAdjustandRecordOutputsPanel_3.Title = 'Settings to Adjust and Record Outputs ';
+            app.SettingstoAdjustandRecordOutputsPanel_3.BackgroundColor = [1 0.6431 0.4902];
+            app.SettingstoAdjustandRecordOutputsPanel_3.Position = [1 584 966 241];
+
+            % Create SaveTrialDataButton_9
+            app.SaveTrialDataButton_9 = uibutton(app.SettingstoAdjustandRecordOutputsPanel_3, 'push');
+            app.SaveTrialDataButton_9.ButtonPushedFcn = createCallbackFcn(app, @SaveTrialDataButton_3Pushed, true);
+            app.SaveTrialDataButton_9.Position = [8 150 189 23];
+            app.SaveTrialDataButton_9.Text = 'Save Trial Data';
+
+            % Create ExportDatatoCSVExcelButton_9
+            app.ExportDatatoCSVExcelButton_9 = uibutton(app.SettingstoAdjustandRecordOutputsPanel_3, 'push');
+            app.ExportDatatoCSVExcelButton_9.ButtonPushedFcn = createCallbackFcn(app, @ExportDatatoCSVExcelButton_3Pushed, true);
+            app.ExportDatatoCSVExcelButton_9.Position = [8 95 90 44];
+            app.ExportDatatoCSVExcelButton_9.Text = {'Export Data to '; 'CSV/Excel'};
+
+            % Create ClearCurrentTrialEntryButton_9
+            app.ClearCurrentTrialEntryButton_9 = uibutton(app.SettingstoAdjustandRecordOutputsPanel_3, 'push');
+            app.ClearCurrentTrialEntryButton_9.ButtonPushedFcn = createCallbackFcn(app, @ClearCurrentTrialEntryButton_3Pushed, true);
+            app.ClearCurrentTrialEntryButton_9.Position = [109 95 88 44];
+            app.ClearCurrentTrialEntryButton_9.Text = {'Clear Current '; 'Trial Entry '};
+
+            % Create FactorsIndependentVariablesLabel_3
+            app.FactorsIndependentVariablesLabel_3 = uilabel(app.SettingstoAdjustandRecordOutputsPanel_3);
+            app.FactorsIndependentVariablesLabel_3.Position = [252 181 176 22];
+            app.FactorsIndependentVariablesLabel_3.Text = 'Factors (Independent Variables)';
+
+            % Create MeasuredOutputspertrialLabel_3
+            app.MeasuredOutputspertrialLabel_3 = uilabel(app.SettingstoAdjustandRecordOutputsPanel_3);
+            app.MeasuredOutputspertrialLabel_3.Position = [519 181 155 22];
+            app.MeasuredOutputspertrialLabel_3.Text = 'Measured Outputs (per trial)';
+
+            % Create TrialCounterEditField_9Label
+            app.TrialCounterEditField_9Label = uilabel(app.SettingstoAdjustandRecordOutputsPanel_3);
+            app.TrialCounterEditField_9Label.HorizontalAlignment = 'right';
+            app.TrialCounterEditField_9Label.Position = [8 185 74 22];
+            app.TrialCounterEditField_9Label.Text = 'Trial Counter';
+
+            % Create TrialCounterEditField_9
+            app.TrialCounterEditField_9 = uieditfield(app.SettingstoAdjustandRecordOutputsPanel_3, 'numeric');
+            app.TrialCounterEditField_9.Position = [97 181 100 30];
+            app.TrialCounterEditField_9.Value = 1;
+
+            % Create NotesfromTrialTextArea_9Label
+            app.NotesfromTrialTextArea_9Label = uilabel(app.SettingstoAdjustandRecordOutputsPanel_3);
+            app.NotesfromTrialTextArea_9Label.HorizontalAlignment = 'right';
+            app.NotesfromTrialTextArea_9Label.Position = [8 47 67 30];
+            app.NotesfromTrialTextArea_9Label.Text = {'Notes from '; 'Trial '};
+
+            % Create NotesfromTrialTextArea_9
+            app.NotesfromTrialTextArea_9 = uitextarea(app.SettingstoAdjustandRecordOutputsPanel_3);
+            app.NotesfromTrialTextArea_9.Position = [81 19 116 60];
+
+            % Create DispenseTimeDropDownLabel
+            app.DispenseTimeDropDownLabel = uilabel(app.SettingstoAdjustandRecordOutputsPanel_3);
+            app.DispenseTimeDropDownLabel.HorizontalAlignment = 'right';
+            app.DispenseTimeDropDownLabel.Position = [209 141 84 22];
+            app.DispenseTimeDropDownLabel.Text = 'Dispense Time';
+
+            % Create DispenseTimeDropDown
+            app.DispenseTimeDropDown = uidropdown(app.SettingstoAdjustandRecordOutputsPanel_3);
+            app.DispenseTimeDropDown.Items = {'Short', 'Medium', 'Long'};
+            app.DispenseTimeDropDown.Position = [308 141 100 22];
+            app.DispenseTimeDropDown.Value = 'Short';
+
+            % Create NozzleSizeDropDownLabel
+            app.NozzleSizeDropDownLabel = uilabel(app.SettingstoAdjustandRecordOutputsPanel_3);
+            app.NozzleSizeDropDownLabel.HorizontalAlignment = 'right';
+            app.NozzleSizeDropDownLabel.Position = [225 106 68 22];
+            app.NozzleSizeDropDownLabel.Text = 'Nozzle Size';
+
+            % Create NozzleSizeDropDown
+            app.NozzleSizeDropDown = uidropdown(app.SettingstoAdjustandRecordOutputsPanel_3);
+            app.NozzleSizeDropDown.Items = {'Small', 'Medium ', 'Large'};
+            app.NozzleSizeDropDown.Position = [308 106 100 22];
+            app.NozzleSizeDropDown.Value = 'Small';
+
+            % Create ofNozzlesDropDownLabel
+            app.ofNozzlesDropDownLabel = uilabel(app.SettingstoAdjustandRecordOutputsPanel_3);
+            app.ofNozzlesDropDownLabel.HorizontalAlignment = 'right';
+            app.ofNozzlesDropDownLabel.Position = [222 73 71 22];
+            app.ofNozzlesDropDownLabel.Text = '# of Nozzles';
+
+            % Create ofNozzlesDropDown
+            app.ofNozzlesDropDown = uidropdown(app.SettingstoAdjustandRecordOutputsPanel_3);
+            app.ofNozzlesDropDown.Items = {'1', '2', '3'};
+            app.ofNozzlesDropDown.Position = [308 73 100 22];
+            app.ofNozzlesDropDown.Value = '3';
+
+            % Create VolumeDispensedLabel
+            app.VolumeDispensedLabel = uilabel(app.SettingstoAdjustandRecordOutputsPanel_3);
+            app.VolumeDispensedLabel.HorizontalAlignment = 'right';
+            app.VolumeDispensedLabel.Position = [467 141 130 22];
+            app.VolumeDispensedLabel.Text = 'Volume Dispensed (µL)';
+
+            % Create VolumeDispensedLEditField
+            app.VolumeDispensedLEditField = uieditfield(app.SettingstoAdjustandRecordOutputsPanel_3, 'numeric');
+            app.VolumeDispensedLEditField.Position = [610 141 65 22];
+
+            % Create TimeDispensingVisiblyStartssEditFieldLabel
+            app.TimeDispensingVisiblyStartssEditFieldLabel = uilabel(app.SettingstoAdjustandRecordOutputsPanel_3);
+            app.TimeDispensingVisiblyStartssEditFieldLabel.HorizontalAlignment = 'right';
+            app.TimeDispensingVisiblyStartssEditFieldLabel.Position = [413 106 184 22];
+            app.TimeDispensingVisiblyStartssEditFieldLabel.Text = 'Time Dispensing Visibly Starts (s)';
+
+            % Create TimeDispensingVisiblyStartssEditField
+            app.TimeDispensingVisiblyStartssEditField = uieditfield(app.SettingstoAdjustandRecordOutputsPanel_3, 'numeric');
+            app.TimeDispensingVisiblyStartssEditField.Position = [610 106 65 22];
+
+            % Create TimeDispensingVisiblyEndssEditFieldLabel
+            app.TimeDispensingVisiblyEndssEditFieldLabel = uilabel(app.SettingstoAdjustandRecordOutputsPanel_3);
+            app.TimeDispensingVisiblyEndssEditFieldLabel.HorizontalAlignment = 'right';
+            app.TimeDispensingVisiblyEndssEditFieldLabel.Position = [417 73 180 22];
+            app.TimeDispensingVisiblyEndssEditFieldLabel.Text = 'Time Dispensing Visibly Ends (s)';
+
+            % Create TimeDispensingVisiblyEndssEditField
+            app.TimeDispensingVisiblyEndssEditField = uieditfield(app.SettingstoAdjustandRecordOutputsPanel_3, 'numeric');
+            app.TimeDispensingVisiblyEndssEditField.Position = [610 73 65 22];
+
+            % Create ExpectedValueswhatitshouldbeLabel_3
+            app.ExpectedValueswhatitshouldbeLabel_3 = uilabel(app.SettingstoAdjustandRecordOutputsPanel_3);
+            app.ExpectedValueswhatitshouldbeLabel_3.Position = [739 185 197 22];
+            app.ExpectedValueswhatitshouldbeLabel_3.Text = 'Expected Values (what it should be)';
+
+            % Create VolumeDispensedLEditField_2Label
+            app.VolumeDispensedLEditField_2Label = uilabel(app.SettingstoAdjustandRecordOutputsPanel_3);
+            app.VolumeDispensedLEditField_2Label.HorizontalAlignment = 'right';
+            app.VolumeDispensedLEditField_2Label.Position = [718 142 130 22];
+            app.VolumeDispensedLEditField_2Label.Text = 'Volume Dispensed (µL)';
+
+            % Create VolumeDispensedLEditField_2
+            app.VolumeDispensedLEditField_2 = uieditfield(app.SettingstoAdjustandRecordOutputsPanel_3, 'numeric');
+            app.VolumeDispensedLEditField_2.Position = [861 142 65 22];
+
+            % Create TotaldispensetimesEditFieldLabel
+            app.TotaldispensetimesEditFieldLabel = uilabel(app.SettingstoAdjustandRecordOutputsPanel_3);
+            app.TotaldispensetimesEditFieldLabel.HorizontalAlignment = 'right';
+            app.TotaldispensetimesEditFieldLabel.Position = [723 106 125 22];
+            app.TotaldispensetimesEditFieldLabel.Text = 'Total dispense time (s)';
+
+            % Create TotaldispensetimesEditField
+            app.TotaldispensetimesEditField = uieditfield(app.SettingstoAdjustandRecordOutputsPanel_3, 'numeric');
+            app.TotaldispensetimesEditField.Position = [861 106 65 22];
+
+            % Create AreaofFinalSpreadmm2EditField_2Label
+            app.AreaofFinalSpreadmm2EditField_2Label = uilabel(app.SettingstoAdjustandRecordOutputsPanel_3);
+            app.AreaofFinalSpreadmm2EditField_2Label.HorizontalAlignment = 'right';
+            app.AreaofFinalSpreadmm2EditField_2Label.Position = [689 73 159 22];
+            app.AreaofFinalSpreadmm2EditField_2Label.Text = 'Area of Final Spread (mm^2)';
+
+            % Create AreaofFinalSpreadmm2EditField_2
+            app.AreaofFinalSpreadmm2EditField_2 = uieditfield(app.SettingstoAdjustandRecordOutputsPanel_3, 'numeric');
+            app.AreaofFinalSpreadmm2EditField_2.Position = [861 73 65 22];
+
+            % Create AreaofFinalSpreadmm2EditFieldLabel
+            app.AreaofFinalSpreadmm2EditFieldLabel = uilabel(app.SettingstoAdjustandRecordOutputsPanel_3);
+            app.AreaofFinalSpreadmm2EditFieldLabel.HorizontalAlignment = 'right';
+            app.AreaofFinalSpreadmm2EditFieldLabel.Position = [438 38 159 22];
+            app.AreaofFinalSpreadmm2EditFieldLabel.Text = 'Area of Final Spread (mm^2)';
+
+            % Create AreaofFinalSpreadmm2EditField
+            app.AreaofFinalSpreadmm2EditField = uieditfield(app.SettingstoAdjustandRecordOutputsPanel_3, 'numeric');
+            app.AreaofFinalSpreadmm2EditField.Position = [610 38 65 22];
+
+            % Create OverallResultsfromConditionPanel_3
+            app.OverallResultsfromConditionPanel_3 = uipanel(app.DripperTestTab);
+            app.OverallResultsfromConditionPanel_3.Title = 'Overall Results from Condition';
+            app.OverallResultsfromConditionPanel_3.BackgroundColor = [0.5412 0.5961 0.949];
+            app.OverallResultsfromConditionPanel_3.Position = [1 1 260 584];
+
+            % Create VolumeDispensedSDLEditFieldLabel
+            app.VolumeDispensedSDLEditFieldLabel = uilabel(app.OverallResultsfromConditionPanel_3);
+            app.VolumeDispensedSDLEditFieldLabel.HorizontalAlignment = 'right';
+            app.VolumeDispensedSDLEditFieldLabel.Position = [28 521 150 22];
+            app.VolumeDispensedSDLEditFieldLabel.Text = 'Volume Dispensed SD (µL)';
+
+            % Create VolumeDispensedSDLEditField
+            app.VolumeDispensedSDLEditField = uieditfield(app.OverallResultsfromConditionPanel_3, 'numeric');
+            app.VolumeDispensedSDLEditField.Position = [195 522 47 22];
+
+            % Create TimingErrorSDstarttimemsEditFieldLabel
+            app.TimingErrorSDstarttimemsEditFieldLabel = uilabel(app.OverallResultsfromConditionPanel_3);
+            app.TimingErrorSDstarttimemsEditFieldLabel.HorizontalAlignment = 'right';
+            app.TimingErrorSDstarttimemsEditFieldLabel.Position = [5 445 179 22];
+            app.TimingErrorSDstarttimemsEditFieldLabel.Text = 'Timing Error SD (start time) (ms)';
+
+            % Create TimingErrorSDstarttimemsEditField
+            app.TimingErrorSDstarttimemsEditField = uieditfield(app.OverallResultsfromConditionPanel_3, 'numeric');
+            app.TimingErrorSDstarttimemsEditField.Position = [196 445 46 22];
+
+            % Create TimingErrorSDendtimemsEditFieldLabel
+            app.TimingErrorSDendtimemsEditFieldLabel = uilabel(app.OverallResultsfromConditionPanel_3);
+            app.TimingErrorSDendtimemsEditFieldLabel.HorizontalAlignment = 'right';
+            app.TimingErrorSDendtimemsEditFieldLabel.Position = [11 404 175 22];
+            app.TimingErrorSDendtimemsEditFieldLabel.Text = 'Timing Error SD (end time) (ms)';
+
+            % Create TimingErrorSDendtimemsEditField
+            app.TimingErrorSDendtimemsEditField = uieditfield(app.OverallResultsfromConditionPanel_3, 'numeric');
+            app.TimingErrorSDendtimemsEditField.Position = [196 404 45 22];
+
+            % Create TimingSDtotaltimemsEditFieldLabel
+            app.TimingSDtotaltimemsEditFieldLabel = uilabel(app.OverallResultsfromConditionPanel_3);
+            app.TimingSDtotaltimemsEditFieldLabel.HorizontalAlignment = 'right';
+            app.TimingSDtotaltimemsEditFieldLabel.Position = [38 365 148 22];
+            app.TimingSDtotaltimemsEditFieldLabel.Text = 'Timing SD (total time) (ms)';
+
+            % Create TimingSDtotaltimemsEditField
+            app.TimingSDtotaltimemsEditField = uieditfield(app.OverallResultsfromConditionPanel_3, 'numeric');
+            app.TimingSDtotaltimemsEditField.Position = [195 365 46 22];
+
+            % Create VolumeDispensedMeanmLEditFieldLabel
+            app.VolumeDispensedMeanmLEditFieldLabel = uilabel(app.OverallResultsfromConditionPanel_3);
+            app.VolumeDispensedMeanmLEditFieldLabel.HorizontalAlignment = 'right';
+            app.VolumeDispensedMeanmLEditFieldLabel.Position = [18 481 166 22];
+            app.VolumeDispensedMeanmLEditFieldLabel.Text = 'Volume Dispensed Mean (mL)';
+
+            % Create VolumeDispensedMeanmLEditField
+            app.VolumeDispensedMeanmLEditField = uieditfield(app.OverallResultsfromConditionPanel_3, 'numeric');
+            app.VolumeDispensedMeanmLEditField.Position = [195 481 47 22];
+
+            % Create AreaofSpreadSDmm2EditFieldLabel
+            app.AreaofSpreadSDmm2EditFieldLabel = uilabel(app.OverallResultsfromConditionPanel_3);
+            app.AreaofSpreadSDmm2EditFieldLabel.HorizontalAlignment = 'right';
+            app.AreaofSpreadSDmm2EditFieldLabel.Position = [37 328 149 22];
+            app.AreaofSpreadSDmm2EditFieldLabel.Text = 'Area of Spread SD (mm^2)';
+
+            % Create AreaofSpreadSDmm2EditField
+            app.AreaofSpreadSDmm2EditField = uieditfield(app.OverallResultsfromConditionPanel_3, 'numeric');
+            app.AreaofSpreadSDmm2EditField.Position = [195 328 46 22];
+
+            % Create AreaofSpreadMeanmm2EditFieldLabel
+            app.AreaofSpreadMeanmm2EditFieldLabel = uilabel(app.OverallResultsfromConditionPanel_3);
+            app.AreaofSpreadMeanmm2EditFieldLabel.HorizontalAlignment = 'right';
+            app.AreaofSpreadMeanmm2EditFieldLabel.Position = [21 287 163 22];
+            app.AreaofSpreadMeanmm2EditFieldLabel.Text = 'Area of Spread Mean (mm^2)';
+
+            % Create AreaofSpreadMeanmm2EditField
+            app.AreaofSpreadMeanmm2EditField = uieditfield(app.OverallResultsfromConditionPanel_3, 'numeric');
+            app.AreaofSpreadMeanmm2EditField.Position = [193 287 48 22];
+
+            % Create PlotsofOutputDataPanel_3
+            app.PlotsofOutputDataPanel_3 = uipanel(app.DripperTestTab);
+            app.PlotsofOutputDataPanel_3.Title = 'Plots of Output Data ';
+            app.PlotsofOutputDataPanel_3.BackgroundColor = [1 0.4118 0.1608];
+            app.PlotsofOutputDataPanel_3.Position = [262 0 705 585];
+
+            % Create UIAxes_6
+            app.UIAxes_6 = uiaxes(app.PlotsofOutputDataPanel_3);
+            title(app.UIAxes_6, 'Volume Dispensed Error (µL)')
+            xlabel(app.UIAxes_6, 'Trial #')
+            ylabel(app.UIAxes_6, 'Volume Error (µL)')
+            zlabel(app.UIAxes_6, 'Z')
+            app.UIAxes_6.Position = [19 359 300 185];
+
+            % Create UIAxes_7
+            app.UIAxes_7 = uiaxes(app.PlotsofOutputDataPanel_3);
+            title(app.UIAxes_7, 'Timing Error: Start (ms)')
+            xlabel(app.UIAxes_7, 'Trial #')
+            ylabel(app.UIAxes_7, 'Timing Error (ms)')
+            zlabel(app.UIAxes_7, 'Z')
+            app.UIAxes_7.Position = [349 402 300 142];
+
+            % Create UIAxes_8
+            app.UIAxes_8 = uiaxes(app.PlotsofOutputDataPanel_3);
+            title(app.UIAxes_8, 'Area of Spread Error (mm^2)')
+            xlabel(app.UIAxes_8, 'Trial #')
+            ylabel(app.UIAxes_8, 'Spread Error (mm^2)')
+            zlabel(app.UIAxes_8, 'Z')
+            app.UIAxes_8.Position = [19 157 300 185];
+
+            % Create UIAxes_18
+            app.UIAxes_18 = uiaxes(app.PlotsofOutputDataPanel_3);
+            title(app.UIAxes_18, 'Timing Error: End (ms)')
+            xlabel(app.UIAxes_18, 'Trial #')
+            ylabel(app.UIAxes_18, 'Timing Error (ms)')
+            zlabel(app.UIAxes_18, 'Z')
+            app.UIAxes_18.Position = [349 241 300 142];
+
+            % Create UIAxes_19
+            app.UIAxes_19 = uiaxes(app.PlotsofOutputDataPanel_3);
+            title(app.UIAxes_19, 'Timing Error Total (ms)')
+            xlabel(app.UIAxes_19, 'Trial #')
+            ylabel(app.UIAxes_19, 'Timing Error (ms)')
+            zlabel(app.UIAxes_19, 'Z')
+            app.UIAxes_19.Position = [349 42 300 183];
+
+            % Create TubingIntegrityTestTab
+            app.TubingIntegrityTestTab = uitab(app.TabGroup);
+            app.TubingIntegrityTestTab.Title = 'Tubing Integrity Test';
+            app.TubingIntegrityTestTab.BackgroundColor = [1 0.4118 0.1608];
+            app.TubingIntegrityTestTab.ForegroundColor = [0 0 1];
+
+            % Create SettingstoAdjustandRecordOutputsPanel_4
+            app.SettingstoAdjustandRecordOutputsPanel_4 = uipanel(app.TubingIntegrityTestTab);
+            app.SettingstoAdjustandRecordOutputsPanel_4.Title = 'Settings to Adjust and Record Outputs ';
+            app.SettingstoAdjustandRecordOutputsPanel_4.BackgroundColor = [1 0.6431 0.4902];
+            app.SettingstoAdjustandRecordOutputsPanel_4.Position = [0 584 966 241];
+
+            % Create SaveTrialDataButton_10
+            app.SaveTrialDataButton_10 = uibutton(app.SettingstoAdjustandRecordOutputsPanel_4, 'push');
+            app.SaveTrialDataButton_10.ButtonPushedFcn = createCallbackFcn(app, @SaveTrialDataButton_4Pushed, true);
+            app.SaveTrialDataButton_10.Position = [8 150 189 23];
+            app.SaveTrialDataButton_10.Text = 'Save Trial Data';
+
+            % Create ExportDatatoCSVExcelButton_10
+            app.ExportDatatoCSVExcelButton_10 = uibutton(app.SettingstoAdjustandRecordOutputsPanel_4, 'push');
+            app.ExportDatatoCSVExcelButton_10.ButtonPushedFcn = createCallbackFcn(app, @ExportDatatoCSVExcelButton_4Pushed, true);
+            app.ExportDatatoCSVExcelButton_10.Position = [8 95 90 44];
+            app.ExportDatatoCSVExcelButton_10.Text = {'Export Data to '; 'CSV/Excel'};
+
+            % Create ClearCurrentTrialEntryButton_10
+            app.ClearCurrentTrialEntryButton_10 = uibutton(app.SettingstoAdjustandRecordOutputsPanel_4, 'push');
+            app.ClearCurrentTrialEntryButton_10.ButtonPushedFcn = createCallbackFcn(app, @ClearCurrentTrialEntryButton_4Pushed, true);
+            app.ClearCurrentTrialEntryButton_10.Position = [109 95 88 44];
+            app.ClearCurrentTrialEntryButton_10.Text = {'Clear Current '; 'Trial Entry '};
+
+            % Create FactorsIndependentVariablesLabel_4
+            app.FactorsIndependentVariablesLabel_4 = uilabel(app.SettingstoAdjustandRecordOutputsPanel_4);
+            app.FactorsIndependentVariablesLabel_4.Position = [252 181 176 22];
+            app.FactorsIndependentVariablesLabel_4.Text = 'Factors (Independent Variables)';
+
+            % Create MeasuredOutputspertrialLabel_4
+            app.MeasuredOutputspertrialLabel_4 = uilabel(app.SettingstoAdjustandRecordOutputsPanel_4);
+            app.MeasuredOutputspertrialLabel_4.Position = [519 181 155 22];
+            app.MeasuredOutputspertrialLabel_4.Text = 'Measured Outputs (per trial)';
+
+            % Create TrialCounterEditField_10Label
+            app.TrialCounterEditField_10Label = uilabel(app.SettingstoAdjustandRecordOutputsPanel_4);
+            app.TrialCounterEditField_10Label.HorizontalAlignment = 'right';
+            app.TrialCounterEditField_10Label.Position = [8 185 74 22];
+            app.TrialCounterEditField_10Label.Text = 'Trial Counter';
+
+            % Create TrialCounterEditField_10
+            app.TrialCounterEditField_10 = uieditfield(app.SettingstoAdjustandRecordOutputsPanel_4, 'numeric');
+            app.TrialCounterEditField_10.Position = [97 181 100 30];
+            app.TrialCounterEditField_10.Value = 1;
+
+            % Create NotesfromTrialTextArea_10Label
+            app.NotesfromTrialTextArea_10Label = uilabel(app.SettingstoAdjustandRecordOutputsPanel_4);
+            app.NotesfromTrialTextArea_10Label.HorizontalAlignment = 'right';
+            app.NotesfromTrialTextArea_10Label.Position = [8 47 67 30];
+            app.NotesfromTrialTextArea_10Label.Text = {'Notes from '; 'Trial '};
+
+            % Create NotesfromTrialTextArea_10
+            app.NotesfromTrialTextArea_10 = uitextarea(app.SettingstoAdjustandRecordOutputsPanel_4);
+            app.NotesfromTrialTextArea_10.Position = [81 19 116 60];
+
+            % Create PressureDropDownLabel
+            app.PressureDropDownLabel = uilabel(app.SettingstoAdjustandRecordOutputsPanel_4);
+            app.PressureDropDownLabel.HorizontalAlignment = 'right';
+            app.PressureDropDownLabel.Position = [253 109 53 22];
+            app.PressureDropDownLabel.Text = 'Pressure';
+
+            % Create PressureDropDown
+            app.PressureDropDown = uidropdown(app.SettingstoAdjustandRecordOutputsPanel_4);
+            app.PressureDropDown.Items = {'Low ', 'Medium ', 'High ', 'N/A'};
+            app.PressureDropDown.Position = [321 109 100 22];
+            app.PressureDropDown.Value = 'Low ';
+
+            % Create CyclesDropDown_6Label
+            app.CyclesDropDown_6Label = uilabel(app.SettingstoAdjustandRecordOutputsPanel_4);
+            app.CyclesDropDown_6Label.HorizontalAlignment = 'right';
+            app.CyclesDropDown_6Label.Position = [265 74 41 22];
+            app.CyclesDropDown_6Label.Text = 'Cycles';
+
+            % Create CyclesDropDown_6
+            app.CyclesDropDown_6 = uidropdown(app.SettingstoAdjustandRecordOutputsPanel_4);
+            app.CyclesDropDown_6.Items = {'3', '7', '15'};
+            app.CyclesDropDown_6.Position = [321 74 100 22];
+            app.CyclesDropDown_6.Value = '3';
+
+            % Create TubeLengthDropDownLabel
+            app.TubeLengthDropDownLabel = uilabel(app.SettingstoAdjustandRecordOutputsPanel_4);
+            app.TubeLengthDropDownLabel.HorizontalAlignment = 'right';
+            app.TubeLengthDropDownLabel.Position = [234 41 72 22];
+            app.TubeLengthDropDownLabel.Text = 'Tube Length';
+
+            % Create TubeLengthDropDown
+            app.TubeLengthDropDown = uidropdown(app.SettingstoAdjustandRecordOutputsPanel_4);
+            app.TubeLengthDropDown.Items = {'Short ', 'Medium ', 'Long'};
+            app.TubeLengthDropDown.Position = [321 41 100 22];
+            app.TubeLengthDropDown.Value = 'Short ';
+
+            % Create LeakRatemLminEditFieldLabel
+            app.LeakRatemLminEditFieldLabel = uilabel(app.SettingstoAdjustandRecordOutputsPanel_4);
+            app.LeakRatemLminEditFieldLabel.HorizontalAlignment = 'right';
+            app.LeakRatemLminEditFieldLabel.Position = [486 144 110 22];
+            app.LeakRatemLminEditFieldLabel.Text = 'Leak Rate (mL/min)';
+
+            % Create LeakRatemLminEditField
+            app.LeakRatemLminEditField = uieditfield(app.SettingstoAdjustandRecordOutputsPanel_4, 'numeric');
+            app.LeakRatemLminEditField.Position = [609 144 65 22];
+
+            % Create DripperStartTimemsEditFieldLabel
+            app.DripperStartTimemsEditFieldLabel = uilabel(app.SettingstoAdjustandRecordOutputsPanel_4);
+            app.DripperStartTimemsEditFieldLabel.HorizontalAlignment = 'right';
+            app.DripperStartTimemsEditFieldLabel.Position = [466 114 130 22];
+            app.DripperStartTimemsEditFieldLabel.Text = 'Dripper Start Time (ms)';
+
+            % Create DripperStartTimemsEditField
+            app.DripperStartTimemsEditField = uieditfield(app.SettingstoAdjustandRecordOutputsPanel_4, 'numeric');
+            app.DripperStartTimemsEditField.Position = [609 114 65 22];
+
+            % Create ExpectedValueswhatitshouldbeLabel_4
+            app.ExpectedValueswhatitshouldbeLabel_4 = uilabel(app.SettingstoAdjustandRecordOutputsPanel_4);
+            app.ExpectedValueswhatitshouldbeLabel_4.Position = [739 185 197 22];
+            app.ExpectedValueswhatitshouldbeLabel_4.Text = 'Expected Values (what it should be)';
+
+            % Create DripperStartTimemsEditField_2Label
+            app.DripperStartTimemsEditField_2Label = uilabel(app.SettingstoAdjustandRecordOutputsPanel_4);
+            app.DripperStartTimemsEditField_2Label.HorizontalAlignment = 'right';
+            app.DripperStartTimemsEditField_2Label.Position = [718 142 130 22];
+            app.DripperStartTimemsEditField_2Label.Text = 'Dripper Start Time (ms)';
+
+            % Create DripperStartTimemsEditField_2
+            app.DripperStartTimemsEditField_2 = uieditfield(app.SettingstoAdjustandRecordOutputsPanel_4, 'numeric');
+            app.DripperStartTimemsEditField_2.Position = [861 142 65 22];
+
+            % Create DripperEndTimemsEditField_2Label
+            app.DripperEndTimemsEditField_2Label = uilabel(app.SettingstoAdjustandRecordOutputsPanel_4);
+            app.DripperEndTimemsEditField_2Label.HorizontalAlignment = 'right';
+            app.DripperEndTimemsEditField_2Label.Position = [719 106 129 22];
+            app.DripperEndTimemsEditField_2Label.Text = 'Dripper End Time (ms) ';
+
+            % Create DripperEndTimemsEditField_2
+            app.DripperEndTimemsEditField_2 = uieditfield(app.SettingstoAdjustandRecordOutputsPanel_4, 'numeric');
+            app.DripperEndTimemsEditField_2.Position = [861 106 65 22];
+
+            % Create SubsystemDropDownLabel
+            app.SubsystemDropDownLabel = uilabel(app.SettingstoAdjustandRecordOutputsPanel_4);
+            app.SubsystemDropDownLabel.HorizontalAlignment = 'right';
+            app.SubsystemDropDownLabel.Position = [242 141 64 22];
+            app.SubsystemDropDownLabel.Text = 'Subsystem';
+
+            % Create SubsystemDropDown
+            app.SubsystemDropDown = uidropdown(app.SettingstoAdjustandRecordOutputsPanel_4);
+            app.SubsystemDropDown.Items = {'Suction Cup', 'Dripper'};
+            app.SubsystemDropDown.Position = [321 141 100 22];
+            app.SubsystemDropDown.Value = 'Suction Cup';
+
+            % Create DripperEndTimemsEditFieldLabel
+            app.DripperEndTimemsEditFieldLabel = uilabel(app.SettingstoAdjustandRecordOutputsPanel_4);
+            app.DripperEndTimemsEditFieldLabel.HorizontalAlignment = 'right';
+            app.DripperEndTimemsEditFieldLabel.Position = [470 85 126 22];
+            app.DripperEndTimemsEditFieldLabel.Text = 'Dripper End Time (ms)';
+
+            % Create DripperEndTimemsEditField
+            app.DripperEndTimemsEditField = uieditfield(app.SettingstoAdjustandRecordOutputsPanel_4, 'numeric');
+            app.DripperEndTimemsEditField.Position = [609 85 65 22];
+
+            % Create GripSuccessfullyCheckBox
+            app.GripSuccessfullyCheckBox = uicheckbox(app.SettingstoAdjustandRecordOutputsPanel_4);
+            app.GripSuccessfullyCheckBox.Text = 'Grip Successfully? ';
+            app.GripSuccessfullyCheckBox.Position = [550 52 124 22];
+
+            % Create VisualDefectsCheckBox
+            app.VisualDefectsCheckBox = uicheckbox(app.SettingstoAdjustandRecordOutputsPanel_4);
+            app.VisualDefectsCheckBox.Text = 'Visual Defects?';
+            app.VisualDefectsCheckBox.Position = [568 20 103 22];
+
+            % Create OverallResultsfromConditionPanel_4
+            app.OverallResultsfromConditionPanel_4 = uipanel(app.TubingIntegrityTestTab);
+            app.OverallResultsfromConditionPanel_4.Title = 'Overall Results from Condition';
+            app.OverallResultsfromConditionPanel_4.BackgroundColor = [0.5412 0.5961 0.949];
+            app.OverallResultsfromConditionPanel_4.Position = [1 1 260 584];
+
+            % Create LeakRateSDmLminEditFieldLabel
+            app.LeakRateSDmLminEditFieldLabel = uilabel(app.OverallResultsfromConditionPanel_4);
+            app.LeakRateSDmLminEditFieldLabel.HorizontalAlignment = 'right';
+            app.LeakRateSDmLminEditFieldLabel.Position = [52 521 130 22];
+            app.LeakRateSDmLminEditFieldLabel.Text = 'Leak Rate SD (mL/min)';
+
+            % Create LeakRateSDmLminEditField
+            app.LeakRateSDmLminEditField = uieditfield(app.OverallResultsfromConditionPanel_4, 'numeric');
+            app.LeakRateSDmLminEditField.Position = [196 521 46 22];
+
+            % Create TimingSDtotaltimemsEditField_2Label
+            app.TimingSDtotaltimemsEditField_2Label = uilabel(app.OverallResultsfromConditionPanel_4);
+            app.TimingSDtotaltimemsEditField_2Label.HorizontalAlignment = 'right';
+            app.TimingSDtotaltimemsEditField_2Label.Position = [35 401 148 22];
+            app.TimingSDtotaltimemsEditField_2Label.Text = 'Timing SD (total time) (ms)';
+
+            % Create TimingSDtotaltimemsEditField_2
+            app.TimingSDtotaltimemsEditField_2 = uieditfield(app.OverallResultsfromConditionPanel_4, 'numeric');
+            app.TimingSDtotaltimemsEditField_2.Position = [193 401 48 22];
+
+            % Create GripSuccessRateEditField_2Label
+            app.GripSuccessRateEditField_2Label = uilabel(app.OverallResultsfromConditionPanel_4);
+            app.GripSuccessRateEditField_2Label.HorizontalAlignment = 'right';
+            app.GripSuccessRateEditField_2Label.Position = [55 360 127 22];
+            app.GripSuccessRateEditField_2Label.Text = 'Grip Success Rate (%)';
+
+            % Create GripSuccessRateEditField_2
+            app.GripSuccessRateEditField_2 = uieditfield(app.OverallResultsfromConditionPanel_4, 'numeric');
+            app.GripSuccessRateEditField_2.Position = [193 360 49 22];
+
+            % Create CycleswithnodefectsoccuringLabel
+            app.CycleswithnodefectsoccuringLabel = uilabel(app.OverallResultsfromConditionPanel_4);
+            app.CycleswithnodefectsoccuringLabel.HorizontalAlignment = 'right';
+            app.CycleswithnodefectsoccuringLabel.Position = [6 319 176 22];
+            app.CycleswithnodefectsoccuringLabel.Text = '% Cycles of no defects occuring';
+
+            % Create CyclesofnodefectsoccuringEditField
+            app.CyclesofnodefectsoccuringEditField = uieditfield(app.OverallResultsfromConditionPanel_4, 'numeric');
+            app.CyclesofnodefectsoccuringEditField.Position = [193 319 48 22];
+
+            % Create TimingErrorSDstarttimemsEditField_2Label
+            app.TimingErrorSDstarttimemsEditField_2Label = uilabel(app.OverallResultsfromConditionPanel_4);
+            app.TimingErrorSDstarttimemsEditField_2Label.HorizontalAlignment = 'right';
+            app.TimingErrorSDstarttimemsEditField_2Label.Position = [4 481 179 22];
+            app.TimingErrorSDstarttimemsEditField_2Label.Text = 'Timing Error SD (start time) (ms)';
+
+            % Create TimingErrorSDstarttimemsEditField_2
+            app.TimingErrorSDstarttimemsEditField_2 = uieditfield(app.OverallResultsfromConditionPanel_4, 'numeric');
+            app.TimingErrorSDstarttimemsEditField_2.Position = [195 481 46 22];
+
+            % Create TimingErrorSDendtimemsEditField_2Label
+            app.TimingErrorSDendtimemsEditField_2Label = uilabel(app.OverallResultsfromConditionPanel_4);
+            app.TimingErrorSDendtimemsEditField_2Label.HorizontalAlignment = 'right';
+            app.TimingErrorSDendtimemsEditField_2Label.Position = [9 439 175 22];
+            app.TimingErrorSDendtimemsEditField_2Label.Text = 'Timing Error SD (end time) (ms)';
+
+            % Create TimingErrorSDendtimemsEditField_2
+            app.TimingErrorSDendtimemsEditField_2 = uieditfield(app.OverallResultsfromConditionPanel_4, 'numeric');
+            app.TimingErrorSDendtimemsEditField_2.Position = [193 439 49 22];
+
+            % Create PlotsofOutputDataPanel_4
+            app.PlotsofOutputDataPanel_4 = uipanel(app.TubingIntegrityTestTab);
+            app.PlotsofOutputDataPanel_4.Title = 'Plots of Output Data ';
+            app.PlotsofOutputDataPanel_4.BackgroundColor = [1 0.4118 0.1608];
+            app.PlotsofOutputDataPanel_4.Position = [262 0 705 585];
+
+            % Create UIAxes_9
+            app.UIAxes_9 = uiaxes(app.PlotsofOutputDataPanel_4);
+            title(app.UIAxes_9, 'Leak Rate (mL/min)')
+            xlabel(app.UIAxes_9, 'Trial #')
+            ylabel(app.UIAxes_9, 'Leak Rate (mL/min)')
+            zlabel(app.UIAxes_9, 'Z')
+            app.UIAxes_9.Position = [31 155 300 185];
+
+            % Create UIAxes_20
+            app.UIAxes_20 = uiaxes(app.PlotsofOutputDataPanel_4);
+            title(app.UIAxes_20, 'Timing Error: Start (ms)')
+            xlabel(app.UIAxes_20, 'Trial #')
+            ylabel(app.UIAxes_20, 'Timing Error (ms)')
+            zlabel(app.UIAxes_20, 'Z')
+            app.UIAxes_20.Position = [31 361 300 184];
+
+            % Create UIAxes_21
+            app.UIAxes_21 = uiaxes(app.PlotsofOutputDataPanel_4);
+            title(app.UIAxes_21, 'Timing Error: End (ms)')
+            xlabel(app.UIAxes_21, 'Trial #')
+            ylabel(app.UIAxes_21, 'Timing Error (ms)')
+            zlabel(app.UIAxes_21, 'Z')
+            app.UIAxes_21.Position = [362 361 300 183];
+
+            % Create UIAxes_22
+            app.UIAxes_22 = uiaxes(app.PlotsofOutputDataPanel_4);
+            title(app.UIAxes_22, 'Timing Error Total (ms)')
+            xlabel(app.UIAxes_22, 'Trial #')
+            ylabel(app.UIAxes_22, 'Timing Error (ms)')
+            zlabel(app.UIAxes_22, 'Z')
+            app.UIAxes_22.Position = [362 157 300 183];
+
+            % Create WearTestTab
+            app.WearTestTab = uitab(app.TabGroup);
+            app.WearTestTab.Title = 'Wear Test';
+            app.WearTestTab.BackgroundColor = [1 0.4118 0.1608];
+            app.WearTestTab.ForegroundColor = [0 0 1];
+
+            % Create SettingstoAdjustandRecordOutputsPanel_5
+            app.SettingstoAdjustandRecordOutputsPanel_5 = uipanel(app.WearTestTab);
+            app.SettingstoAdjustandRecordOutputsPanel_5.Title = 'Settings to Adjust and Record Outputs ';
+            app.SettingstoAdjustandRecordOutputsPanel_5.BackgroundColor = [1 0.6431 0.4902];
+            app.SettingstoAdjustandRecordOutputsPanel_5.Position = [1 584 966 241];
+
+            % Create SaveTrialDataButton_11
+            app.SaveTrialDataButton_11 = uibutton(app.SettingstoAdjustandRecordOutputsPanel_5, 'push');
+            app.SaveTrialDataButton_11.ButtonPushedFcn = createCallbackFcn(app, @SaveTrialDataButton_5Pushed, true);
+            app.SaveTrialDataButton_11.Position = [8 150 189 23];
+            app.SaveTrialDataButton_11.Text = 'Save Trial Data';
+
+            % Create ExportDatatoCSVExcelButton_11
+            app.ExportDatatoCSVExcelButton_11 = uibutton(app.SettingstoAdjustandRecordOutputsPanel_5, 'push');
+            app.ExportDatatoCSVExcelButton_11.ButtonPushedFcn = createCallbackFcn(app, @ExportDatatoCSVExcelButton_5Pushed, true);
+            app.ExportDatatoCSVExcelButton_11.Position = [8 95 90 44];
+            app.ExportDatatoCSVExcelButton_11.Text = {'Export Data to '; 'CSV/Excel'};
+
+            % Create ClearCurrentTrialEntryButton_11
+            app.ClearCurrentTrialEntryButton_11 = uibutton(app.SettingstoAdjustandRecordOutputsPanel_5, 'push');
+            app.ClearCurrentTrialEntryButton_11.ButtonPushedFcn = createCallbackFcn(app, @ClearCurrentTrialEntryButton_5Pushed, true);
+            app.ClearCurrentTrialEntryButton_11.Position = [109 95 88 44];
+            app.ClearCurrentTrialEntryButton_11.Text = {'Clear Current '; 'Trial Entry '};
+
+            % Create MeasuredOutputspertrialLabel_5
+            app.MeasuredOutputspertrialLabel_5 = uilabel(app.SettingstoAdjustandRecordOutputsPanel_5);
+            app.MeasuredOutputspertrialLabel_5.Position = [404 181 155 22];
+            app.MeasuredOutputspertrialLabel_5.Text = 'Measured Outputs (per trial)';
+
+            % Create TrialCounterEditField_11Label
+            app.TrialCounterEditField_11Label = uilabel(app.SettingstoAdjustandRecordOutputsPanel_5);
+            app.TrialCounterEditField_11Label.HorizontalAlignment = 'right';
+            app.TrialCounterEditField_11Label.Position = [8 185 74 22];
+            app.TrialCounterEditField_11Label.Text = 'Trial Counter';
+
+            % Create TrialCounterEditField_11
+            app.TrialCounterEditField_11 = uieditfield(app.SettingstoAdjustandRecordOutputsPanel_5, 'numeric');
+            app.TrialCounterEditField_11.Position = [97 181 100 30];
+            app.TrialCounterEditField_11.Value = 1;
+
+            % Create NotesfromTrialTextArea_11Label
+            app.NotesfromTrialTextArea_11Label = uilabel(app.SettingstoAdjustandRecordOutputsPanel_5);
+            app.NotesfromTrialTextArea_11Label.HorizontalAlignment = 'right';
+            app.NotesfromTrialTextArea_11Label.Position = [8 47 67 30];
+            app.NotesfromTrialTextArea_11Label.Text = {'Notes from '; 'Trial '};
+
+            % Create NotesfromTrialTextArea_11
+            app.NotesfromTrialTextArea_11 = uitextarea(app.SettingstoAdjustandRecordOutputsPanel_5);
+            app.NotesfromTrialTextArea_11.Position = [81 19 116 60];
+
+            % Create TimeDrippingVisiblyStartsmsEditFieldLabel
+            app.TimeDrippingVisiblyStartsmsEditFieldLabel = uilabel(app.SettingstoAdjustandRecordOutputsPanel_5);
+            app.TimeDrippingVisiblyStartsmsEditFieldLabel.HorizontalAlignment = 'right';
+            app.TimeDrippingVisiblyStartsmsEditFieldLabel.Position = [256 63 182 22];
+            app.TimeDrippingVisiblyStartsmsEditFieldLabel.Text = 'Time Dripping Visibly Starts (ms) ';
+
+            % Create TimeDrippingVisiblyStartsmsEditField
+            app.TimeDrippingVisiblyStartsmsEditField = uieditfield(app.SettingstoAdjustandRecordOutputsPanel_5, 'numeric');
+            app.TimeDrippingVisiblyStartsmsEditField.Position = [448 63 45 22];
+
+            % Create RailPositionErrormmEditFieldLabel
+            app.RailPositionErrormmEditFieldLabel = uilabel(app.SettingstoAdjustandRecordOutputsPanel_5);
+            app.RailPositionErrormmEditFieldLabel.HorizontalAlignment = 'right';
+            app.RailPositionErrormmEditFieldLabel.Position = [493 151 133 22];
+            app.RailPositionErrormmEditFieldLabel.Text = 'Rail Position Error (mm)';
+
+            % Create RailPositionErrormmEditField
+            app.RailPositionErrormmEditField = uieditfield(app.SettingstoAdjustandRecordOutputsPanel_5, 'numeric');
+            app.RailPositionErrormmEditField.Position = [639 151 51 22];
+
+            % Create ExpectedValueswhatitshouldbeLabel_5
+            app.ExpectedValueswhatitshouldbeLabel_5 = uilabel(app.SettingstoAdjustandRecordOutputsPanel_5);
+            app.ExpectedValueswhatitshouldbeLabel_5.Position = [739 185 197 22];
+            app.ExpectedValueswhatitshouldbeLabel_5.Text = 'Expected Values (what it should be)';
+
+            % Create VolumeDispensedLEditField_3Label
+            app.VolumeDispensedLEditField_3Label = uilabel(app.SettingstoAdjustandRecordOutputsPanel_5);
+            app.VolumeDispensedLEditField_3Label.HorizontalAlignment = 'right';
+            app.VolumeDispensedLEditField_3Label.Position = [718 142 130 22];
+            app.VolumeDispensedLEditField_3Label.Text = 'Volume Dispensed (µL)';
+
+            % Create VolumeDispensedLEditField_3
+            app.VolumeDispensedLEditField_3 = uieditfield(app.SettingstoAdjustandRecordOutputsPanel_5, 'numeric');
+            app.VolumeDispensedLEditField_3.Position = [861 142 65 22];
+
+            % Create RailVelocitymmsEditField_2Label
+            app.RailVelocitymmsEditField_2Label = uilabel(app.SettingstoAdjustandRecordOutputsPanel_5);
+            app.RailVelocitymmsEditField_2Label.HorizontalAlignment = 'right';
+            app.RailVelocitymmsEditField_2Label.Position = [737 106 111 22];
+            app.RailVelocitymmsEditField_2Label.Text = 'Rail Velocity (mm/s)';
+
+            % Create RailVelocitymmsEditField_2
+            app.RailVelocitymmsEditField_2 = uieditfield(app.SettingstoAdjustandRecordOutputsPanel_5, 'numeric');
+            app.RailVelocitymmsEditField_2.Position = [861 106 65 22];
+
+            % Create DrippercycletimesEditFieldLabel
+            app.DrippercycletimesEditFieldLabel = uilabel(app.SettingstoAdjustandRecordOutputsPanel_5);
+            app.DrippercycletimesEditFieldLabel.HorizontalAlignment = 'right';
+            app.DrippercycletimesEditFieldLabel.Position = [730 73 118 22];
+            app.DrippercycletimesEditFieldLabel.Text = 'Dripper cycle time (s)';
+
+            % Create DrippercycletimesEditField
+            app.DrippercycletimesEditField = uieditfield(app.SettingstoAdjustandRecordOutputsPanel_5, 'numeric');
+            app.DrippercycletimesEditField.Position = [861 73 65 22];
+
+            % Create VisualDamageCheckBox
+            app.VisualDamageCheckBox = uicheckbox(app.SettingstoAdjustandRecordOutputsPanel_5);
+            app.VisualDamageCheckBox.Text = 'Visual Damage?';
+            app.VisualDamageCheckBox.Position = [375 150 110 22];
+
+            % Create VolumeofMediaDispensedLEditFieldLabel
+            app.VolumeofMediaDispensedLEditFieldLabel = uilabel(app.SettingstoAdjustandRecordOutputsPanel_5);
+            app.VolumeofMediaDispensedLEditFieldLabel.HorizontalAlignment = 'right';
+            app.VolumeofMediaDispensedLEditFieldLabel.Position = [258 93 179 22];
+            app.VolumeofMediaDispensedLEditFieldLabel.Text = 'Volume of Media Dispensed (µL)';
+
+            % Create VolumeofMediaDispensedLEditField
+            app.VolumeofMediaDispensedLEditField = uieditfield(app.SettingstoAdjustandRecordOutputsPanel_5, 'numeric');
+            app.VolumeofMediaDispensedLEditField.Position = [449 93 45 22];
+
+            % Create GripSuccessfullyCheckBox_2
+            app.GripSuccessfullyCheckBox_2 = uicheckbox(app.SettingstoAdjustandRecordOutputsPanel_5);
+            app.GripSuccessfullyCheckBox_2.Text = 'Grip Successfully?';
+            app.GripSuccessfullyCheckBox_2.Position = [375 121 121 22];
+
+            % Create TimeDrippingVisiblyEndsmsEditFieldLabel
+            app.TimeDrippingVisiblyEndsmsEditFieldLabel = uilabel(app.SettingstoAdjustandRecordOutputsPanel_5);
+            app.TimeDrippingVisiblyEndsmsEditFieldLabel.HorizontalAlignment = 'right';
+            app.TimeDrippingVisiblyEndsmsEditFieldLabel.Position = [261 34 178 22];
+            app.TimeDrippingVisiblyEndsmsEditFieldLabel.Text = 'Time Dripping Visibly Ends (ms) ';
+
+            % Create TimeDrippingVisiblyEndsmsEditField
+            app.TimeDrippingVisiblyEndsmsEditField = uieditfield(app.SettingstoAdjustandRecordOutputsPanel_5, 'numeric');
+            app.TimeDrippingVisiblyEndsmsEditField.Position = [449 34 45 22];
+
+            % Create RailVelocitymmsEditFieldLabel
+            app.RailVelocitymmsEditFieldLabel = uilabel(app.SettingstoAdjustandRecordOutputsPanel_5);
+            app.RailVelocitymmsEditFieldLabel.HorizontalAlignment = 'right';
+            app.RailVelocitymmsEditFieldLabel.Position = [515 123 111 22];
+            app.RailVelocitymmsEditFieldLabel.Text = 'Rail Velocity (mm/s)';
+
+            % Create RailVelocitymmsEditField
+            app.RailVelocitymmsEditField = uieditfield(app.SettingstoAdjustandRecordOutputsPanel_5, 'numeric');
+            app.RailVelocitymmsEditField.Position = [639 123 51 22];
+
+            % Create CoverslipPositionErrormmLabel
+            app.CoverslipPositionErrormmLabel = uilabel(app.SettingstoAdjustandRecordOutputsPanel_5);
+            app.CoverslipPositionErrormmLabel.HorizontalAlignment = 'right';
+            app.CoverslipPositionErrormmLabel.Position = [524 84 104 30];
+            app.CoverslipPositionErrormmLabel.Text = {'Coverslip Position '; 'Error (mm)'};
+
+            % Create CoverslipPositionErrormmEditField
+            app.CoverslipPositionErrormmEditField = uieditfield(app.SettingstoAdjustandRecordOutputsPanel_5, 'numeric');
+            app.CoverslipPositionErrormmEditField.Position = [638 88 52 22];
+
+            % Create OverallResultsfromConditionPanel_5
+            app.OverallResultsfromConditionPanel_5 = uipanel(app.WearTestTab);
+            app.OverallResultsfromConditionPanel_5.Title = 'Overall Results from Condition';
+            app.OverallResultsfromConditionPanel_5.BackgroundColor = [0.5412 0.5961 0.949];
+            app.OverallResultsfromConditionPanel_5.Position = [1 1 260 584];
+
+            % Create GripSuccessRateEditField_3Label
+            app.GripSuccessRateEditField_3Label = uilabel(app.OverallResultsfromConditionPanel_5);
+            app.GripSuccessRateEditField_3Label.HorizontalAlignment = 'right';
+            app.GripSuccessRateEditField_3Label.Position = [52 521 127 22];
+            app.GripSuccessRateEditField_3Label.Text = 'Grip Success Rate (%)';
+
+            % Create GripSuccessRateEditField_3
+            app.GripSuccessRateEditField_3 = uieditfield(app.OverallResultsfromConditionPanel_5, 'numeric');
+            app.GripSuccessRateEditField_3.Position = [191 521 51 22];
+
+            % Create CyclethatwearstartstoshowEditFieldLabel
+            app.CyclethatwearstartstoshowEditFieldLabel = uilabel(app.OverallResultsfromConditionPanel_5);
+            app.CyclethatwearstartstoshowEditFieldLabel.HorizontalAlignment = 'right';
+            app.CyclethatwearstartstoshowEditFieldLabel.Position = [14 481 165 22];
+            app.CyclethatwearstartstoshowEditFieldLabel.Text = 'Cycle that wear starts to show';
+
+            % Create CyclethatwearstartstoshowEditField
+            app.CyclethatwearstartstoshowEditField = uieditfield(app.OverallResultsfromConditionPanel_5, 'numeric');
+            app.CyclethatwearstartstoshowEditField.Position = [190 481 52 22];
+
+            % Create VolumeDispensedSDLEditField_2Label
+            app.VolumeDispensedSDLEditField_2Label = uilabel(app.OverallResultsfromConditionPanel_5);
+            app.VolumeDispensedSDLEditField_2Label.HorizontalAlignment = 'right';
+            app.VolumeDispensedSDLEditField_2Label.Position = [29 439 150 22];
+            app.VolumeDispensedSDLEditField_2Label.Text = 'Volume Dispensed SD (µL)';
+
+            % Create VolumeDispensedSDLEditField_2
+            app.VolumeDispensedSDLEditField_2 = uieditfield(app.OverallResultsfromConditionPanel_5, 'numeric');
+            app.VolumeDispensedSDLEditField_2.Position = [189 439 53 22];
+
+            % Create DripperStartTimeErrorSDmsEditFieldLabel
+            app.DripperStartTimeErrorSDmsEditFieldLabel = uilabel(app.OverallResultsfromConditionPanel_5);
+            app.DripperStartTimeErrorSDmsEditFieldLabel.HorizontalAlignment = 'right';
+            app.DripperStartTimeErrorSDmsEditFieldLabel.Position = [1 401 180 22];
+            app.DripperStartTimeErrorSDmsEditFieldLabel.Text = 'Dripper Start Time Error SD (ms)';
+
+            % Create DripperStartTimeErrorSDmsEditField
+            app.DripperStartTimeErrorSDmsEditField = uieditfield(app.OverallResultsfromConditionPanel_5, 'numeric');
+            app.DripperStartTimeErrorSDmsEditField.Position = [190 401 52 22];
+
+            % Create DripperEndTimeSDmsEditFieldLabel
+            app.DripperEndTimeSDmsEditFieldLabel = uilabel(app.OverallResultsfromConditionPanel_5);
+            app.DripperEndTimeSDmsEditFieldLabel.HorizontalAlignment = 'right';
+            app.DripperEndTimeSDmsEditFieldLabel.Position = [35 365 146 22];
+            app.DripperEndTimeSDmsEditFieldLabel.Text = 'Dripper End Time SD (ms)';
+
+            % Create DripperEndTimeSDmsEditField
+            app.DripperEndTimeSDmsEditField = uieditfield(app.OverallResultsfromConditionPanel_5, 'numeric');
+            app.DripperEndTimeSDmsEditField.Position = [189 365 52 22];
+
+            % Create DripperTotalTimeErrorSDmsEditFieldLabel
+            app.DripperTotalTimeErrorSDmsEditFieldLabel = uilabel(app.OverallResultsfromConditionPanel_5);
+            app.DripperTotalTimeErrorSDmsEditFieldLabel.HorizontalAlignment = 'right';
+            app.DripperTotalTimeErrorSDmsEditFieldLabel.Position = [2 328 179 22];
+            app.DripperTotalTimeErrorSDmsEditFieldLabel.Text = 'Dripper Total Time Error SD (ms)';
+
+            % Create DripperTotalTimeErrorSDmsEditField
+            app.DripperTotalTimeErrorSDmsEditField = uieditfield(app.OverallResultsfromConditionPanel_5, 'numeric');
+            app.DripperTotalTimeErrorSDmsEditField.Position = [189 328 52 22];
+
+            % Create RailPositionErrorSDmmEditFieldLabel
+            app.RailPositionErrorSDmmEditFieldLabel = uilabel(app.OverallResultsfromConditionPanel_5);
+            app.RailPositionErrorSDmmEditFieldLabel.HorizontalAlignment = 'right';
+            app.RailPositionErrorSDmmEditFieldLabel.Position = [30 287 153 22];
+            app.RailPositionErrorSDmmEditFieldLabel.Text = 'Rail Position Error SD (mm)';
+
+            % Create RailPositionErrorSDmmEditField
+            app.RailPositionErrorSDmmEditField = uieditfield(app.OverallResultsfromConditionPanel_5, 'numeric');
+            app.RailPositionErrorSDmmEditField.Position = [191 287 52 22];
+
+            % Create RailVelocityErrorSDmmsEditFieldLabel
+            app.RailVelocityErrorSDmmsEditFieldLabel = uilabel(app.OverallResultsfromConditionPanel_5);
+            app.RailVelocityErrorSDmmsEditFieldLabel.HorizontalAlignment = 'right';
+            app.RailVelocityErrorSDmmsEditFieldLabel.Position = [22 248 161 22];
+            app.RailVelocityErrorSDmmsEditFieldLabel.Text = 'Rail Velocity Error SD (mm/s)';
+
+            % Create RailVelocityErrorSDmmsEditField
+            app.RailVelocityErrorSDmmsEditField = uieditfield(app.OverallResultsfromConditionPanel_5, 'numeric');
+            app.RailVelocityErrorSDmmsEditField.Position = [191 248 52 22];
+
+            % Create SlipPositionErrorSDmmEditFieldLabel
+            app.SlipPositionErrorSDmmEditFieldLabel = uilabel(app.OverallResultsfromConditionPanel_5);
+            app.SlipPositionErrorSDmmEditFieldLabel.HorizontalAlignment = 'right';
+            app.SlipPositionErrorSDmmEditFieldLabel.Position = [29 202 152 22];
+            app.SlipPositionErrorSDmmEditFieldLabel.Text = 'Slip Position Error SD (mm)';
+
+            % Create SlipPositionErrorSDmmEditField
+            app.SlipPositionErrorSDmmEditField = uieditfield(app.OverallResultsfromConditionPanel_5, 'numeric');
+            app.SlipPositionErrorSDmmEditField.Position = [189 202 52 22];
+
+            % Create PlotsofOutputDataPanel_5
+            app.PlotsofOutputDataPanel_5 = uipanel(app.WearTestTab);
+            app.PlotsofOutputDataPanel_5.Title = 'Plots of Output Data ';
+            app.PlotsofOutputDataPanel_5.BackgroundColor = [1 0.4118 0.1608];
+            app.PlotsofOutputDataPanel_5.Position = [262 0 705 585];
+
+            % Create UIAxes_12
+            app.UIAxes_12 = uiaxes(app.PlotsofOutputDataPanel_5);
+            title(app.UIAxes_12, 'Volume Dispense Error (µL)')
+            xlabel(app.UIAxes_12, 'Trial #')
+            ylabel(app.UIAxes_12, 'Volume Error (µL)')
+            zlabel(app.UIAxes_12, 'Z')
+            app.UIAxes_12.Position = [19 366 300 185];
+
+            % Create UIAxes_13
+            app.UIAxes_13 = uiaxes(app.PlotsofOutputDataPanel_5);
+            title(app.UIAxes_13, 'Dripper Total Time Error (ms)')
+            xlabel(app.UIAxes_13, 'Trial #')
+            ylabel(app.UIAxes_13, 'Timing Error (mm/s)')
+            zlabel(app.UIAxes_13, 'Z')
+            app.UIAxes_13.Position = [349 366 300 185];
+
+            % Create UIAxes_14
+            app.UIAxes_14 = uiaxes(app.PlotsofOutputDataPanel_5);
+            title(app.UIAxes_14, 'Rail Position Error (mm)')
+            xlabel(app.UIAxes_14, 'Trial #')
+            ylabel(app.UIAxes_14, 'Position Error (mm)')
+            zlabel(app.UIAxes_14, 'Z')
+            app.UIAxes_14.Position = [19 192 300 168];
+
+            % Create UIAxes_24
+            app.UIAxes_24 = uiaxes(app.PlotsofOutputDataPanel_5);
+            title(app.UIAxes_24, 'Slip Position Error (mm)')
+            xlabel(app.UIAxes_24, 'Trial #')
+            ylabel(app.UIAxes_24, 'Position Error (mm)')
+            zlabel(app.UIAxes_24, 'Z')
+            app.UIAxes_24.Position = [349 192 300 169];
+
+            % Create UIAxes_25
+            app.UIAxes_25 = uiaxes(app.PlotsofOutputDataPanel_5);
+            title(app.UIAxes_25, 'Rail Velocity Error (mm/s)')
+            xlabel(app.UIAxes_25, 'Trial #')
+            ylabel(app.UIAxes_25, 'Velocity Error (mm/s)')
+            zlabel(app.UIAxes_25, 'Z')
+            app.UIAxes_25.Position = [188 1 300 185];
+
+            % Create SequenceTestTab
+            app.SequenceTestTab = uitab(app.TabGroup);
+            app.SequenceTestTab.Title = 'Sequence Test';
+            app.SequenceTestTab.BackgroundColor = [1 0.4118 0.1608];
+            app.SequenceTestTab.ForegroundColor = [0 0 1];
+
+            % Create SettingstoAdjustandRecordOutputsPanel_6
+            app.SettingstoAdjustandRecordOutputsPanel_6 = uipanel(app.SequenceTestTab);
+            app.SettingstoAdjustandRecordOutputsPanel_6.Title = 'Settings to Adjust and Record Outputs ';
+            app.SettingstoAdjustandRecordOutputsPanel_6.BackgroundColor = [1 0.6431 0.4902];
+            app.SettingstoAdjustandRecordOutputsPanel_6.Position = [1 584 966 241];
+
+            % Create SaveTrialDataButton_12
+            app.SaveTrialDataButton_12 = uibutton(app.SettingstoAdjustandRecordOutputsPanel_6, 'push');
+            app.SaveTrialDataButton_12.ButtonPushedFcn = createCallbackFcn(app, @SaveTrialDataButton_6Pushed, true);
+            app.SaveTrialDataButton_12.Position = [8 150 189 23];
+            app.SaveTrialDataButton_12.Text = 'Save Trial Data';
+
+            % Create ExportDatatoCSVExcelButton_12
+            app.ExportDatatoCSVExcelButton_12 = uibutton(app.SettingstoAdjustandRecordOutputsPanel_6, 'push');
+            app.ExportDatatoCSVExcelButton_12.ButtonPushedFcn = createCallbackFcn(app, @ExportDatatoCsvExcelButton_6Pushed, true);
+            app.ExportDatatoCSVExcelButton_12.Position = [8 95 90 44];
+            app.ExportDatatoCSVExcelButton_12.Text = {'Export Data to '; 'CSV/Excel'};
+
+            % Create ClearCurrentTrialEntryButton_12
+            app.ClearCurrentTrialEntryButton_12 = uibutton(app.SettingstoAdjustandRecordOutputsPanel_6, 'push');
+            app.ClearCurrentTrialEntryButton_12.ButtonPushedFcn = createCallbackFcn(app, @ClearCurrentTrialEntryButton_6Pushed, true);
+            app.ClearCurrentTrialEntryButton_12.Position = [109 95 88 44];
+            app.ClearCurrentTrialEntryButton_12.Text = {'Clear Current '; 'Trial Entry '};
+
+            % Create FactorsIndependentVariablesLabel_6
+            app.FactorsIndependentVariablesLabel_6 = uilabel(app.SettingstoAdjustandRecordOutputsPanel_6);
+            app.FactorsIndependentVariablesLabel_6.Position = [252 181 176 22];
+            app.FactorsIndependentVariablesLabel_6.Text = 'Factors (Independent Variables)';
+
+            % Create MeasuredOutputspertrialLabel_6
+            app.MeasuredOutputspertrialLabel_6 = uilabel(app.SettingstoAdjustandRecordOutputsPanel_6);
+            app.MeasuredOutputspertrialLabel_6.Position = [519 181 155 22];
+            app.MeasuredOutputspertrialLabel_6.Text = 'Measured Outputs (per trial)';
+
+            % Create TrialCounterEditField_12Label
+            app.TrialCounterEditField_12Label = uilabel(app.SettingstoAdjustandRecordOutputsPanel_6);
+            app.TrialCounterEditField_12Label.HorizontalAlignment = 'right';
+            app.TrialCounterEditField_12Label.Position = [8 185 74 22];
+            app.TrialCounterEditField_12Label.Text = 'Trial Counter';
+
+            % Create TrialCounterEditField_12
+            app.TrialCounterEditField_12 = uieditfield(app.SettingstoAdjustandRecordOutputsPanel_6, 'numeric');
+            app.TrialCounterEditField_12.Position = [97 181 100 30];
+            app.TrialCounterEditField_12.Value = 1;
+
+            % Create NotesfromTrialTextArea_12Label
+            app.NotesfromTrialTextArea_12Label = uilabel(app.SettingstoAdjustandRecordOutputsPanel_6);
+            app.NotesfromTrialTextArea_12Label.HorizontalAlignment = 'right';
+            app.NotesfromTrialTextArea_12Label.Position = [8 47 67 30];
+            app.NotesfromTrialTextArea_12Label.Text = {'Notes from '; 'Trial '};
+
+            % Create NotesfromTrialTextArea_12
+            app.NotesfromTrialTextArea_12 = uitextarea(app.SettingstoAdjustandRecordOutputsPanel_6);
+            app.NotesfromTrialTextArea_12.Position = [81 19 116 60];
+
+            % Create TimingAdjustmentDropDownLabel
+            app.TimingAdjustmentDropDownLabel = uilabel(app.SettingstoAdjustandRecordOutputsPanel_6);
+            app.TimingAdjustmentDropDownLabel.HorizontalAlignment = 'right';
+            app.TimingAdjustmentDropDownLabel.Position = [239 145 107 22];
+            app.TimingAdjustmentDropDownLabel.Text = 'Timing Adjustment ';
+
+            % Create TimingAdjustmentDropDown
+            app.TimingAdjustmentDropDown = uidropdown(app.SettingstoAdjustandRecordOutputsPanel_6);
+            app.TimingAdjustmentDropDown.Items = {'+ 10 %', '- 10 %'};
+            app.TimingAdjustmentDropDown.Position = [352 145 75 22];
+            app.TimingAdjustmentDropDown.Value = '+ 10 %';
+
+            % Create RailSpeedDropDownLabel
+            app.RailSpeedDropDownLabel = uilabel(app.SettingstoAdjustandRecordOutputsPanel_6);
+            app.RailSpeedDropDownLabel.HorizontalAlignment = 'right';
+            app.RailSpeedDropDownLabel.Position = [277 106 64 22];
+            app.RailSpeedDropDownLabel.Text = 'Rail Speed';
+
+            % Create RailSpeedDropDown
+            app.RailSpeedDropDown = uidropdown(app.SettingstoAdjustandRecordOutputsPanel_6);
+            app.RailSpeedDropDown.Items = {'Slow', 'Medium', 'Fast'};
+            app.RailSpeedDropDown.Position = [352 106 73 22];
+            app.RailSpeedDropDown.Value = 'Slow';
+
+            % Create PressureDropDown_2Label
+            app.PressureDropDown_2Label = uilabel(app.SettingstoAdjustandRecordOutputsPanel_6);
+            app.PressureDropDown_2Label.HorizontalAlignment = 'right';
+            app.PressureDropDown_2Label.Position = [288 67 53 22];
+            app.PressureDropDown_2Label.Text = 'Pressure';
+
+            % Create PressureDropDown_2
+            app.PressureDropDown_2 = uidropdown(app.SettingstoAdjustandRecordOutputsPanel_6);
+            app.PressureDropDown_2.Items = {'Low', 'Medium', 'High'};
+            app.PressureDropDown_2.Position = [352 67 73 22];
+            app.PressureDropDown_2.Value = 'Low';
+
+            % Create TimingErrormsEditField_2Label
+            app.TimingErrormsEditField_2Label = uilabel(app.SettingstoAdjustandRecordOutputsPanel_6);
+            app.TimingErrormsEditField_2Label.HorizontalAlignment = 'right';
+            app.TimingErrormsEditField_2Label.Position = [499 141 98 22];
+            app.TimingErrormsEditField_2Label.Text = 'Timing Error (ms)';
+
+            % Create TimingErrormsEditField_2
+            app.TimingErrormsEditField_2 = uieditfield(app.SettingstoAdjustandRecordOutputsPanel_6, 'numeric');
+            app.TimingErrormsEditField_2.Position = [610 141 65 22];
+
+            % Create ofCorrectStepsEditFieldLabel
+            app.ofCorrectStepsEditFieldLabel = uilabel(app.SettingstoAdjustandRecordOutputsPanel_6);
+            app.ofCorrectStepsEditFieldLabel.HorizontalAlignment = 'right';
+            app.ofCorrectStepsEditFieldLabel.Position = [495 106 102 22];
+            app.ofCorrectStepsEditFieldLabel.Text = '# of Correct Steps';
+
+            % Create ofCorrectStepsEditField
+            app.ofCorrectStepsEditField = uieditfield(app.SettingstoAdjustandRecordOutputsPanel_6, 'numeric');
+            app.ofCorrectStepsEditField.Position = [610 106 65 22];
+
+            % Create TotalCycleTimesEditFieldLabel
+            app.TotalCycleTimesEditFieldLabel = uilabel(app.SettingstoAdjustandRecordOutputsPanel_6);
+            app.TotalCycleTimesEditFieldLabel.HorizontalAlignment = 'right';
+            app.TotalCycleTimesEditFieldLabel.Position = [487 73 110 22];
+            app.TotalCycleTimesEditFieldLabel.Text = 'Total Cycle Time (s)';
+
+            % Create TotalCycleTimesEditField
+            app.TotalCycleTimesEditField = uieditfield(app.SettingstoAdjustandRecordOutputsPanel_6, 'numeric');
+            app.TotalCycleTimesEditField.Position = [610 73 65 22];
+
+            % Create ExpectedValueswhatitshouldbeLabel_6
+            app.ExpectedValueswhatitshouldbeLabel_6 = uilabel(app.SettingstoAdjustandRecordOutputsPanel_6);
+            app.ExpectedValueswhatitshouldbeLabel_6.Position = [739 185 197 22];
+            app.ExpectedValueswhatitshouldbeLabel_6.Text = 'Expected Values (what it should be)';
+
+            % Create TotalCycleTimesEditField_2Label
+            app.TotalCycleTimesEditField_2Label = uilabel(app.SettingstoAdjustandRecordOutputsPanel_6);
+            app.TotalCycleTimesEditField_2Label.HorizontalAlignment = 'right';
+            app.TotalCycleTimesEditField_2Label.Position = [738 142 110 22];
+            app.TotalCycleTimesEditField_2Label.Text = 'Total Cycle Time (s)';
+
+            % Create TotalCycleTimesEditField_2
+            app.TotalCycleTimesEditField_2 = uieditfield(app.SettingstoAdjustandRecordOutputsPanel_6, 'numeric');
+            app.TotalCycleTimesEditField_2.Position = [861 142 65 22];
+
+            % Create DidtheDeviceFailShowanErrorCheckBox
+            app.DidtheDeviceFailShowanErrorCheckBox = uicheckbox(app.SettingstoAdjustandRecordOutputsPanel_6);
+            app.DidtheDeviceFailShowanErrorCheckBox.Text = 'Did the Device Fail/Show an Error? ';
+            app.DidtheDeviceFailShowanErrorCheckBox.Position = [464 42 214 22];
+
+            % Create WerethereanydelaysorcollisionsCheckBox
+            app.WerethereanydelaysorcollisionsCheckBox = uicheckbox(app.SettingstoAdjustandRecordOutputsPanel_6);
+            app.WerethereanydelaysorcollisionsCheckBox.Text = 'Were there any delays or collisions?';
+            app.WerethereanydelaysorcollisionsCheckBox.Position = [464 13 216 22];
+
+            % Create OverallResultsfromConditionPanel_6
+            app.OverallResultsfromConditionPanel_6 = uipanel(app.SequenceTestTab);
+            app.OverallResultsfromConditionPanel_6.Title = 'Overall Results from Condition';
+            app.OverallResultsfromConditionPanel_6.BackgroundColor = [0.5412 0.5961 0.949];
+            app.OverallResultsfromConditionPanel_6.Position = [1 1 260 584];
+
+            % Create TimingErrorSDmsEditField_2Label
+            app.TimingErrorSDmsEditField_2Label = uilabel(app.OverallResultsfromConditionPanel_6);
+            app.TimingErrorSDmsEditField_2Label.HorizontalAlignment = 'right';
+            app.TimingErrorSDmsEditField_2Label.Position = [24 522 118 22];
+            app.TimingErrorSDmsEditField_2Label.Text = 'Timing Error SD (ms)';
+
+            % Create TimingErrorSDmsEditField_2
+            app.TimingErrorSDmsEditField_2 = uieditfield(app.OverallResultsfromConditionPanel_6, 'numeric');
+            app.TimingErrorSDmsEditField_2.Position = [159 522 62 22];
+
+            % Create ofTimesDeviceFailedEditFieldLabel
+            app.ofTimesDeviceFailedEditFieldLabel = uilabel(app.OverallResultsfromConditionPanel_6);
+            app.ofTimesDeviceFailedEditFieldLabel.HorizontalAlignment = 'right';
+            app.ofTimesDeviceFailedEditFieldLabel.Position = [7 481 136 22];
+            app.ofTimesDeviceFailedEditFieldLabel.Text = '# of Times Device Failed';
+
+            % Create ofTimesDeviceFailedEditField
+            app.ofTimesDeviceFailedEditField = uieditfield(app.OverallResultsfromConditionPanel_6, 'numeric');
+            app.ofTimesDeviceFailedEditField.Position = [159 481 62 22];
+
+            % Create CycleTimeMeansEditFieldLabel
+            app.CycleTimeMeansEditFieldLabel = uilabel(app.OverallResultsfromConditionPanel_6);
+            app.CycleTimeMeansEditFieldLabel.HorizontalAlignment = 'right';
+            app.CycleTimeMeansEditFieldLabel.Position = [27 440 115 22];
+            app.CycleTimeMeansEditFieldLabel.Text = 'Cycle Time Mean (s)';
+
+            % Create CycleTimeMeansEditField
+            app.CycleTimeMeansEditField = uieditfield(app.OverallResultsfromConditionPanel_6, 'numeric');
+            app.CycleTimeMeansEditField.Position = [159 440 62 22];
+
+            % Create CycleTimeSDmsEditFieldLabel
+            app.CycleTimeSDmsEditFieldLabel = uilabel(app.OverallResultsfromConditionPanel_6);
+            app.CycleTimeSDmsEditFieldLabel.HorizontalAlignment = 'right';
+            app.CycleTimeSDmsEditFieldLabel.Position = [30 401 112 22];
+            app.CycleTimeSDmsEditFieldLabel.Text = 'Cycle Time SD (ms)';
+
+            % Create CycleTimeSDmsEditField
+            app.CycleTimeSDmsEditField = uieditfield(app.OverallResultsfromConditionPanel_6, 'numeric');
+            app.CycleTimeSDmsEditField.Position = [159 401 62 22];
+
+            % Create SuccessRateEditFieldLabel
+            app.SuccessRateEditFieldLabel = uilabel(app.OverallResultsfromConditionPanel_6);
+            app.SuccessRateEditFieldLabel.HorizontalAlignment = 'right';
+            app.SuccessRateEditFieldLabel.Position = [41 360 101 22];
+            app.SuccessRateEditFieldLabel.Text = 'Success Rate (%)';
+
+            % Create SuccessRateEditField
+            app.SuccessRateEditField = uieditfield(app.OverallResultsfromConditionPanel_6, 'numeric');
+            app.SuccessRateEditField.Position = [159 360 62 22];
+
+            % Create PlotsofOutputDataPanel_6
+            app.PlotsofOutputDataPanel_6 = uipanel(app.SequenceTestTab);
+            app.PlotsofOutputDataPanel_6.Title = 'Plots of Output Data ';
+            app.PlotsofOutputDataPanel_6.BackgroundColor = [1 0.4118 0.1608];
+            app.PlotsofOutputDataPanel_6.Position = [262 0 705 585];
+
+            % Create UIAxes_15
+            app.UIAxes_15 = uiaxes(app.PlotsofOutputDataPanel_6);
+            title(app.UIAxes_15, 'Timing Error (ms)')
+            xlabel(app.UIAxes_15, 'Trial #')
+            ylabel(app.UIAxes_15, 'Timing Error (ms)')
+            zlabel(app.UIAxes_15, 'Z')
+            app.UIAxes_15.Position = [19 359 300 185];
+
+            % Create UIAxes_16
+            app.UIAxes_16 = uiaxes(app.PlotsofOutputDataPanel_6);
+            title(app.UIAxes_16, '# of Successful Steps in the Cycle')
+            xlabel(app.UIAxes_16, 'Trial #')
+            ylabel(app.UIAxes_16, '# of Steps')
+            zlabel(app.UIAxes_16, 'Z')
+            app.UIAxes_16.Position = [349 359 300 185];
+
+            % Create UIAxes_17
+            app.UIAxes_17 = uiaxes(app.PlotsofOutputDataPanel_6);
+            title(app.UIAxes_17, 'Total Device Cycle Time (s)')
+            xlabel(app.UIAxes_17, 'Trial #')
+            ylabel(app.UIAxes_17, 'Cycle Time (s)')
+            zlabel(app.UIAxes_17, 'Z')
+            app.UIAxes_17.Position = [182 136 300 185];
+
+            % Show the figure after all components are created
+            app.UIFigure.Visible = 'on';
+        end
+    end
+
+    % App creation and deletion
+    methods (Access = public)
+
+        % Construct app
+        function app = Verification_App
+
+            % Create UIFigure and components
+            createComponents(app)
+
+            % Register the app with App Designer
+            registerApp(app, app.UIFigure)
+
+            % Execute the startup function
+            runStartupFcn(app, @startupFcn)
+
+            if nargout == 0
+                clear app
+            end
+        end
+
+        % Code that executes before app deletion
+        function delete(app)
+
+            % Delete UIFigure when app is deleted
+            delete(app.UIFigure)
+        end
+    end
+end
