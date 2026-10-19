@@ -1,0 +1,2572 @@
+classdef BRAIN_Center_GUI < matlab.apps.AppBase
+
+    % Properties that correspond to app components
+    properties (Access = public)
+        UIFigure                        matlab.ui.Figure
+        TabGroup                        matlab.ui.container.TabGroup
+        SessionTab                      matlab.ui.container.Tab
+        PercentWorkDoneByPLEGSPanel_2   matlab.ui.container.Panel
+        RightLegEditField               matlab.ui.control.NumericEditField
+        RightLegEditFieldLabel          matlab.ui.control.Label
+        PercentWorkDoneByPLEGSPanel     matlab.ui.container.Panel
+        LeftLegEditField                matlab.ui.control.NumericEditField
+        LeftLegEditFieldLabel           matlab.ui.control.Label
+        RightJointsMaxAnglesPanel_2     matlab.ui.container.Panel
+        RAMax                           matlab.ui.control.NumericEditField
+        RAEditFieldLabel                matlab.ui.control.Label
+        RKMax                           matlab.ui.control.NumericEditField
+        RKEditFieldLabel                matlab.ui.control.Label
+        RHMax                           matlab.ui.control.NumericEditField
+        RHEditFieldLabel                matlab.ui.control.Label
+        RAMin                           matlab.ui.control.NumericEditField
+        RAEditField_2Label              matlab.ui.control.Label
+        RKMin                           matlab.ui.control.NumericEditField
+        RKEditField_2Label              matlab.ui.control.Label
+        RHMin                           matlab.ui.control.NumericEditField
+        RHEditField_2Label              matlab.ui.control.Label
+        FlexionLabel_4                  matlab.ui.control.Label
+        ExtensionLabel_4                matlab.ui.control.Label
+        LeftJointsMaxAnglesPanel_2      matlab.ui.container.Panel
+        LAMin                           matlab.ui.control.NumericEditField
+        LAEditField_2Label              matlab.ui.control.Label
+        LKMin                           matlab.ui.control.NumericEditField
+        LKEditField_2Label              matlab.ui.control.Label
+        LHMin                           matlab.ui.control.NumericEditField
+        LHEditField_2Label              matlab.ui.control.Label
+        LAMax                           matlab.ui.control.NumericEditField
+        LAEditFieldLabel                matlab.ui.control.Label
+        LKMax                           matlab.ui.control.NumericEditField
+        LKEditFieldLabel                matlab.ui.control.Label
+        LHMax                           matlab.ui.control.NumericEditField
+        LHEditFieldLabel                matlab.ui.control.Label
+        FlexionLabel_3                  matlab.ui.control.Label
+        ExtensionLabel_3                matlab.ui.control.Label
+        DASHBOARDPanel_2                matlab.ui.container.Panel
+        SelectJointstoResetPanel_2      matlab.ui.container.Panel
+        LAReset                         matlab.ui.control.CheckBox
+        LKReset                         matlab.ui.control.CheckBox
+        LHReset                         matlab.ui.control.CheckBox
+        RAReset                         matlab.ui.control.CheckBox
+        RKReset                         matlab.ui.control.CheckBox
+        RHReset                         matlab.ui.control.CheckBox
+        ResetModifiedPlotsButton        matlab.ui.control.Button
+        ModifyRoutinePanel_2            matlab.ui.container.Panel
+        SelectJointstoModifyPanel_2     matlab.ui.container.Panel
+        LACheckbox                      matlab.ui.control.CheckBox
+        LKCheckbox                      matlab.ui.control.CheckBox
+        LHCheckbox                      matlab.ui.control.CheckBox
+        RACheckbox                      matlab.ui.control.CheckBox
+        RKCheckbox                      matlab.ui.control.CheckBox
+        RHCheckbox                      matlab.ui.control.CheckBox
+        MaxAngledegEditField            matlab.ui.control.NumericEditField
+        MaxAngledegEditFieldLabel       matlab.ui.control.Label
+        DirectionDropDownLabel          matlab.ui.control.Label
+        DirectionDropDown               matlab.ui.control.DropDown
+        GainEditField                   matlab.ui.control.NumericEditField
+        GainEditFieldLabel              matlab.ui.control.Label
+        OffsetDegEditField              matlab.ui.control.NumericEditField
+        OffsetDegEditFieldLabel         matlab.ui.control.Label
+        ApplyButton                     matlab.ui.control.Button
+        ShowOriginalTrajectoryPanel_2   matlab.ui.container.Panel
+        Tree                            matlab.ui.container.CheckBoxTree
+        AllJointsNode_2                 matlab.ui.container.TreeNode
+        RHNode_2                        matlab.ui.container.TreeNode
+        RKNode_2                        matlab.ui.container.TreeNode
+        RANode_2                        matlab.ui.container.TreeNode
+        LHNode_2                        matlab.ui.container.TreeNode
+        LKNode_2                        matlab.ui.container.TreeNode
+        LANode_2                        matlab.ui.container.TreeNode
+        DisplayJointGraphLinePanel_2    matlab.ui.container.Panel
+        AnkleJointCheckBox              matlab.ui.control.CheckBox
+        KneeJointCheckBox               matlab.ui.control.CheckBox
+        HipJointCheckBox                matlab.ui.control.CheckBox
+        ExportModifiedTrajectoryButton  matlab.ui.control.Button
+        LoadPatientTrajectoryButton     matlab.ui.control.Button
+        UIAxes_2                        matlab.ui.control.UIAxes
+        UIAxes2_2                       matlab.ui.control.UIAxes
+        OverallTab                      matlab.ui.container.Tab
+        ROMVisibilityPanel_2            matlab.ui.container.Panel
+        PatientsWorkCheckBox            matlab.ui.control.CheckBox
+        PLEGSWorkCheckBox               matlab.ui.control.CheckBox
+        ROMVisibilityPanel              matlab.ui.container.Panel
+        RightLegJointsCheckBox          matlab.ui.control.CheckBox
+        LeftLegJointsCheckBox           matlab.ui.control.CheckBox
+        ApplyROMButton                  matlab.ui.control.Button
+        RangeofMotionGrowthPanel        matlab.ui.container.Panel
+        UIAxes3                         matlab.ui.control.UIAxes
+        SessionSummaryTable             matlab.ui.control.Table
+        ExoskeletonRelianceDevelopmentPanel  matlab.ui.container.Panel
+        UIAxes3_2                       matlab.ui.control.UIAxes
+        OpenPatientFolderButton         matlab.ui.control.Button
+        ExporttoPatientFolderButton     matlab.ui.control.Button
+        PatientsGoalRangeofMotionPanel  matlab.ui.container.Panel
+        RightLegAnglesPanel_2           matlab.ui.container.Panel
+        RAMinGoal                       matlab.ui.control.NumericEditField
+        RAEditField_4Label              matlab.ui.control.Label
+        RAMaxGoal                       matlab.ui.control.NumericEditField
+        RAEditField_3Label              matlab.ui.control.Label
+        RKMinGoal                       matlab.ui.control.NumericEditField
+        RKEditField_4Label              matlab.ui.control.Label
+        RKMaxGoal                       matlab.ui.control.NumericEditField
+        RKEditField_3Label              matlab.ui.control.Label
+        RHMinGoal                       matlab.ui.control.NumericEditField
+        RHEditField_4Label              matlab.ui.control.Label
+        RHMaxGoal                       matlab.ui.control.NumericEditField
+        RHEditField_3Label              matlab.ui.control.Label
+        FlexionLabel_8                  matlab.ui.control.Label
+        ExtensionLabel_9                matlab.ui.control.Label
+        LeftLegAnglesPanel_2            matlab.ui.container.Panel
+        LAMinGoal                       matlab.ui.control.NumericEditField
+        LAEditField_4Label              matlab.ui.control.Label
+        LAMaxGoal                       matlab.ui.control.NumericEditField
+        LAEditField_3Label              matlab.ui.control.Label
+        LKMinGoal                       matlab.ui.control.NumericEditField
+        LKEditField_4Label              matlab.ui.control.Label
+        LKMaxGoal                       matlab.ui.control.NumericEditField
+        LKEditField_3Label              matlab.ui.control.Label
+        LHMinGoal                       matlab.ui.control.NumericEditField
+        LHEditField_4Label              matlab.ui.control.Label
+        LHMaxGoal                       matlab.ui.control.NumericEditField
+        LHEditField_3Label              matlab.ui.control.Label
+        FlexionLabel_7                  matlab.ui.control.Label
+        ExtensionLabel_8                matlab.ui.control.Label
+        PatientsOriginalRangeofMotionPanel  matlab.ui.container.Panel
+        RightLegAnglesPanel             matlab.ui.container.Panel
+        RAMinOrig                       matlab.ui.control.NumericEditField
+        RAEditField_2Label_2            matlab.ui.control.Label
+        RAMaxOrig                       matlab.ui.control.NumericEditField
+        RAEditFieldLabel_2              matlab.ui.control.Label
+        RKMinOrig                       matlab.ui.control.NumericEditField
+        RKEditField_2Label_2            matlab.ui.control.Label
+        RKMaxOrig                       matlab.ui.control.NumericEditField
+        RKEditFieldLabel_2              matlab.ui.control.Label
+        RHMinOrig                       matlab.ui.control.NumericEditField
+        RHEditField_2Label_2            matlab.ui.control.Label
+        RHMaxOrig                       matlab.ui.control.NumericEditField
+        RHEditFieldLabel_2              matlab.ui.control.Label
+        FlexionLabel_6                  matlab.ui.control.Label
+        ExtensionLabel_7                matlab.ui.control.Label
+        LeftLegAnglesPanel              matlab.ui.container.Panel
+        LAMinOrig                       matlab.ui.control.NumericEditField
+        LAEditField_2Label_2            matlab.ui.control.Label
+        LAMaxOrig                       matlab.ui.control.NumericEditField
+        LAEditFieldLabel_2              matlab.ui.control.Label
+        LKMinOrig                       matlab.ui.control.NumericEditField
+        LKEditField_2Label_2            matlab.ui.control.Label
+        LKMaxOrig                       matlab.ui.control.NumericEditField
+        LKEditFieldLabel_2              matlab.ui.control.Label
+        LHMinOrig                       matlab.ui.control.NumericEditField
+        LHEditField_2Label_2            matlab.ui.control.Label
+        LHMaxOrig                       matlab.ui.control.NumericEditField
+        LHEditFieldLabel_2              matlab.ui.control.Label
+        FlexionLabel_5                  matlab.ui.control.Label
+        ExtensionLabel_5                matlab.ui.control.Label
+    end
+
+    properties (Constant) % Constants defining joint names and plot colors for visualization 
+        jointNames = {'RH','RK','RA','LH','LK','LA'} % Joint List: Right hip, right knee, right ankle, left hip, left knee, left ankle
+        jointColors = {'r','g','b','c','m','y'} %Corresponding color codes for each joint
+    end 
+    properties (Access = private) % Private properties for internal state management
+        loaded logical = false % Boolean indicating whether data is loaded into app 
+        phases struct      % Struct array with fields: name, orig (original data), mod (modified data) matrix
+        curPhase char = 'P0' %Currently selected phase string ('P0','P1', or 'P2')
+        curJoint char = 'RH' %Currently selected joint string
+        %Struct of plot handles for range of motion and work plots, organized by joint and source (PLEGS or patient)
+        plotHandles struct = struct('ROM',gobjects(6,1),'Work', ...
+            struct('PLEGS',struct('Left',[],'Right',[]),'Patient',struct('Left',[],'Right',[])))
+        previousPlotHandles struct = struct(); % Struct holding data for displaying previous/original trajectories
+        GainOffsetEdited logical = false % Flag indicating if gain or offset fields were edited
+        MaxAngleEdited logical = false % Flag indicating if max angle value was edited
+        sessionFiles = {}; % Cell array storing file paths of loaded patient session MAT files
+        sessionData = {}; % Cell array storing loaded session data structs
+    end
+    % Properties for the safety limits corresponding to each joint type
+    properties (Constant, Access = private)
+        % Hard limits for maximum allowed flexion and extension angles (degrees) per joint type 
+        HardLimits = struct('Hip',struct('Flexion',-9,'Extension',139),...
+            'Knee',struct('Flexion',0,'Extension',157),'Ankle',...
+            struct('Flexion',-20,'Extension',25));
+        % Mapping from joint abbreviations to joint type categories
+        JointToType = struct('RH','Hip','LH','Hip','RK','Knee','LK','Knee', ...
+            'RA','Ankle','LA','Ankle');
+    end
+    % Private helper methods for internal computations and UI updates
+    methods (Access = private)
+        % Update gain and offset spinner UI controls based on currently selected phase and joint data
+        function refreshSpinners(app)
+            if ~app.loaded
+                return; % Nothing to update if data is not loaded
+            end
+            % Get indices for currently selected phase and joint
+            [pIdx, jIdx] = app.currentIndices();
+            %Extract original and modified joint angle data columns (time column is 1, joint cols start at 2) 
+            orig = app.phases(pIdx).orig(:, jIdx + 1);
+            mod  = app.phases(pIdx).mod(:, jIdx + 1);
+            mu  = mean(orig);
+            %Calculate scaling factor for gain, clamped to range [10, 300]
+            scl = (max(mod) - min(mod)) / (max(orig) - min(orig));
+            %Calculate offset as difference in means clipped to [-30, 30]
+            off = mean(mod) - mu;
+            %Update Gain and Offset UI fields with rounded values 
+            app.GainEditField.Value = round(min(max(scl * 100, 10), 300), 1);
+            app.OffsetDegEditField.Value  = round(min(max(off, -30), 30), 1);
+        end
+        %Apply gain and offset tuning to selected joints' modified data
+        function applyTuning(app)
+            %Get list of joints selected for modification
+            selectedJoints = app.getSelectedJoints();
+            %Check if no joints are selected, show alert and abort
+            if isempty(selectedJoints)
+                uialert(app.UIFigure, 'Please select at least one joint','No Joint Selected')
+                return;
+            end
+            %Retrieve gain as decimal fraction(e.g., 150% => 1.5)
+            gain = app.GainEditField.Value / 100;
+            direction = app.DirectionDropDown.Value;
+            %Determine if direction corresponds to extension or flexion modifications
+            isExtension = strcmp(direction, 'Extension (+)');
+            isFlexion = strcmp(direction,'Flexion (-)');
+            if ~(isExtension || isFlexion)
+                return; %Invalid direction, do nothing 
+            end
+            %Map joint labels to data column indices in phase matrices 
+            jointMap = struct('RH',2,'RK',3,'RA',4,'LH',5,'LK',6,'LA',7);
+            %Initialize previousPlotHandles struct if empty
+            if ~isstruct(app.previousPlotHandles) || isempty(fieldnames(app.previousPlotHandles))
+                app.previousPlotHandles = struct();
+            end
+            %Save original data for all phases and selected joints into previousPlotHandles for potential revert/visual comparison 
+            for pIdx = 1:numel(app.phases)
+                for i = 1:numel(selectedJoints)
+                    jn = selectedJoints{i};
+                    col = jointMap.(jn);
+                    fld = jn + "_P" + pIdx;
+                    app.previousPlotHandles.(fld) = app.phases(pIdx).orig(:,col);
+                end
+            end
+            %For each selected joint, apply gain and offset transformation
+            for i = 1:length(selectedJoints)
+                jointName = selectedJoints{i};
+                col = jointMap.(jointName);
+                allMod = vertcat(app.phases.mod);
+                curData = allMod(:,col);
+                mu = mean(curData); %Mean angle for baseline
+                newData = zeros(size(curData));
+                %Indices for positive, negative, and equal to mean values
+                posIdx = (curData > mu);
+                negIdx = (curData < mu);
+                eqIdx = (curData == mu);
+                %Apply gain only to chosen direction part of the data to preserve physiological plausibility
+                if isExtension
+                    newData(posIdx) = mu + gain * (curData(posIdx) - mu);
+                    newData(negIdx) = curData(negIdx);
+                    newData(eqIdx) = mu; %Maintain mean for equal entries
+                elseif isFlexion
+                    newData(negIdx) = mu + gain * (curData(negIdx) - mu);
+                    newData(posIdx) = curData(posIdx);
+                    newData(eqIdx) = mu;
+                end
+                %Add offset to entire dataset after gain application
+                newData = newData + app.OffsetDegEditField.Value;
+                %Clamp modified angle data within allowed safety limits for that joint type
+                jointType = app.JointToType.(jointName);
+                limits = app.HardLimits.(jointType);
+                minLim = limits.Flexion;
+                maxLim = limits.Extension;
+                newData(newData > maxLim) = maxLim;
+                newData(newData < minLim) = minLim;
+                %Update modified phase data for this joint
+                app.setJointModifiedData(jointName, newData);
+            end
+        end
+        %Retrieve previously stored data for a given jointTag (joint-phase combination)
+        function data = getPreviousJointData(app, jointTag)
+            if isfield(app.previousPlotHandles, jointTag)
+                data = app.previousPlotHandles.(jointTag);
+            else
+                data = []; %No stored data found for requested jointTag
+            end
+        end
+        %Determine if previous/original trajectory line should be visible based on checked tree nodes
+        function tf = shouldShowPrevious(app,jointTag)
+            checked = app.Tree.CheckedNodes
+            checkedLabels = strings(1, numel(checked));
+            for i = 1:numel(checked)
+                checkedLabels(i) = checked(i).Text;
+            end
+            %Show if either the specific joint or 'All Lines' is checked
+            tf = any(checkedLabels == jointTag) || any(checkedLabels == "All Lines");
+        end
+        %Draw current plots (both original and modified) of joint trajectories for left and right legs 
+        function drawPlots(app)
+            if ~app.loaded
+                return; %No data loaded to plot
+            end
+            % Vertically concatenate phases orig and mod data for seamless plotting
+            allOrig = vertcat(app.phases.orig);
+            allMod  = vertcat(app.phases.mod);
+            %Extract time and joint data columns (time is col1: right leg joints cols 2-4, left leg joints cols 5-7)
+            tO  = allOrig(:, 1);
+            RL_o = allOrig(:, 2:4);
+            LL_o = allOrig(:, 5:7);
+            tM  = allMod(:, 1);
+            RL_m = allMod(:, 2:4);
+            LL_m = allMod(:, 5:7);
+            % Clear existing plots and prepare axes for new plots
+            axesArr = [app.UIAxes_2, app.UIAxes2_2];
+            for ax = axesArr
+                cla(ax); %Clear axes
+                hold(ax, 'on'); %Hold for multiple lines
+            end
+            %Initialize storage for plot handles of modified lines 
+            app.plotHandles = struct();
+            app.plotHandles.LL_mod = gobjects(1,3);   % Left leg modified joint plots
+            app.plotHandles.RL_mod = gobjects(1,3);   % Right leg modified joint plots            
+            % Initialize cell arrays to hold previous/original line plot handles
+            app.plotHandles.RL_prev = cell(1,3);
+            app.plotHandles.LL_prev = cell(1,3);
+            for j = 1:3
+                % Plot right leg modified joint angles with color coding
+                app.plotHandles.RL_mod(j) = plot(app.UIAxes2_2, tM, RL_m(:, j), app.jointColors{j}, 'LineWidth', 1.4);
+                jointTag = app.jointNames{j};
+                %Plot original (previous) lines for right leg if available and toggle visibility appropriately 
+                if isfield(app.previousPlotHandles, jointTag + "_P1")
+                    prev1 = app.getPreviousJointData(jointTag + "_P1");
+                    prev2 = app.getPreviousJointData(jointTag + "_P2");
+                    prev3 = app.getPreviousJointData(jointTag + "_P3");
+                    prevData = vertcat(prev1(:),prev2(:),prev3(:));
+                    tPrev = vertcat(app.phases.orig);
+                    tPrev = tPrev(:,1);
+                    tPrev = tPrev(:);
+                    prevData = prevData(:);
+                    minLen = min(length(tPrev),length(prevData));
+                    tPrev = tPrev(1:minLen);
+                    prevData = prevData(1:minLen);
+                    if isempty(app.plotHandles.RL_prev{j}) || ~isvalid(app.plotHandles.RL_prev{j})
+                       app.plotHandles.RL_prev{j} = plot(app.UIAxes2_2,tPrev,prevData,...
+                        '--','Color',app.jointColors{j},'LineWidth',1.2);
+                    end
+                    if ~isempty(app.plotHandles.RL_prev{j}) && isvalid(app.plotHandles.RL_prev{j})
+                       if app.shouldShowPrevious(jointTag)
+                          app.plotHandles.RL_prev{j}.Visible = 'on';
+                       else
+                          app.plotHandles.RL_prev{j}.Visible = 'off';
+                       end
+                    end
+                end
+            end
+            for j = 1:3
+                %Plot left leg modified joint angles with color coding 
+                app.plotHandles.LL_mod(j) = plot(app.UIAxes_2, tM, LL_m(:, j), app.jointColors{j}, 'LineWidth', 1.4);
+                jointTag = app.jointNames{j+3};
+                %Plot original (previous) lines for left leg if available and toggle visibility appropriately 
+                if isfield(app.previousPlotHandles, jointTag + "_P1")
+                    prev1 = app.getPreviousJointData(jointTag + "_P1");
+                    prev2 = app.getPreviousJointData(jointTag + "_P2");
+                    prev3 = app.getPreviousJointData(jointTag + "_P3");
+                    prevData = vertcat(prev1(:),prev2(:),prev3(:));
+                    tPrev = vertcat(app.phases.orig);
+                    tPrev = tPrev(:,1);
+                    minLen = min(length(tPrev), length(prevData));
+                    tPrev = tPrev(1:minLen);
+                    prevData = prevData(1:minLen);
+                    if isempty(app.plotHandles.LL_prev{j}) || ~isvalid(app.plotHandles.LL_prev{j})
+                        app.plotHandles.LL_prev{j} = plot(app.UIAxes_2,tPrev,prevData,...
+                        '--','Color',app.jointColors{j},'LineWidth',1.2)
+                        disp("Created dotted line for: " + jointTag);
+                    end
+                    if ~isempty(app.plotHandles.LL_prev{j}) && isvalid(app.plotHandles.LL_prev{j})
+                        if app.shouldShowPrevious(jointTag)
+                            app.plotHandles.LL_prev{j}.Visible = 'on';
+                        else
+                            app.plotHandles.LL_prev{j}.Visible = 'off';
+                        end
+                    end
+                end
+            end
+            % Add legends for left and right leg plots showing joint names 
+            jointLabels = {'Hip','Knee','Ankle'};
+            lgd1 = legend(app.UIAxes_2, app.plotHandles.LL_mod,jointLabels, 'Location', 'northeast');
+            lgd2 = legend(app.UIAxes2_2, app.plotHandles.RL_mod,jointLabels, 'Location', 'northeast');
+            %Set legend appearance to white background and black text/edges for readability
+            set([lgd1,lgd2],'TextColor','black','Color','white','EdgeColor','black');
+            %Set axes properties: axes colors white on dark background, grid on, labels, and limits 
+            for ax = axesArr
+                ax.XLim = [0, tM(end)];
+                ax.XLabel.String = 'Time [s]';
+                ax.XColor = 'w';
+                ax.YColor = 'w';
+                ax.ZColor = 'w';
+                ax.Title.Color = 'w';
+                ax.XLabel.Color = 'w';
+                ax.YLabel.Color = 'w';
+                ax.ZLabel.Color = 'w';
+                ax.Box = 'on';
+                grid(ax,'on');
+                ax.GridColor = [1 1 1] * 0.5;
+                ax.GridAlpha = 0.3;
+                ax.GridLineStyle = '-';
+            end
+            %Update visibility of lines based on checkboxes and user preferences 
+            app.updateLineVisibility();
+            app.displayExtremes(); %Display min/max ranges in UI fields
+            app.updatePreviousLineVisibility(); %Update original trajectory lines visibility
+        end
+      %Update visibility of joint trajectory lines based on checbox states for Hip, knee, and ankle 
+      function updateLineVisibility(app)
+            % Update line visibility based on checkbox states
+            if ~app.loaded || isempty(app.plotHandles)
+                return; %No plots to update
+            end
+            % Hip joint (index 1) visibility toggle
+            if app.HipJointCheckBox.Value
+                set(app.plotHandles.LL_mod(1), 'Visible', 'on');
+                set(app.plotHandles.RL_mod(1), 'Visible', 'on');
+            else
+                set(app.plotHandles.LL_mod(1), 'Visible', 'off');
+                set(app.plotHandles.RL_mod(1), 'Visible', 'off');
+            end
+            % Knee joint (index 2) visibility toggle 
+            if app.KneeJointCheckBox.Value
+                set(app.plotHandles.LL_mod(2), 'Visible', 'on');
+                set(app.plotHandles.RL_mod(2), 'Visible', 'on');
+            else
+                set(app.plotHandles.LL_mod(2), 'Visible', 'off');
+                set(app.plotHandles.RL_mod(2), 'Visible', 'off');
+            end
+            
+            % Ankle joint (index 3) visibility toggle
+            if app.AnkleJointCheckBox.Value
+                set(app.plotHandles.LL_mod(3), 'Visible', 'on');
+                set(app.plotHandles.RL_mod(3), 'Visible', 'on');
+            else
+                set(app.plotHandles.LL_mod(3), 'Visible', 'off');
+                set(app.plotHandles.RL_mod(3), 'Visible', 'off');
+            end
+      end
+      %Return indices for the current phase and joint selection, used for accessing data matrices
+      function [pIdx, jIdx] = currentIndices(app)
+            %Convert phase label to index
+            pIdx = app.phaseLookup(app.curPhase);
+            %Find index of current joint in jointNames list
+            jIdx = find(strcmp(app.jointNames, app.curJoint));
+      end
+      %Helper function to convert phase label into numerical index  
+      function idx = phaseLookup(app, ph)
+             switch ph
+                 case 'P0'
+                 idx = 1;
+                 case 'P1'
+                 idx = 2;
+             otherwise
+                 idx = 3;
+             end
+      end
+      %Get list of joint names selected via checkboxes for modification
+       function selectedJoints = getSelectedJoints(app)
+           jointList = {'RH','RK','RA','LH','LK','LA'};
+           checkboxFields = {'RHCheckbox','RKCheckbox','RACheckbox',...
+               'LHCheckbox','LKCheckbox','LACheckbox'};
+           selectedJoints ={};
+           for i = 1:numel(jointList)
+               if app.(checkboxFields{i}).Value
+                   selectedJoints{end+1} = jointList{i};
+               end
+           end
+       end
+       %Get list of joints checked in tree control for visualization or modification 
+       function joints = getCheckedJoints(app)
+           selectedNodes = app.JointTree.CheckedNodes;
+           allJointNames = {'RH','RK','RA','LH','LK','LA'};
+           joints = {};
+           for i = 1:length(selectedNodes)
+               nodeText = selectedNodes(i).Text;
+               if ismember(nodeText, allJointNames)
+                   joints{end+1} = nodeText;
+               else
+                   joints = allJointNames; %If root or all selected, return all joints 
+                   break;
+               end
+           end
+       end
+       %Populate UI numeric fields with minimum and maximum values for all joints based on modified data
+       function displayExtremes(app)
+           if ~app.loaded
+               return; %Cannot display if no data loaded 
+           end
+           %Concatenate all modified phases data vertically for global analysis 
+           allMod = vertcat(app.phases.mod);
+           t = allMod(:,1);
+           jointNames = app.jointNames;
+           %Loop through each joint to compute min/max and display
+           for j = 1:length(jointNames)
+               jointName = jointNames{j};
+               y = allMod(:,j+1); %Joint angle column
+               ymin = min(y);
+               ymax = max(y);
+               minFieldName = jointName + "Min"; %Corresponding property name for min value
+               maxFieldName = jointName + "Max"; %Corresponding property name for max value
+               if isprop(app,minFieldName)
+                   app.(minFieldName).Value = round(ymin); %Set min value to UI field
+               end
+               if isprop(app, maxFieldName)
+                   app.(maxFieldName).Value = round(ymax); %Set max value to UI field
+               end
+           end
+       end
+       %Get checked joints from tree for display of previous/original lines
+       function joints = getCheckedPreviousJoints(app)
+           checked = app.Tree.CheckedNodes;
+           jointNames = app.jointNames;
+           joints = {};
+           for i = 1:length(checked)
+               label = checked(i).Text;
+               if strcmp(label,"All Joints")
+                   joints = jointNames;
+                   return;
+               end
+               if ismember(label,jointNames)
+                   joints{end + 1} = label;
+               end
+           end
+       end
+       %Retrieve modified data vector for the specified jointTag (e.g.,'RH')
+       function data = getJointModifiedData(app, jointTag)
+            allMod = vertcat(app.phases.mod);
+            jointMap = struct('RH',2,'RK',3,'RA',4,'LH',5,'LK',6,'LA',7);
+            col = jointMap.(jointTag);
+            data = allMod(:,col);
+       end
+       %Set modified data vector into the relevant phases for the specified jointTag 
+       function setJointModifiedData(app,jointTag,newData)
+           jointMap = struct('RH',2,'RK',3,'RA',4,'LH',5,'LK',6,'LA',7);
+           col = jointMap.(jointTag);
+           nPhases = numel(app.phases);
+           counts = zeros(1,nPhases);
+           %Collect number of rows in each phase
+           for k = 1:nPhases
+               counts(k) = size(app.phases(k).mod,1);
+           end
+           totalRows = sum(counts);
+           if length(newData) ~= totalRows
+               error("Length mismatch: expected %d elements, got %d.",...
+                   totalRows, length(newData));
+           end
+           %Split newData vector into phase-sized chunks 
+           newDataSplit = mat2cell(newData(:), counts,1);
+           %Update phase mod data with corresponding split data
+           for k = 1:nPhases
+               app.phases(k).mod(:,col) = newDataSplit{k};
+           end
+       end
+       %check if specified max angle value is within safety limits for given joint and direction 
+       function tf = validateMaxAngle(app,jointTag, direction,userValue)
+           jointType = app.JointToType.(jointTag);
+           limits = app.HardLimits.(jointType);
+           if strcmp(direction,'Extension')
+               limit = limits.Extension
+               if userValue > limit 
+                   %alert if user attempts to set extension beyond safe limits
+                   uialert(app.UIFigure,sprintf('Maximum extension for %s joint is %d degrees.',jointTag,limit), ...
+                       'Angle Limit Exceeded');
+                   tf = false;
+                   return;
+               end 
+           elseif strcmp(direction,'Flexion')
+               limit = limits.Flexion;
+               if userValue < limit 
+                   %Alert if user attempts to set flexion beyond safe limits
+                   uialert(app.UIFigure,sprintf('Maximum flexion for %s joint is %d degrees.',jointTag,limit), ...
+                       'Angle Limit Exceeded');
+                   tf = false;
+                   return;
+               end
+           end 
+           tf = true; %Value is within limits
+       end
+       %Apply max angle changes to selected joints with scaling of modified data 
+       function applyMaxAngle(app)
+            directionStr = app.DirectionDropDown.Value; %User selected modification direction
+            userVal = app.MaxAngledegEditField.Value; %User input angle value to apply
+            isExtension = strcmp(app.DirectionDropDown.Value,'Extension (+)');
+            isFlexion = strcmp(app.DirectionDropDown.Value,'Flexion (-)');
+            selected = app.getSelectedJoints();
+            if isempty(selected)
+                uialert(app.UIFigure,'Please select at least one joint.','No Joint Selected');
+                return;
+            end
+            jointMap = struct('RH',2,'RK',3, 'RA',4,'LH',5,'LK',6,'LA',7);
+            %Validate each selected joint's new max angle against hard limits
+            for idx = 1:numel(selected)
+                jointTag = selected{idx};
+                dirKey = '';
+                valtocheck = userVal;
+                if isExtension 
+                    dirKey = 'Extension';
+                elseif isFlexion
+                    dirKey = 'Flexion';
+                end
+                if isExtension
+                    if ~app.validateMaxAngle(jointTag, dirKey,valtocheck)
+                        return; %Stop if validation fails
+                    end
+                elseif ~isFlexion
+                    if ~app.validateMaxAngle(jointTag,dirKey,valtocheck)
+                        return; %Stop if validation fails
+                    end
+                end
+            end
+            %If validation passes, update UI numeric fields 
+            for idx = 1:numel(selected)
+                jointTag = selected{idx};
+                if isExtension
+                    app.([jointTag 'Max']).Value = userVal;
+                elseif isFlexion
+                    app.([jointTag 'Min']).Value = userVal;
+                end
+            end
+            %Save original phase data for selected joints and phases for possible revert
+            if ~isstruct(app.previousPlotHandles) || isempty(fieldnames(app.previousPlotHandles))
+                app.previousPlotHandles = struct();
+            end
+            for pIdx = 1:numel(app.phases)
+                for i = 1:numel(selected)
+                    jt = selected{i};
+                    fld = sprintf('%s_P%d',jt,pIdx);
+                    col = jointMap.(jt);
+                    app.previousPlotHandles.(fld) = app.phases(pIdx).orig(:,col);
+                end
+            end
+            %For each selected joint, scale modified data to new max angle while perserving shape 
+            for idx = 1:numel(selected)
+                jointTag = selected{idx};
+                col = jointMap.(jointTag);
+                modData = app.getJointModifiedData(jointTag);
+                currentMax = max(modData);
+                currentMin = min(modData);
+                extMax = app.([jointTag 'Max']).Value;
+                flexMin = app.([jointTag 'Min']).Value;
+                %Calculate scale factors for positive (Extension) and negative (flexion) parts 
+                if currentMax > 0 && extMax > 0
+                    scalePos = extMax / currentMax;
+                else
+                    scalePos = 1;
+                end
+                if currentMin < 0 && flexMin > 0
+                    scaleNeg = (-flexMin) / currentMin;
+                else
+                    scaleNeg = 1;
+                end
+                newData = zeros(size(modData));
+                posIdx = modData > 0;
+                newData(posIdx) = modData(posIdx) * scalePos;
+                negIdx = modData < 0;
+                newData(negIdx) = modData(negIdx) * scaleNeg;
+                zeroIdx = modData == 0;
+                newData(zeroIdx) = 0;
+                %Set modified data for the joint
+                app.setJointModifiedData(jointTag, newData);
+            end
+            %Redraw plots to reflect changes
+            app.drawPlots();
+       end
+       %Retrieve original range of motion (ROM) angles from UI fields
+       function origAngles = getOriginalROM(app)
+           joints = {'RH','RK','RA','LH','LK','LA'};
+           origAngles = struct();
+           for i = 1:length(joints)
+               j = joints{i};
+               maxProp = j + "MaxOrig";
+               minProp = j + "MinOrig";
+               %Handle legacy properties if new ones are missing
+               if isprop(app,maxProp)
+                   origAngles.(maxProp) = app.(maxProp).Value;
+               else
+                   legacyMax = j + "Max";
+                   if isprop(app,legacyMax)
+                       origAngles.(maxProp) = app.(legacyMax).Value;
+                   else
+                       origAngles.(maxProp) = NaN;
+                   end
+               end
+               if isprop(app,minProp)
+                   origAngles.(minProp) = app.(minProp).Value;
+               else
+                   legacyMin = j + "Min";
+                   if isprop(app,legacyMin)
+                       origAngles.(minProp) = app.(legacyMin).Value;
+                   else
+                       origAngles.(minProp) = NaN;
+                   end
+               end
+           end
+       end
+       %Retrieve goal range of motion (ROM) angles from UI fields 
+       function goalAngles = getGoalROM(app)
+           joints = {'RH','RK','RA','LH','LK','LA'};
+           goalAngles = struct();
+           for i = 1:length(joints)
+               j = joints{i};
+               maxProp = j + "MaxGoal";
+               minProp = j + "MinGoal";
+               if isprop(app,maxProp)
+                   goalAngles.(maxProp) = app.(maxProp).Value;
+               else 
+                   goalAngles.(maxProp) = NaN;
+               end
+               if isprop(app,minProp)
+                   goalAngles.(maxProp) = app.(maxProp).Value;
+               else
+                   goalAngles.(maxProp) = NaN;
+               end
+           end
+       end 
+       %Update the percent work done fields based on loaded session data for specified session index
+       function updateWorkDoneDisplays(app,sessionIdx)
+           if isempty(app.sessionData) || sessionIdx > length(app.sessionData)
+               return; %Session index invalid or data not loaded
+           end
+           %Extract session data struct for given index
+           sess = app.sessionData{sessionIdx};
+           %Gather gait phase data matrices
+           allPhases = {sess.WalkP0G,sess.WalkP1G,sess.WalkP2G};
+           leftWork = 0;
+           rightWork = 0;
+           totalWork = 0;
+           %Calculate sums of absolute work for left and right leg joints over all phases
+           for i = 1:length(allPhases)
+               data = allPhases{i};
+               leftWork = leftWork + sum(abs(data(:,5:7)),'all');
+               rightWork = rightWork + sum(abs(data(:,2:4)),'all');
+               totalWork = totalWork +sum(abs(data(:,2:7)),'all');
+           end
+           %Calculate percent work done by each leg based on total
+           leftPct = 100 * leftWork / totalWork;
+           rightPct = 100 * rightWork / totalWork;
+           %Update UI numeric gields with rounded percentage values 
+           app.LeftLegEditField.Value = round(leftPct,2);
+           app.RightLegEditField.Value = round(rightPct,2);
+       end 
+       %Generate or update overall analysis plots for ROM and work progression across sessions 
+       function updateOverallAnalysisPlots(app)
+           if isempty(app.sessionData)
+               return; %No data available for plotting 
+           end
+           nSessions = length(app.sessionData);
+           jointList = {'RH','RK','RA','LH','LK','LA'};
+           nJoints = numel(jointList);
+           romPercentGoal = zeros(nSessions+1,nJoints); %ROM percent relative to goal for sessions and baseline 
+           percentchangefromoriginal = nan(nSessions,1);
+           percentchangefromgoal = nan(nSessions,1);
+           workLeft = nan(nSessions+1,1); %Percent work done by left leg PLEGS
+           workRight = nan(nSessions+1,1); %Percent work done by right leg PLEGS
+           patientworkLeft = nan(nSessions+1,1); %Percent work done by left leg (100% - PLEGS) 
+           patientworkRight = nan(nSessions+1,1); %Percent work done by right leg
+           origROM = app.getOriginalROM(); %Load baseline ROM angles
+           goalROM = app.getGoalROM(); %Load goal ROM angles
+           originalMaxAngles = nan(1,nJoints);
+           goalMaxAngles = nan(1, nJoints);
+           %Extract and clamp original and goal max angles within hardware limits for comparability 
+           for idx = 1:nJoints
+               joint = jointList{idx};
+               maxOrigField = joint + "MaxOrig";
+               maxGoalField = joint + "MaxGoal";
+               if isfield(origROM,maxOrigField)
+                   rawOrigVal = origROM.(maxOrigField);
+               else
+                   rawOrigVal = NaN;
+               end
+               if isfield(goalROM,maxGoalField)
+                   rawGoalVal = goalROM.(maxGoalField);
+               else
+                   rawGoalVal = NaN;
+               end
+               jointType = app.JointToType.(joint);
+               limits = app.HardLimits.(jointType);
+               minLim = limits.Flexion;
+               maxLim = limits.Extension;
+               if ~isnan(rawOrigVal)
+                   originalMaxAngles(idx) = min(max(rawOrigVal,minLim),maxLim);
+               else
+                   originalMaxAngles(idx) = NaN;
+               end
+               if ~isnan(rawGoalVal)
+                   goalMaxAngles(idx) = min(max(rawGoalVal,minLim),maxLim);
+               else
+                   goalMaxAngles(idx) = NaN;
+               end
+           end
+           %Calculate baseline ROM as percent of goal ROM
+           for j = 1:nJoints
+               if ~isnan(originalMaxAngles(j)) && ~isnan(goalMaxAngles(j)) && goalMaxAngles(j) ~= 0
+                   romPercentGoal(1,j) = 100 * originalMaxAngles(j)/goalMaxAngles(j);
+               else
+                   romPercentGoal(1,j) = NaN;
+               end
+           end
+           %Initialize work and patient work first entries with NaN (baseline)
+           workLeft(1) = NaN;
+           workRight(1) = NaN;
+           patientworkLeft(1) = NaN;
+           patientworkRight(1) = NaN;
+           %Loop over sessions to compute per-session ROM and work metrics
+           for s = 1:nSessions
+               sess = app.sessionData{s};
+               allPhases = {sess.WalkP0G,sess.WalkP1G,sess.WalkP2G};
+               maxAnglesSession = zeros(1,nJoints);
+               %Find max absolute angle per joint across all phases in session
+               for j = 1:nJoints
+                   jointCol = 1 + j;
+                   maxVal = -inf;
+                   for p = 1:numel(allPhases)
+                       maxVal = max(maxVal,max(abs(allPhases{p}(:,jointCol))));
+                   end
+                   maxAnglesSession(j) = maxVal;
+               end
+               changesfromorig = nan(1,nJoints);
+               changesfromgoal = nan(1,nJoints);
+               %Calculate percent change from original and percent of goal ROM achieved
+               for j = 1:nJoints
+                   if ~isnan(originalMaxAngles(j)) && originalMaxAngles(j) ~= 0
+                       changesfromorig(j) = 100 * ((maxAnglesSession(j) - originalMaxAngles(j)) / originalMaxAngles(j));
+                   end
+                   if ~isnan(goalMaxAngles(j)) && goalMaxAngles(j) ~= 0
+                       changesfromgoal(j) = 100 * (maxAnglesSession(j) / goalMaxAngles(j));
+                   end
+               end
+               percentchangefromoriginal(s) = mean(changesfromorig,'omitnan'); %Average across joints ignorning NaN
+               percentchangefromgoal(s) = mean(changesfromgoal,'omitnan');
+               leftWorkSum = 0;
+               rightWorkSum = 0;
+               totalWorkSum = 0;
+               %Compute work done sums for left and right legs across all phases
+               for p = 1:numel(allPhases)
+                   d = allPhases{p};
+                   leftWorkSum = leftWorkSum + sum(abs(d(:,5:7)),'all');
+                   rightWorkSum = rightWorkSum + sum(abs(d(:,2:4)),'all');
+                   totalWorkSum = totalWorkSum + sum(abs(d(:,2:7)),'all');
+               end
+               %Calculate percent work done for PLEGS
+               workLeft(s+1) = 100 * leftWorkSum / totalWorkSum;
+               workRight(s+1) = 100 * rightWorkSum / totalWorkSum;
+               %Calculate percent work done by patient (complement)
+               patientWorkLeft(s+1) = 100 - workLeft(s+1);
+               patientWorkRight(s+1) = 100 - workRight(s+1);
+               %Calculate ROM percent of goal for this session
+               for j = 1:nJoints
+                   if ~isnan(goalMaxAngles(j)) && goalMaxAngles(j) ~= 0
+                       romPercentGoal(s+1,j) = 100 * (maxAnglesSession(j) / goalMaxAngles(j));
+                   else
+                       romPercentGoal(s+1,j) = NaN;
+                   end 
+               end
+           end
+           %Clear and hold for updating work and ROM plots
+           cla(app.UIAxes3_2);
+           hold(app.UIAxes3_2,'on');
+           xValsWork = 1:nSessions;
+           %Plot PLEGS work done for left and right legs 
+           app.plotHandles.Work.PLEGS.Left = plot(app.UIAxes3_2,xValsWork,workLeft(2:end),'-b','DisplayName','PLEGS Left Leg');
+           app.plotHandles.Work.PLEGS.Right = plot(app.UIAxes3_2,xValsWork,workRight(2:end),'-r','DisplayName','PLEGS Right Leg');
+           %Plot patient work done for left and right legs
+           app.plotHandles.Work.Patient.Left = plot(app.UIAxes3_2,xValsWork,patientWorkLeft(2:end),'--b','DisplayName','Patient Left Leg');
+           app.plotHandles.Work.Patient.Right = plot(app.UIAxes3_2,xValsWork,patientWorkRight(2:end),'--r','DisplayName','Patient Right Leg');
+           %Add and configure legend and axes colors
+           lgdWork = legend(app.UIAxes3_2,'Location','best');
+           set(lgdWork,'TextColor','black','Color','white','EdgeColor', 'black');
+           app.UIAxes3_2.XColor = 'w';
+           app.UIAxes3_2.YColor = 'w';
+           app.UIAxes3_2.ZColor = 'w';
+           app.UIAxes3_2.Title.Color = 'w';
+           app.UIAxes3_2.XLabel.Color = 'w';
+           app.UIAxes3_2.YLabel.Color = 'w';
+           app.UIAxes3_2.ZLabel.Color = 'w';
+           grid(app.UIAxes3_2,'on');
+           app.UIAxes3_2.XLim = [1 nSessions];
+           app.UIAxes3_2.XTick = xValsWork;
+           hold(app.UIAxes3_2,'off');
+           %Prepare and plot ROM percent of goal for each joint across all sessions + baseline
+           cla(app.UIAxes3);
+           hold(app.UIAxes3,'on');
+           jointColors = {'r','g','b','c','m','y'};
+           jointLabels = {'RH','RK','RA','LH','LK','LA'};
+           xValsROM = 0:nSessions;
+           app.plotHandles.ROM = gobjects(nJoints,1);
+           for j=1:nJoints
+               app.plotHandles.ROM(j) = plot(app.UIAxes3,xValsROM,romPercentGoal(:,j),'-','Color', ...
+                   jointColors{j},'DisplayName',jointLabels{j},'LineWidth',1.5);
+           end 
+           lgdRom = legend(app.UIAxes3,'Location','best');
+           set(lgdRom,'TextColor','black','Color','white','EdgeColor','black');
+           app.UIAxes3.XColor = 'w';
+           app.UIAxes3.YColor = 'w';
+           app.UIAxes3.ZColor = 'w';
+           app.UIAxes3.Title.Color = 'w';
+           app.UIAxes3.XLabel.Color = 'w';
+           app.UIAxes3.YLabel.Color = 'w';
+           app.UIAxes3.ZLabel.Color = 'w';
+           grid(app.UIAxes3,'on');
+           app.UIAxes3.XLim = [0 nSessions];
+           app.UIAxes3.XTick = xValsROM;
+           hold(app.UIAxes3,'off');
+           %Update visibility of plots based on user checkbox selections
+           app.updateVisibility();
+       end 
+       %Update the data table summarizing sessions with percent changes and work 
+       function updateSessionSummaryTable(app)
+           if isempty(app.sessionData)
+               app.SessionSummaryTable.Data = {};
+               return;
+           end
+           nSessions = length(app.sessionData);
+           jointList = {'RH','RK','RA','LH','LK','LA'};
+           nJoints = numel(jointList);
+           percentChangeFromOriginal = zeros(nSessions,1);
+           percentChangeFromGoal = zeros(nSessions,1);
+           leftWork = zeros(nSessions,1);
+           rightWork = zeros(nSessions,1);
+           origROM = app.getOriginalROM();
+           goalROM = app.getGoalROM();
+           originalMaxAngles = nan(1,nJoints);
+           goalMaxAngles = nan(1,nJoints);
+           %Extract original and goal max angles 
+           for idx = 1:nJoints
+               joint = jointList{idx};
+               maxOrigField = joint + "MaxOrig";
+               maxGoalField = joint + "MaxGoal";
+               if isfield(origROM,maxOrigField)
+                   originalMaxAngles(idx) = origROM.(maxOrigField);
+               end
+               if isfield(goalROM,maxGoalField)
+                   goalMaxAngles(idx) = goalROM.(maxGoalField);
+               end
+           end
+           %Compute session by session changes and work done for table
+           for s = 1:nSessions
+               sess = app.sessionData{s};
+               allPhases = {sess.WalkP0G,sess.WalkP1G,sess.WalkP2G};
+               maxAnglesSession = zeros(1,nJoints);
+               %Maximum angle per joint over all phases 
+               for j = 1:nJoints
+                   col = 1 + j;
+                   maxVal = -inf;
+                   for p = 1:length(allPhases)
+                       maxVal = max(maxVal,max(abs(allPhases{p}(:,col))));
+                   end
+                   maxAnglesSession(j) = maxVal;
+               end
+               changesFromOrig = zeros(1,nJoints);
+               changesFromGoal = zeros(1,nJoints);
+               %Percent changes from original and goal ROM
+               for j = 1:nJoints
+                   if ~isnan(originalMaxAngles(j)) && originalMaxAngles(j) ~= 0
+                       changesFromOrig(j) = 100*((maxAnglesSession(j) - originalMaxAngles(j))/originalMaxAngles(j));
+                   else 
+                       changesFromOrig(j) = NaN;
+                   end
+                   if ~isnan(goalMaxAngles(j)) && goalMaxAngles(j) ~= 0
+                       changesFromGoal(j) = 100*(maxAnglesSession(j)/goalMaxAngles(j));
+                   else
+                       changesFromGoal(j) = NaN;
+                   end
+               end
+               percentChangeFromOriginal(s) = mean(changesFromOrig,'omitnan');
+               percentChangeFromGoal(s) = mean(changesFromGoal,'omitnan');
+               totalWork = 0;
+               leftWorkSum = 0;
+               rightWorkSum = 0;
+               %Sum work done for left and right legs over all phases 
+               for p = 1:length(allPhases)
+                   d = allPhases{p};
+                   leftWorkSum = leftWorkSum + sum(abs(d(:,5:7)),'all');
+                   rightWorkSum = rightWorkSum + sum(abs(d(:,2:4)),'all');
+                   totalWork = totalWork + sum(abs(d(:,2:7)),'all');
+               end
+               leftWork(s) = 100 * leftWorkSum / totalWork;
+               rightWork(s) = 100 * rightWorkSum / totalWork;
+           end 
+           %Prepare table with relevant columns for display
+           T = table((1:nSessions)',percentChangeFromOriginal,percentChangeFromGoal, ...
+               leftWork,rightWork,'VariableNames',{'Session','PctChangeFromOriginal','PctChangeFromGoal','LeftLegWorkPct','RightLegWorkPct'});
+           app.SessionSummaryTable.Data = T;
+       end 
+       %Update visibility of ROM and work plots according to checkbox controls
+       function updateVisibility(app)
+           if ~app.loaded || isempty(app.plotHandles)
+               return; %No plots to update or no data loaded
+           end
+           leftIndices = 4:6; %Left leg joint indices in plotHandles.ROM
+           rightIndices = 1:3; %Right leg joint indices 
+           %Manage left leg ROM plot visibility according to checkbox
+           for i = leftIndices
+               if isgraphics(app.plotHandles.ROM(i))
+                    if app.LeftLegJointsCheckBox.Value
+                         set(app.plotHandles.ROM(leftIndices),'Visible','on');
+                    else
+                         set(app.plotHandles.ROM(leftIndices),'Visible','off');
+                    end
+               end
+           end 
+           %Manage right leg ROM plot visibility according to checkbox
+           for i = rightIndices 
+               if isgraphics(app.plotHandles.ROM(i))
+                   if app.RightLegJointsCheckBox.Value
+                       set(app.plotHandles.ROM(i),'Visible','on');
+                   else
+                       set(app.plotHandles.ROM(i),'Visible','off');
+                   end
+               end
+           end
+           %Manage PLEGS left work plot visibility 
+           if isgraphics(app.plotHandles.Work.PLEGS.Left)
+                if app.PLEGSWorkCheckBox.Value 
+                    set(app.plotHandles.Work.PLEGS.Left,'Visible','on');
+                else
+                    set(app.plotHandles.Work.PLEGS.Left,'Visible','off');
+                end
+           end
+           %Manage PLEGS right work plot visbility 
+           if isgraphics(app.plotHandles.Work.PLEGS.Right)
+               if app.PLEGSWorkCheckBox.Value
+                   set(app.plotHandles.Work.PLEGS.Right,'Visible','on');
+               else  
+                   set(app.plotHandles.Work.PLEGS.Right,'Visible','off');
+               end
+           end 
+           %Manage patient left work plot visibility 
+           if isgraphics(app.plotHandles.Work.Patient.Left)
+               if app.PatientsWorkCheckBox.Value
+                   set(app.plotHandles.Work.Patient.Left,'Visible','on');
+               else  
+                   set(app.plotHandles.Work.Patient.Left,'Visible','off');
+               end
+           end
+           %Manage patient right work plot visibility
+           if isgraphics(app.plotHandles.Work.Patient.Right)
+               if app.PatientsWorkCheckBox.Value
+                   set(app.plotHandles.Work.Patient.Right,'Visible','on');
+               else
+                   set(app.plotHandles.Work.Patient.Right,'Visible','off');
+               end
+           end 
+       end
+       end 
+
+    % Callbacks that handle component events
+    methods (Access = private)
+
+        % Code that executes after component creation
+        function startupFcn2(app)
+            drawnow;
+            %Get screen size for centering window
+            screenSize = get(0,'ScreenSize');
+            figWidth = app.UIFigure.Position(3);
+            figHeight = app.UIFigure.Position(4);
+            x = (screenSize(3) - figWidth) / 2;
+            y = (screenSize(4) - figHeight) / 2;
+            app.UIFigure.Position(1:2) = [x,y]; %Move UI to center of screen
+        end
+
+        % Callback function
+        function onPhaseChange(app, event)
+            value = app.TimeSegmentDropDown.Value;
+            %Determine curPhase based on dropdown value prefix 
+            if startsWith(value, 'P0')
+                app.curPhase = 'P0';
+            elseif startsWith(value, 'P1')
+                app.curPhase = 'P1';
+            elseif startsWith(value, 'P2')
+                app.curPhase = 'P2';
+            else 
+                app.curPhase = 'P2'; %Default to phase P2 if no match
+            end
+            %Update spinner UI controls to reflect new selection
+            app.refreshSpinners();
+        end
+
+        % Callback function
+        function onJointChange(app, event)
+            value = app.JointDropDown.Value;
+            app.curJoint = event.Value;
+            %Update direction dropdown, e.g. extending or flexion options
+            app.updateDirectionDropdown();
+        end
+
+        % Button pushed function: LoadPatientTrajectoryButton
+        function onLoad(app, event)
+            [f, p] = uigetfile('*.mat', 'Select trajectory MAT file');
+            if isequal(f, 0)
+                return; %User cancelled file selection
+            end
+            %Load data from file selected by user
+            S = load(fullfile(p, f));
+            %Verify required fields exist in loaded MAT file
+            if ~all(isfield(S, {'WalkP0G', 'WalkP1G', 'WalkP2G'}))
+                uialert(app.UIFigure, ...
+                    'MAT file must contain WalkP0G, WalkP1G, WalkP2G', ...
+                    'Invalid file');
+                return;
+            end
+            %Store original and modified data as identical (initially) structured by phase
+            app.phases = struct('name', {'P0', 'P1', 'P2'}, ...
+                'orig', {S.WalkP0G, S.WalkP1G, S.WalkP2G}, ...
+                'mod',  {S.WalkP0G, S.WalkP1G, S.WalkP2G});
+            app.loaded = true; %Mark data as loaded
+            % Enable UI controls for manipulation and export
+            app.OffsetDegEditField.Enable = 'on';
+            app.GainEditField.Enable = 'on';
+            app.ResetModifiedPlotsButton.Enable = 'on';
+            app.ExportModifiedTrajectoryButton.Enable = 'on';
+            % Enable checkboxes for joint visibility
+            app.HipJointCheckBox.Enable = 'on';
+            app.KneeJointCheckBox.Enable = 'on';
+            app.AnkleJointCheckBox.Enable = 'on';
+            % Default checkboxes to checked state for initial plots 
+            app.HipJointCheckBox.Value = true;
+            app.KneeJointCheckBox.Value = true;
+            app.AnkleJointCheckBox.Value = true;
+            % Reset tuning parameters to defaults 
+            app.OffsetDegEditField.Value = 0;
+            app.GainEditField.Value = 100;
+            figure(app.UIFigure);
+            drawnow;
+            %Update plots based on loaded data 
+            app.drawPlots();
+        end
+
+        % Callback function
+        function onTune(app, event)
+            value = app.OffsetDegEditField.Value;
+            if ~app.loaded
+                 return; %No data loaded, ignore tuning
+            end
+            app.applyTuning(); %Apply gain and offset modifications
+            app.drawPlots(); %Redraw plots to display changes
+        end
+
+        % Button pushed function: ResetModifiedPlotsButton
+        function onReset(app, event)
+             if ~app.loaded; 
+                 return; %No data loaded, nothing to reset
+             end
+             %Collect joints selected for reset
+             toReset = {};
+             if app.RHReset.Value, 
+                 toReset{end+1} = 'RH';
+             end
+             if app.RKReset.Value,
+                 toReset{end+1} = 'RK';
+             end
+             if app.RAReset.Value,
+                 toReset{end+1} = 'RA';
+             end
+             if app.LHReset.Value,
+                 toReset{end+1} = 'LH';
+             end
+             if app.LKReset.Value,
+                 toReset{end+1} = 'LK';
+             end
+             if app.LAReset.Value,
+                 toReset{end+1} = 'LA';
+             end
+             %Alert if no joints selected
+             if isempty(toReset)
+                 uialert(app.UIFigure,'Please select at least one joint to reset.','No Joints Selected');
+                 return;
+             end
+             jointMap = struct('RH',2,'RK',3,'RA',4,'LH',5,'LK',6,'LA',7);
+             %Loop over phases and reset mod data to original for selected joints
+             for pIdx = 1:numel(app.phases)
+                 for i = 1:numel(toReset)
+                     jn = toReset{i};
+                     col = jointMap.(jn);
+                     app.phases(pIdx).mod(:,col) = app.phases(pIdx).orig(:,col);
+                 end
+             end
+             %Redraw plots with data reset
+             app.drawPlots();
+        end
+
+        % Button pushed function: ExportModifiedTrajectoryButton
+        function onExport(app, event)
+              if ~app.loaded
+                 return; %No data loaded to export
+              end 
+             % Extract modified trajectory data for all three phases
+              WalkP0G_mod = app.phases(1).mod;
+              WalkP1G_mod = app.phases(2).mod;
+              WalkP2G_mod = app.phases(3).mod; 
+              % Prompt for save location and filename
+              [f, p] = uiputfile('*_mod.mat', 'Save modified trajectories as');
+              if isequal(f, 0)
+                  return; %User cancelled
+              end
+              % Save modified trajectory variables to MAT file
+              save(fullfile(p, f), 'WalkP0G_mod', 'WalkP1G_mod', 'WalkP2G_mod');
+              % Notify user of successful export
+              uialert(app.UIFigure, 'Modified trajectories saved!', ...
+                 'Export complete', 'Icon', 'success');
+        end
+
+        % Value changed function: HipJointCheckBox
+        function HipJointCheckBoxValueChanged(app, event)
+            value = app.HipJointCheckBox.Value;
+            fprintf('Hip checkbox changed to: %d\n', app.HipJointCheckBox.Value);
+            app.updateLineVisibility();
+        end
+
+        % Value changed function: KneeJointCheckBox
+        function KneeJointCheckBoxValueChanged(app, event)
+            value = app.KneeJointCheckBox.Value;
+            fprintf('Knee checkbox changed to: %d\n', app.KneeJointCheckBox.Value);
+            app.updateLineVisibility();
+        end
+
+        % Value changed function: AnkleJointCheckBox
+        function AnkleJointCheckBoxValueChanged(app, event)
+            value = app.AnkleJointCheckBox.Value;
+            fprintf('Ankle checkbox changed to: %d\n', app.AnkleJointCheckBox.Value);
+            app.updateLineVisibility();           
+        end
+
+        % Value changed function: DirectionDropDown
+        function updateDirectionDropdown(app, event)
+            newItems = {'Extension (+)', 'Flexion (-)'};
+            app.DirectionDropDown.Items = newItems;
+            %Reset dropdown value if current is not in valid list
+            if ~ismember(app.DirectionDropDown.Value, newItems)
+                app.DirectionDropDown.Value = 'Extension (+)';
+            end
+        end
+
+        % Button pushed function: ApplyButton
+        function ApplyButtonPushed(app, event)
+            if ~app.loaded
+                return; %No data loaded, ignore
+            end
+            if app.GainOffsetEdited
+               %Apply gain/offset tuning changes
+               app.applyTuning();
+               app.drawPlots();
+               app.displayExtremes();
+               %Reset flags and UI controls to default state
+               app.GainOffsetEdited = false;
+               app.OffsetDegEditField.Value = 0;
+               app.GainEditField.Value = 100;
+               return;
+            end
+            if app.MaxAngleEdited
+               %Apply max angle tuning changes 
+               app.applyMaxAngle();
+               app.drawPlots();
+               %Reset flags and UI controls to default state
+               app.MaxAngleEdited = false;
+               app.MaxAngledegEditField.Value = 0;
+               return;
+            end
+        end
+
+        % Callback function: Tree
+        function updatePreviousLineVisibility(app, event)
+            checkedNodes = app.Tree.CheckedNodes;
+            checkedLabels = strings(1,numel(checkedNodes));
+            for i = 1:numel(checkedNodes)
+                checkedLabels(i) = checkedNodes(i).Text;
+            end
+            showAll = any(checkedLabels == "All Lines");
+            showRH = showAll || any(checkedLabels == "RH");
+            showRK = showAll || any(checkedLabels == "RK");
+            showRA = showAll || any(checkedLabels == "RA");
+            showLH = showAll || any(checkedLabels == "LH");
+            showLK = showAll || any(checkedLabels == "LK");
+            showLA = showAll || any(checkedLabels == "LA");
+            %Update visibility of right leg previous plot lines (hip, knee, ankle)
+            for i = 1:3
+                h = app.plotHandles.RL_prev{i};
+                if ~isempty(h) && isvalid(h)
+                    switch i
+                        case 1, h.Visible = iff(showRH, 'on','off');
+                        case 2, h.Visible = iff(showRK,'on','off');
+                        case 3, h.Visible = iff(showRA, 'on','off');
+                    end
+                end
+            end
+            %Update visibility of left leg previous plot lines (hip, knee, ankle)
+            for i = 1:3
+                h = app.plotHandles.LL_prev{i};
+                if ~isempty(h) && isvalid(h)
+                    switch i
+                        case 1, h.Visible = iff(showLH,'on','off');
+                        case 2, h.Visible = iff(showLK,'on','off');
+                        case 3, h.Visible = iff(showLA,'on', 'off');
+                    end
+                end
+            end
+            function v = iff(cond,a,b)
+                if cond
+                    v = a;
+                else
+                    v = b;
+                end
+            end
+                  
+        end
+
+        % Callback function
+        function MaxAngleChanged(app, event)
+            value = app.MaxAngledegEditField.Value;
+
+        end
+
+        % Value changed function: MaxAngledegEditField
+        function onMaxAngleChanged(app, event)
+            value = app.MaxAngledegEditField.Value;
+            app.MaxAngleEdited = true;
+            app.GainOffsetEdited = false;
+        end
+
+        % Value changed function: GainEditField, OffsetDegEditField
+        function onGainOffsetChanged(app, event)
+            value = app.GainEditField.Value;
+            app.GainOffsetEdited = true;
+            app.MaxAngleEdited = false;
+        end
+
+        % Callback function
+        function onGainChanged(app, event)
+            value = app.GainEditField.Value;
+            
+        end
+
+        % Callback function
+        function on(app, event)
+
+        end
+
+        % Button pushed function: OpenPatientFolderButton
+        function onLoadFolder(app, event)
+            folderPath = uigetdir(pwd,'Select Patient Data Folder');
+            if folderPath == 0
+                return; %User cancelled selection
+            end
+            if ~isfolder(folderPath)
+                mkdir(folderPath); %Create folder if it doesn't exist
+                uialert(app.UIFigure,sprintf('Folder "%s" did not exist and was created.', folderPath), ...
+                    'Folder Created');
+            end
+            sessionFiles = dir(fullfile(folderPath,'*.mat'));
+            if isempty(sessionFiles)
+                uialert(app.UIFigure,'No session MAT files found in folder.','No Files');
+                return;
+            end
+            %Store full file paths of session files
+            app.sessionFiles = fullfile({sessionFiles.folder},{sessionFiles.name});
+            validSessions = {};
+            %Load each file and check for required fields for validity
+            for k = 1:length(app.sessionFiles)
+                dataStruct = load(app.sessionFiles{k});
+                if all(isfield(dataStruct, {'WalkP0G','WalkP1G','WalkP2G'}))
+                    validSessions{end+1} = struct('WalkP0G',dataStruct.WalkP0G, ...
+                        'WalkP1G',dataStruct.WalkP1G,'WalkP2G',dataStruct.WalkP2G);
+                elseif all(isfield(dataStruct,{'WalkP0G_mod','WalkP1G_mod','WalkP2G_mod'}))
+                    validSessions{end+1} = struct('WalkP0G',dataStruct.WalkP0G_mod,'WalkP1G', ...
+                        dataStruct.WalkP1G_mod,'WalkP2G',dataStruct.WalkP2G_mod);
+                else 
+                    %Warn about invalid files skipped
+                    warning('Session file "%s" does not contain required fields. Skipping.',app.sessionFiles{k});
+                    continue;
+                end
+            end 
+            app.sessionData = validSessions;
+            numSessions = length(app.sessionData);
+            if isprop(app,'SessionCountLabel')
+                app.SessionCountLabel.Text = sprintf('Sessions: %d', numSessions);
+            else 
+                uialert(app.UIFigure,sprintf('Loaded %d sessions from folder.', ...
+                    numSessions),'Sessions Loaded');
+            end
+            if numSessions == 0
+                uialert(app.UIFigure, 'No valid Session files were loaded from the selected folder.','Load Error');
+                return;
+            end
+            %Initialize phases for first session in loaded data
+            app.phases = struct('name',{'P0','P1','P2'},'orig', ...
+                {app.sessionData{1}.WalkP0G,app.sessionData{1}.WalkP1G,app.sessionData{1}.WalkP2G}, ...
+                'mod',{app.sessionData{1}.WalkP0G,app.sessionData{1}.WalkP1G,app.sessionData{1}.WalkP2G});
+            app.loaded = true;
+            %Enable UI controls for manipulation and export
+            app.OffsetDegEditField.Enable = 'on';
+            app.GainEditField.Enable = 'on';
+            app.ResetModifiedPlotsButton.Enable = 'on';
+            app.ExportModifiedTrajectoryButton.Enable = 'on';
+            app.HipJointCheckBox.Enable = 'on';
+            app.KneeJointCheckBox.Enable = 'on';
+            app.AnkleJointCheckBox.Enable = 'on';
+            %Draw plots based on loaded data for first session
+            app.drawPlots();
+            %Update auxiliary display components with session 1 data
+            app.updateWorkDoneDisplays(1);
+            app.updateOverallAnalysisPlots();
+            app.updateSessionSummaryTable();
+        end
+
+        % Button pushed function: ExporttoPatientFolderButton
+        function onExportFolder(app, event)
+            if ~app.loaded
+                uialert(app.UIFigure,'No data loaded','Export Error');
+                return;
+            end
+            if isempty(app.sessionFiles)
+                uialert(app.UIFigure,'No folder loaded to export to.','Export Error');
+                return;
+            end
+            folderPath = uigetdir(pwd,'Select Folder to Export Patient Data');
+            WalkP0G_mod = app.phases(1).mod;
+            WalkP1G_mod = app.phases(2).mod;
+            WalkP2G_mod = app.phases(3).mod;
+            origROM = app.getOriginalROM();
+            goalROM = app.getGoalROM();
+            ROMData = struct('Original',origROM,'Goal',goalROM);
+            try
+                %Save modified trajectory and ROM info as separate files in selected folder
+                save(fullfile(folderPath,'ModifiedTrajectories.mat'),'WalkP0G_mod','WalkP1G_mod','WalkP2G_mod');
+                save(fullfile(folderPath,'PatientRangeOfMotion.mat'),'ROMData');
+                uialert(app.UIFigure,'Patient data exported successfully.','Success','Icon','success');
+            catch ME
+                uialert(app.UIFigure,['Failed to export patient data: ',ME.message],'Export Error');
+            end
+        end
+
+        % Button pushed function: ApplyROMButton
+        function ApplyROMButtonPushed(app, event)
+            joints = {'RH','RK','RA','LH','LK','LA'};
+            %Iteration over each joint to fetch current ROM values (placeholders for future extension) 
+            for i = 1:numel(joints)
+                j = joints{i};
+                maxOrigField = j + "MaxOrig";
+                minOrigField = j + "MinOrig";
+                if isprop(app,maxOrigField) && isprop(app,minOrigField)
+                    origMaxVal = app.(maxOrigField).Value;
+                    origMinValue = app.(minOrigField).Value;
+                end
+                maxGoalField = j + "MaxGoal";
+                minGoalField = j + "MinGoal";
+                if isprop(app,maxGoalField) && isprop(app,minGoalField)
+                    goalMaxVal = app.(maxGoalField).Value;
+                    goalMinVal = app.(minGoalField).Value;
+                end
+            end
+            %Refresh overall plots and summary table to reflect changes 
+            app.updateOverallAnalysisPlots();
+            app.updateSessionSummaryTable();
+            %Notify user of successful update
+            uialert(app.UIFigure, "Patient's range of motion updated successfully.","Update Complete",'Icon','success');
+        end
+
+        % Value changed function: PatientsWorkCheckBox
+        function PatientsWorkCheckBoxValueChanged(app, event)
+            value = app.PatientsWorkCheckBox.Value;
+            app.updateVisibility();
+        end
+
+        % Value changed function: PLEGSWorkCheckBox
+        function PLEGSWorkCheckBoxValueChanged(app, event)
+            value = app.PLEGSWorkCheckBox.Value;
+            app.updateVisibility();
+        end
+
+        % Value changed function: RightLegJointsCheckBox
+        function RightLegJointsCheckBoxValueChanged(app, event)
+            value = app.RightLegJointsCheckBox.Value;
+            app.updateVisibility();
+        end
+
+        % Value changed function: LeftLegJointsCheckBox
+        function LeftLegJointsCheckBoxValueChanged(app, event)
+            value = app.LeftLegJointsCheckBox.Value;
+            app.updateVisibility();
+        end
+    end
+
+    % Component initialization
+    methods (Access = private)
+
+        % Create UIFigure and components
+        function createComponents(app)
+
+            % Create UIFigure and hide until all components are created
+            app.UIFigure = uifigure('Visible', 'off');
+            app.UIFigure.Color = [0.502 0.502 0.502];
+            app.UIFigure.Position = [100 100 917 678];
+            app.UIFigure.Name = 'MATLAB App';
+
+            % Create TabGroup
+            app.TabGroup = uitabgroup(app.UIFigure);
+            app.TabGroup.Position = [1 1 918 678];
+
+            % Create SessionTab
+            app.SessionTab = uitab(app.TabGroup);
+            app.SessionTab.Title = 'Session';
+            app.SessionTab.BackgroundColor = [0.129411764705882 0.129411764705882 0.129411764705882];
+
+            % Create UIAxes2_2
+            app.UIAxes2_2 = uiaxes(app.SessionTab);
+            title(app.UIAxes2_2, 'Right Leg')
+            xlabel(app.UIAxes2_2, 'Time (s)')
+            ylabel(app.UIAxes2_2, 'Angle (degrees)')
+            zlabel(app.UIAxes2_2, 'Z')
+            app.UIAxes2_2.Color = [0.0705882352941176 0.0705882352941176 0.0705882352941176];
+            app.UIAxes2_2.ColorOrder = [0.149 0.549 0.866;0.96 0.466 0.16;1 0.909 0.392;0.752 0.36 0.984;0.286 0.858 0.25;0.423 0.956 1;0.949 0.403 0.772];
+            app.UIAxes2_2.Position = [493 380 411 274];
+
+            % Create UIAxes_2
+            app.UIAxes_2 = uiaxes(app.SessionTab);
+            title(app.UIAxes_2, 'Left Leg ')
+            xlabel(app.UIAxes_2, 'Time (s)')
+            ylabel(app.UIAxes_2, 'Angle (degrees)')
+            zlabel(app.UIAxes_2, 'Z')
+            app.UIAxes_2.Color = [0.0705882352941176 0.0705882352941176 0.0705882352941176];
+            app.UIAxes_2.ColorOrder = [0.149 0.549 0.866;0.96 0.466 0.16;1 0.909 0.392;0.752 0.36 0.984;0.286 0.858 0.25;0.423 0.956 1;0.949 0.403 0.772];
+            app.UIAxes_2.Position = [3 380 427 273];
+
+            % Create DASHBOARDPanel_2
+            app.DASHBOARDPanel_2 = uipanel(app.SessionTab);
+            app.DASHBOARDPanel_2.ForegroundColor = [0.850980392156863 0.850980392156863 0.850980392156863];
+            app.DASHBOARDPanel_2.BorderType = 'none';
+            app.DASHBOARDPanel_2.Title = 'DASHBOARD';
+            app.DASHBOARDPanel_2.BackgroundColor = [0.651 0.651 0.651];
+            app.DASHBOARDPanel_2.FontWeight = 'bold';
+            app.DASHBOARDPanel_2.Position = [1 0 915 217];
+
+            % Create LoadPatientTrajectoryButton
+            app.LoadPatientTrajectoryButton = uibutton(app.DASHBOARDPanel_2, 'push');
+            app.LoadPatientTrajectoryButton.ButtonPushedFcn = createCallbackFcn(app, @onLoad, true);
+            app.LoadPatientTrajectoryButton.BackgroundColor = [0.902 0.902 0.902];
+            app.LoadPatientTrajectoryButton.Position = [14 163 154 25];
+            app.LoadPatientTrajectoryButton.Text = 'Load Patient Trajectory';
+
+            % Create ExportModifiedTrajectoryButton
+            app.ExportModifiedTrajectoryButton = uibutton(app.DASHBOARDPanel_2, 'push');
+            app.ExportModifiedTrajectoryButton.ButtonPushedFcn = createCallbackFcn(app, @onExport, true);
+            app.ExportModifiedTrajectoryButton.BackgroundColor = [0.902 0.902 0.902];
+            app.ExportModifiedTrajectoryButton.FontColor = [0.149 0.149 0.149];
+            app.ExportModifiedTrajectoryButton.Position = [13 129 155 25];
+            app.ExportModifiedTrajectoryButton.Text = 'Export Modified Trajectory';
+
+            % Create DisplayJointGraphLinePanel_2
+            app.DisplayJointGraphLinePanel_2 = uipanel(app.DASHBOARDPanel_2);
+            app.DisplayJointGraphLinePanel_2.BorderType = 'none';
+            app.DisplayJointGraphLinePanel_2.Title = 'Display Joint Graph Line ';
+            app.DisplayJointGraphLinePanel_2.BackgroundColor = [0.902 0.902 0.902];
+            app.DisplayJointGraphLinePanel_2.Position = [19 30 144 84];
+
+            % Create HipJointCheckBox
+            app.HipJointCheckBox = uicheckbox(app.DisplayJointGraphLinePanel_2);
+            app.HipJointCheckBox.ValueChangedFcn = createCallbackFcn(app, @HipJointCheckBoxValueChanged, true);
+            app.HipJointCheckBox.Text = 'Hip Joint';
+            app.HipJointCheckBox.FontColor = [0.149 0.149 0.149];
+            app.HipJointCheckBox.Position = [6 41 68 22];
+
+            % Create KneeJointCheckBox
+            app.KneeJointCheckBox = uicheckbox(app.DisplayJointGraphLinePanel_2);
+            app.KneeJointCheckBox.ValueChangedFcn = createCallbackFcn(app, @KneeJointCheckBoxValueChanged, true);
+            app.KneeJointCheckBox.Text = 'Knee Joint';
+            app.KneeJointCheckBox.Position = [6 20 78 22];
+
+            % Create AnkleJointCheckBox
+            app.AnkleJointCheckBox = uicheckbox(app.DisplayJointGraphLinePanel_2);
+            app.AnkleJointCheckBox.ValueChangedFcn = createCallbackFcn(app, @AnkleJointCheckBoxValueChanged, true);
+            app.AnkleJointCheckBox.Text = 'Ankle Joint';
+            app.AnkleJointCheckBox.FontColor = [0.149 0.149 0.149];
+            app.AnkleJointCheckBox.Position = [6 -1 80 22];
+
+            % Create ShowOriginalTrajectoryPanel_2
+            app.ShowOriginalTrajectoryPanel_2 = uipanel(app.DASHBOARDPanel_2);
+            app.ShowOriginalTrajectoryPanel_2.ForegroundColor = [0.149 0.149 0.149];
+            app.ShowOriginalTrajectoryPanel_2.BorderType = 'none';
+            app.ShowOriginalTrajectoryPanel_2.Title = 'Show Original Trajectory';
+            app.ShowOriginalTrajectoryPanel_2.BackgroundColor = [0.902 0.902 0.902];
+            app.ShowOriginalTrajectoryPanel_2.Position = [192 19 149 164];
+
+            % Create Tree
+            app.Tree = uitree(app.ShowOriginalTrajectoryPanel_2, 'checkbox');
+            app.Tree.FontColor = [0.850980392156863 0.850980392156863 0.850980392156863];
+            app.Tree.BackgroundColor = [0.0705882352941176 0.0705882352941176 0.0705882352941176];
+            app.Tree.Position = [8 13 134 123];
+
+            % Create AllJointsNode_2
+            app.AllJointsNode_2 = uitreenode(app.Tree);
+            app.AllJointsNode_2.Text = 'All Joints';
+
+            % Create RHNode_2
+            app.RHNode_2 = uitreenode(app.AllJointsNode_2);
+            app.RHNode_2.Text = 'RH';
+
+            % Create RKNode_2
+            app.RKNode_2 = uitreenode(app.AllJointsNode_2);
+            app.RKNode_2.Text = 'RK';
+
+            % Create RANode_2
+            app.RANode_2 = uitreenode(app.AllJointsNode_2);
+            app.RANode_2.Text = 'RA';
+
+            % Create LHNode_2
+            app.LHNode_2 = uitreenode(app.AllJointsNode_2);
+            app.LHNode_2.Text = 'LH';
+
+            % Create LKNode_2
+            app.LKNode_2 = uitreenode(app.AllJointsNode_2);
+            app.LKNode_2.Text = 'LK';
+
+            % Create LANode_2
+            app.LANode_2 = uitreenode(app.AllJointsNode_2);
+            app.LANode_2.Text = 'LA';
+
+            % Assign Checked Nodes
+            app.Tree.CheckedNodesChangedFcn = createCallbackFcn(app, @updatePreviousLineVisibility, true);
+
+            % Create ModifyRoutinePanel_2
+            app.ModifyRoutinePanel_2 = uipanel(app.DASHBOARDPanel_2);
+            app.ModifyRoutinePanel_2.BorderType = 'none';
+            app.ModifyRoutinePanel_2.Title = 'Modify Routine ';
+            app.ModifyRoutinePanel_2.BackgroundColor = [0.902 0.902 0.902];
+            app.ModifyRoutinePanel_2.Position = [370 10 355 178];
+
+            % Create ApplyButton
+            app.ApplyButton = uibutton(app.ModifyRoutinePanel_2, 'push');
+            app.ApplyButton.ButtonPushedFcn = createCallbackFcn(app, @ApplyButtonPushed, true);
+            app.ApplyButton.BackgroundColor = [0.651 0.651 0.651];
+            app.ApplyButton.FontColor = [0.850980392156863 0.850980392156863 0.850980392156863];
+            app.ApplyButton.Position = [248 12 100 22];
+            app.ApplyButton.Text = 'Apply';
+
+            % Create OffsetDegEditFieldLabel
+            app.OffsetDegEditFieldLabel = uilabel(app.ModifyRoutinePanel_2);
+            app.OffsetDegEditFieldLabel.HorizontalAlignment = 'right';
+            app.OffsetDegEditFieldLabel.FontColor = [0.149 0.149 0.149];
+            app.OffsetDegEditFieldLabel.Position = [163 126 70 22];
+            app.OffsetDegEditFieldLabel.Text = 'Offset (Deg)';
+
+            % Create OffsetDegEditField
+            app.OffsetDegEditField = uieditfield(app.ModifyRoutinePanel_2, 'numeric');
+            app.OffsetDegEditField.ValueChangedFcn = createCallbackFcn(app, @onGainOffsetChanged, true);
+            app.OffsetDegEditField.FontColor = [1 1 1];
+            app.OffsetDegEditField.BackgroundColor = [0.0705882352941176 0.0705882352941176 0.0705882352941176];
+            app.OffsetDegEditField.Position = [248 126 100 22];
+
+            % Create GainEditFieldLabel
+            app.GainEditFieldLabel = uilabel(app.ModifyRoutinePanel_2);
+            app.GainEditFieldLabel.HorizontalAlignment = 'right';
+            app.GainEditFieldLabel.FontColor = [0.149 0.149 0.149];
+            app.GainEditFieldLabel.Position = [181 41 52 22];
+            app.GainEditFieldLabel.Text = 'Gain (%)';
+
+            % Create GainEditField
+            app.GainEditField = uieditfield(app.ModifyRoutinePanel_2, 'numeric');
+            app.GainEditField.ValueChangedFcn = createCallbackFcn(app, @onGainOffsetChanged, true);
+            app.GainEditField.FontColor = [1 1 1];
+            app.GainEditField.BackgroundColor = [0.0705882352941176 0.0705882352941176 0.0705882352941176];
+            app.GainEditField.Position = [248 41 100 22];
+
+            % Create DirectionDropDown
+            app.DirectionDropDown = uidropdown(app.ModifyRoutinePanel_2);
+            app.DirectionDropDown.Items = {'Extension (+)', 'Flexion (-)'};
+            app.DirectionDropDown.ValueChangedFcn = createCallbackFcn(app, @updateDirectionDropdown, true);
+            app.DirectionDropDown.FontColor = [0.149 0.149 0.149];
+            app.DirectionDropDown.BackgroundColor = [0.902 0.902 0.902];
+            app.DirectionDropDown.Position = [248 99 99 22];
+            app.DirectionDropDown.Value = 'Extension (+)';
+
+            % Create DirectionDropDownLabel
+            app.DirectionDropDownLabel = uilabel(app.ModifyRoutinePanel_2);
+            app.DirectionDropDownLabel.BackgroundColor = [0.902 0.902 0.902];
+            app.DirectionDropDownLabel.HorizontalAlignment = 'right';
+            app.DirectionDropDownLabel.FontColor = [0.149 0.149 0.149];
+            app.DirectionDropDownLabel.Position = [187 99 52 22];
+            app.DirectionDropDownLabel.Text = 'Direction';
+
+            % Create MaxAngledegEditFieldLabel
+            app.MaxAngledegEditFieldLabel = uilabel(app.ModifyRoutinePanel_2);
+            app.MaxAngledegEditFieldLabel.HorizontalAlignment = 'right';
+            app.MaxAngledegEditFieldLabel.FontColor = [0.149 0.149 0.149];
+            app.MaxAngledegEditFieldLabel.Position = [140 69 92 22];
+            app.MaxAngledegEditFieldLabel.Text = 'Max Angle (deg)';
+
+            % Create MaxAngledegEditField
+            app.MaxAngledegEditField = uieditfield(app.ModifyRoutinePanel_2, 'numeric');
+            app.MaxAngledegEditField.ValueChangedFcn = createCallbackFcn(app, @onMaxAngleChanged, true);
+            app.MaxAngledegEditField.FontColor = [0.850980392156863 0.850980392156863 0.850980392156863];
+            app.MaxAngledegEditField.BackgroundColor = [0.0705882352941176 0.0705882352941176 0.0705882352941176];
+            app.MaxAngledegEditField.Position = [247 69 100 22];
+
+            % Create SelectJointstoModifyPanel_2
+            app.SelectJointstoModifyPanel_2 = uipanel(app.ModifyRoutinePanel_2);
+            app.SelectJointstoModifyPanel_2.ForegroundColor = [0.149 0.149 0.149];
+            app.SelectJointstoModifyPanel_2.BorderType = 'none';
+            app.SelectJointstoModifyPanel_2.Title = 'Select Joints to Modify ';
+            app.SelectJointstoModifyPanel_2.BackgroundColor = [0.902 0.902 0.902];
+            app.SelectJointstoModifyPanel_2.Position = [8 37 133 93];
+
+            % Create RHCheckbox
+            app.RHCheckbox = uicheckbox(app.SelectJointstoModifyPanel_2);
+            app.RHCheckbox.Text = 'RH';
+            app.RHCheckbox.Position = [49 46 39 22];
+
+            % Create RKCheckbox
+            app.RKCheckbox = uicheckbox(app.SelectJointstoModifyPanel_2);
+            app.RKCheckbox.Text = 'RK';
+            app.RKCheckbox.FontColor = [0.149 0.149 0.149];
+            app.RKCheckbox.Position = [49 25 38 22];
+
+            % Create RACheckbox
+            app.RACheckbox = uicheckbox(app.SelectJointstoModifyPanel_2);
+            app.RACheckbox.Text = 'RA';
+            app.RACheckbox.Position = [49 4 38 22];
+
+            % Create LHCheckbox
+            app.LHCheckbox = uicheckbox(app.SelectJointstoModifyPanel_2);
+            app.LHCheckbox.Text = 'LH';
+            app.LHCheckbox.FontColor = [0.149 0.149 0.149];
+            app.LHCheckbox.Position = [6 45 37 22];
+
+            % Create LKCheckbox
+            app.LKCheckbox = uicheckbox(app.SelectJointstoModifyPanel_2);
+            app.LKCheckbox.Text = 'LK';
+            app.LKCheckbox.Position = [6 24 36 22];
+
+            % Create LACheckbox
+            app.LACheckbox = uicheckbox(app.SelectJointstoModifyPanel_2);
+            app.LACheckbox.Text = 'LA';
+            app.LACheckbox.FontColor = [0.149 0.149 0.149];
+            app.LACheckbox.Position = [6 4 36 22];
+
+            % Create SelectJointstoResetPanel_2
+            app.SelectJointstoResetPanel_2 = uipanel(app.DASHBOARDPanel_2);
+            app.SelectJointstoResetPanel_2.BorderType = 'none';
+            app.SelectJointstoResetPanel_2.Title = 'Select Joints to Reset';
+            app.SelectJointstoResetPanel_2.BackgroundColor = [0.902 0.902 0.902];
+            app.SelectJointstoResetPanel_2.Position = [769 34 138 136];
+
+            % Create ResetModifiedPlotsButton
+            app.ResetModifiedPlotsButton = uibutton(app.SelectJointstoResetPanel_2, 'push');
+            app.ResetModifiedPlotsButton.ButtonPushedFcn = createCallbackFcn(app, @onReset, true);
+            app.ResetModifiedPlotsButton.BackgroundColor = [0.651 0.651 0.651];
+            app.ResetModifiedPlotsButton.FontColor = [0.850980392156863 0.850980392156863 0.850980392156863];
+            app.ResetModifiedPlotsButton.Position = [7 9 125 23];
+            app.ResetModifiedPlotsButton.Text = 'Reset Modified Plots';
+
+            % Create RHReset
+            app.RHReset = uicheckbox(app.SelectJointstoResetPanel_2);
+            app.RHReset.Text = 'RH';
+            app.RHReset.Position = [67 94 39 22];
+
+            % Create RKReset
+            app.RKReset = uicheckbox(app.SelectJointstoResetPanel_2);
+            app.RKReset.Text = 'RK';
+            app.RKReset.FontColor = [0.149 0.149 0.149];
+            app.RKReset.Position = [67 67 39 22];
+
+            % Create RAReset
+            app.RAReset = uicheckbox(app.SelectJointstoResetPanel_2);
+            app.RAReset.Text = 'RA';
+            app.RAReset.FontColor = [0.149 0.149 0.149];
+            app.RAReset.Position = [67 41 39 22];
+
+            % Create LHReset
+            app.LHReset = uicheckbox(app.SelectJointstoResetPanel_2);
+            app.LHReset.Text = 'LH';
+            app.LHReset.Position = [20 94 37 22];
+
+            % Create LKReset
+            app.LKReset = uicheckbox(app.SelectJointstoResetPanel_2);
+            app.LKReset.Text = 'LK';
+            app.LKReset.FontColor = [0.149 0.149 0.149];
+            app.LKReset.Position = [20 67 37 22];
+
+            % Create LAReset
+            app.LAReset = uicheckbox(app.SelectJointstoResetPanel_2);
+            app.LAReset.Text = 'LA';
+            app.LAReset.Position = [20 41 37 22];
+
+            % Create LeftJointsMaxAnglesPanel_2
+            app.LeftJointsMaxAnglesPanel_2 = uipanel(app.SessionTab);
+            app.LeftJointsMaxAnglesPanel_2.BorderType = 'none';
+            app.LeftJointsMaxAnglesPanel_2.Title = 'Left Joints Max Angles';
+            app.LeftJointsMaxAnglesPanel_2.BackgroundColor = [0.8 0.8 0.8];
+            app.LeftJointsMaxAnglesPanel_2.Position = [10 238 194 130];
+
+            % Create ExtensionLabel_3
+            app.ExtensionLabel_3 = uilabel(app.LeftJointsMaxAnglesPanel_2);
+            app.ExtensionLabel_3.Position = [15 92 76 22];
+            app.ExtensionLabel_3.Text = 'Extension (+)';
+
+            % Create FlexionLabel_3
+            app.FlexionLabel_3 = uilabel(app.LeftJointsMaxAnglesPanel_2);
+            app.FlexionLabel_3.Position = [127 94 59 22];
+            app.FlexionLabel_3.Text = 'Flexion (-)';
+
+            % Create LHEditFieldLabel
+            app.LHEditFieldLabel = uilabel(app.LeftJointsMaxAnglesPanel_2);
+            app.LHEditFieldLabel.HorizontalAlignment = 'right';
+            app.LHEditFieldLabel.FontColor = [0.149 0.149 0.149];
+            app.LHEditFieldLabel.Position = [2 69 25 22];
+            app.LHEditFieldLabel.Text = 'LH';
+
+            % Create LHMax
+            app.LHMax = uieditfield(app.LeftJointsMaxAnglesPanel_2, 'numeric');
+            app.LHMax.FontColor = [1 1 1];
+            app.LHMax.BackgroundColor = [0 0 0];
+            app.LHMax.Position = [42 69 50 22];
+
+            % Create LKEditFieldLabel
+            app.LKEditFieldLabel = uilabel(app.LeftJointsMaxAnglesPanel_2);
+            app.LKEditFieldLabel.HorizontalAlignment = 'right';
+            app.LKEditFieldLabel.Position = [4 37 25 22];
+            app.LKEditFieldLabel.Text = 'LK';
+
+            % Create LKMax
+            app.LKMax = uieditfield(app.LeftJointsMaxAnglesPanel_2, 'numeric');
+            app.LKMax.FontColor = [1 1 1];
+            app.LKMax.BackgroundColor = [0 0 0];
+            app.LKMax.Position = [44 37 49 22];
+
+            % Create LAEditFieldLabel
+            app.LAEditFieldLabel = uilabel(app.LeftJointsMaxAnglesPanel_2);
+            app.LAEditFieldLabel.HorizontalAlignment = 'right';
+            app.LAEditFieldLabel.FontColor = [0.149 0.149 0.149];
+            app.LAEditFieldLabel.Position = [4 3 25 22];
+            app.LAEditFieldLabel.Text = 'LA';
+
+            % Create LAMax
+            app.LAMax = uieditfield(app.LeftJointsMaxAnglesPanel_2, 'numeric');
+            app.LAMax.FontColor = [1 1 1];
+            app.LAMax.BackgroundColor = [0 0 0];
+            app.LAMax.Position = [44 3 49 22];
+
+            % Create LHEditField_2Label
+            app.LHEditField_2Label = uilabel(app.LeftJointsMaxAnglesPanel_2);
+            app.LHEditField_2Label.HorizontalAlignment = 'right';
+            app.LHEditField_2Label.Position = [102 70 25 22];
+            app.LHEditField_2Label.Text = 'LH';
+
+            % Create LHMin
+            app.LHMin = uieditfield(app.LeftJointsMaxAnglesPanel_2, 'numeric');
+            app.LHMin.FontColor = [1 1 1];
+            app.LHMin.BackgroundColor = [0 0 0];
+            app.LHMin.Position = [142 70 45 22];
+
+            % Create LKEditField_2Label
+            app.LKEditField_2Label = uilabel(app.LeftJointsMaxAnglesPanel_2);
+            app.LKEditField_2Label.HorizontalAlignment = 'right';
+            app.LKEditField_2Label.Position = [102 38 25 22];
+            app.LKEditField_2Label.Text = 'LK';
+
+            % Create LKMin
+            app.LKMin = uieditfield(app.LeftJointsMaxAnglesPanel_2, 'numeric');
+            app.LKMin.FontColor = [1 1 1];
+            app.LKMin.BackgroundColor = [0 0 0];
+            app.LKMin.Position = [142 38 45 22];
+
+            % Create LAEditField_2Label
+            app.LAEditField_2Label = uilabel(app.LeftJointsMaxAnglesPanel_2);
+            app.LAEditField_2Label.HorizontalAlignment = 'right';
+            app.LAEditField_2Label.Position = [102 4 25 22];
+            app.LAEditField_2Label.Text = 'LA';
+
+            % Create LAMin
+            app.LAMin = uieditfield(app.LeftJointsMaxAnglesPanel_2, 'numeric');
+            app.LAMin.FontColor = [1 1 1];
+            app.LAMin.BackgroundColor = [0.0705882352941176 0.0705882352941176 0.0705882352941176];
+            app.LAMin.Position = [142 4 45 22];
+
+            % Create RightJointsMaxAnglesPanel_2
+            app.RightJointsMaxAnglesPanel_2 = uipanel(app.SessionTab);
+            app.RightJointsMaxAnglesPanel_2.ForegroundColor = [0.149 0.149 0.149];
+            app.RightJointsMaxAnglesPanel_2.BorderType = 'none';
+            app.RightJointsMaxAnglesPanel_2.Title = 'Right Joints Max Angles';
+            app.RightJointsMaxAnglesPanel_2.BackgroundColor = [0.8 0.8 0.8];
+            app.RightJointsMaxAnglesPanel_2.Position = [493 233 212 135];
+
+            % Create ExtensionLabel_4
+            app.ExtensionLabel_4 = uilabel(app.RightJointsMaxAnglesPanel_2);
+            app.ExtensionLabel_4.Position = [18 97 76 22];
+            app.ExtensionLabel_4.Text = 'Extension (+)';
+
+            % Create FlexionLabel_4
+            app.FlexionLabel_4 = uilabel(app.RightJointsMaxAnglesPanel_2);
+            app.FlexionLabel_4.Position = [134 97 59 22];
+            app.FlexionLabel_4.Text = 'Flexion (-)';
+
+            % Create RHEditField_2Label
+            app.RHEditField_2Label = uilabel(app.RightJointsMaxAnglesPanel_2);
+            app.RHEditField_2Label.HorizontalAlignment = 'right';
+            app.RHEditField_2Label.FontColor = [0.149 0.149 0.149];
+            app.RHEditField_2Label.Position = [106 75 25 22];
+            app.RHEditField_2Label.Text = 'RH';
+
+            % Create RHMin
+            app.RHMin = uieditfield(app.RightJointsMaxAnglesPanel_2, 'numeric');
+            app.RHMin.FontColor = [1 1 1];
+            app.RHMin.BackgroundColor = [0.0705882352941176 0.0705882352941176 0.0705882352941176];
+            app.RHMin.Position = [146 75 53 22];
+
+            % Create RKEditField_2Label
+            app.RKEditField_2Label = uilabel(app.RightJointsMaxAnglesPanel_2);
+            app.RKEditField_2Label.HorizontalAlignment = 'right';
+            app.RKEditField_2Label.Position = [106 43 25 22];
+            app.RKEditField_2Label.Text = 'RK';
+
+            % Create RKMin
+            app.RKMin = uieditfield(app.RightJointsMaxAnglesPanel_2, 'numeric');
+            app.RKMin.FontColor = [1 1 1];
+            app.RKMin.BackgroundColor = [0.0705882352941176 0.0705882352941176 0.0705882352941176];
+            app.RKMin.Position = [146 43 53 22];
+
+            % Create RAEditField_2Label
+            app.RAEditField_2Label = uilabel(app.RightJointsMaxAnglesPanel_2);
+            app.RAEditField_2Label.HorizontalAlignment = 'right';
+            app.RAEditField_2Label.Position = [106 9 25 22];
+            app.RAEditField_2Label.Text = 'RA';
+
+            % Create RAMin
+            app.RAMin = uieditfield(app.RightJointsMaxAnglesPanel_2, 'numeric');
+            app.RAMin.FontColor = [1 1 1];
+            app.RAMin.BackgroundColor = [0.0705882352941176 0.0705882352941176 0.0705882352941176];
+            app.RAMin.Position = [146 9 53 22];
+
+            % Create RHEditFieldLabel
+            app.RHEditFieldLabel = uilabel(app.RightJointsMaxAnglesPanel_2);
+            app.RHEditFieldLabel.HorizontalAlignment = 'right';
+            app.RHEditFieldLabel.FontColor = [0.149 0.149 0.149];
+            app.RHEditFieldLabel.Position = [10 75 25 22];
+            app.RHEditFieldLabel.Text = 'RH';
+
+            % Create RHMax
+            app.RHMax = uieditfield(app.RightJointsMaxAnglesPanel_2, 'numeric');
+            app.RHMax.FontColor = [1 1 1];
+            app.RHMax.BackgroundColor = [0.0705882352941176 0.0705882352941176 0.0705882352941176];
+            app.RHMax.Position = [50 75 49 22];
+
+            % Create RKEditFieldLabel
+            app.RKEditFieldLabel = uilabel(app.RightJointsMaxAnglesPanel_2);
+            app.RKEditFieldLabel.HorizontalAlignment = 'right';
+            app.RKEditFieldLabel.Position = [10 43 25 22];
+            app.RKEditFieldLabel.Text = 'RK';
+
+            % Create RKMax
+            app.RKMax = uieditfield(app.RightJointsMaxAnglesPanel_2, 'numeric');
+            app.RKMax.FontColor = [1 1 1];
+            app.RKMax.BackgroundColor = [0.0705882352941176 0.0705882352941176 0.0705882352941176];
+            app.RKMax.Position = [50 43 49 22];
+
+            % Create RAEditFieldLabel
+            app.RAEditFieldLabel = uilabel(app.RightJointsMaxAnglesPanel_2);
+            app.RAEditFieldLabel.HorizontalAlignment = 'right';
+            app.RAEditFieldLabel.FontColor = [0.149 0.149 0.149];
+            app.RAEditFieldLabel.Position = [10 9 25 22];
+            app.RAEditFieldLabel.Text = 'RA';
+
+            % Create RAMax
+            app.RAMax = uieditfield(app.RightJointsMaxAnglesPanel_2, 'numeric');
+            app.RAMax.FontColor = [1 1 1];
+            app.RAMax.BackgroundColor = [0.0705882352941176 0.0705882352941176 0.0705882352941176];
+            app.RAMax.Position = [50 9 49 22];
+
+            % Create PercentWorkDoneByPLEGSPanel
+            app.PercentWorkDoneByPLEGSPanel = uipanel(app.SessionTab);
+            app.PercentWorkDoneByPLEGSPanel.ForegroundColor = [0.149 0.149 0.149];
+            app.PercentWorkDoneByPLEGSPanel.BorderType = 'none';
+            app.PercentWorkDoneByPLEGSPanel.Title = 'Percent Work Done By PLEGS';
+            app.PercentWorkDoneByPLEGSPanel.BackgroundColor = [0.9412 0.9412 0.9412];
+            app.PercentWorkDoneByPLEGSPanel.Position = [228 311 177 59];
+
+            % Create LeftLegEditFieldLabel
+            app.LeftLegEditFieldLabel = uilabel(app.PercentWorkDoneByPLEGSPanel);
+            app.LeftLegEditFieldLabel.HorizontalAlignment = 'right';
+            app.LeftLegEditFieldLabel.Position = [10 9 52 22];
+            app.LeftLegEditFieldLabel.Text = 'Left Leg ';
+
+            % Create LeftLegEditField
+            app.LeftLegEditField = uieditfield(app.PercentWorkDoneByPLEGSPanel, 'numeric');
+            app.LeftLegEditField.FontColor = [1 1 1];
+            app.LeftLegEditField.BackgroundColor = [0.149 0.149 0.149];
+            app.LeftLegEditField.Position = [76 9 100 22];
+
+            % Create PercentWorkDoneByPLEGSPanel_2
+            app.PercentWorkDoneByPLEGSPanel_2 = uipanel(app.SessionTab);
+            app.PercentWorkDoneByPLEGSPanel_2.ForegroundColor = [0.149 0.149 0.149];
+            app.PercentWorkDoneByPLEGSPanel_2.BorderType = 'none';
+            app.PercentWorkDoneByPLEGSPanel_2.Title = 'Percent Work Done By PLEGS';
+            app.PercentWorkDoneByPLEGSPanel_2.BackgroundColor = [0.9412 0.9412 0.9412];
+            app.PercentWorkDoneByPLEGSPanel_2.Position = [721 311 177 59];
+
+            % Create RightLegEditFieldLabel
+            app.RightLegEditFieldLabel = uilabel(app.PercentWorkDoneByPLEGSPanel_2);
+            app.RightLegEditFieldLabel.HorizontalAlignment = 'right';
+            app.RightLegEditFieldLabel.Position = [6 9 56 22];
+            app.RightLegEditFieldLabel.Text = 'Right Leg';
+
+            % Create RightLegEditField
+            app.RightLegEditField = uieditfield(app.PercentWorkDoneByPLEGSPanel_2, 'numeric');
+            app.RightLegEditField.FontColor = [1 1 1];
+            app.RightLegEditField.BackgroundColor = [0.0705882352941176 0.0705882352941176 0.0705882352941176];
+            app.RightLegEditField.Position = [76 9 100 22];
+
+            % Create OverallTab
+            app.OverallTab = uitab(app.TabGroup);
+            app.OverallTab.Title = 'Overall';
+            app.OverallTab.BackgroundColor = [0.149 0.149 0.149];
+
+            % Create PatientsOriginalRangeofMotionPanel
+            app.PatientsOriginalRangeofMotionPanel = uipanel(app.OverallTab);
+            app.PatientsOriginalRangeofMotionPanel.ForegroundColor = [0.149 0.149 0.149];
+            app.PatientsOriginalRangeofMotionPanel.BorderType = 'none';
+            app.PatientsOriginalRangeofMotionPanel.Title = 'Patient''s Original Range of Motion';
+            app.PatientsOriginalRangeofMotionPanel.BackgroundColor = [0.902 0.902 0.902];
+            app.PatientsOriginalRangeofMotionPanel.Position = [3 2 402 167];
+
+            % Create LeftLegAnglesPanel
+            app.LeftLegAnglesPanel = uipanel(app.PatientsOriginalRangeofMotionPanel);
+            app.LeftLegAnglesPanel.ForegroundColor = [0.149 0.149 0.149];
+            app.LeftLegAnglesPanel.BorderType = 'none';
+            app.LeftLegAnglesPanel.Title = 'Left Leg Angles';
+            app.LeftLegAnglesPanel.BackgroundColor = [0.8 0.8 0.8];
+            app.LeftLegAnglesPanel.Position = [7 6 188 136];
+
+            % Create ExtensionLabel_5
+            app.ExtensionLabel_5 = uilabel(app.LeftLegAnglesPanel);
+            app.ExtensionLabel_5.FontColor = [0.149 0.149 0.149];
+            app.ExtensionLabel_5.Position = [14 91 76 23];
+            app.ExtensionLabel_5.Text = 'Extension (+)';
+
+            % Create FlexionLabel_5
+            app.FlexionLabel_5 = uilabel(app.LeftLegAnglesPanel);
+            app.FlexionLabel_5.FontColor = [0.149 0.149 0.149];
+            app.FlexionLabel_5.Position = [110 91 76 23];
+            app.FlexionLabel_5.Text = 'Flexion (-)';
+
+            % Create LHEditFieldLabel_2
+            app.LHEditFieldLabel_2 = uilabel(app.LeftLegAnglesPanel);
+            app.LHEditFieldLabel_2.HorizontalAlignment = 'right';
+            app.LHEditFieldLabel_2.FontColor = [0.149 0.149 0.149];
+            app.LHEditFieldLabel_2.Position = [1 65 28 22];
+            app.LHEditFieldLabel_2.Text = 'LH';
+
+            % Create LHMaxOrig
+            app.LHMaxOrig = uieditfield(app.LeftLegAnglesPanel, 'numeric');
+            app.LHMaxOrig.FontColor = [0.149 0.149 0.149];
+            app.LHMaxOrig.BackgroundColor = [0.9412 0.9412 0.9412];
+            app.LHMaxOrig.Position = [41 65 47 21];
+
+            % Create LHEditField_2Label_2
+            app.LHEditField_2Label_2 = uilabel(app.LeftLegAnglesPanel);
+            app.LHEditField_2Label_2.HorizontalAlignment = 'right';
+            app.LHEditField_2Label_2.FontColor = [0.149 0.149 0.149];
+            app.LHEditField_2Label_2.Position = [92 66 28 22];
+            app.LHEditField_2Label_2.Text = 'LH';
+
+            % Create LHMinOrig
+            app.LHMinOrig = uieditfield(app.LeftLegAnglesPanel, 'numeric');
+            app.LHMinOrig.FontColor = [0.149 0.149 0.149];
+            app.LHMinOrig.BackgroundColor = [0.9412 0.9412 0.9412];
+            app.LHMinOrig.Position = [132 66 47 21];
+
+            % Create LKEditFieldLabel_2
+            app.LKEditFieldLabel_2 = uilabel(app.LeftLegAnglesPanel);
+            app.LKEditFieldLabel_2.HorizontalAlignment = 'right';
+            app.LKEditFieldLabel_2.FontColor = [0.149 0.149 0.149];
+            app.LKEditFieldLabel_2.Position = [1 35 28 22];
+            app.LKEditFieldLabel_2.Text = 'LK';
+
+            % Create LKMaxOrig
+            app.LKMaxOrig = uieditfield(app.LeftLegAnglesPanel, 'numeric');
+            app.LKMaxOrig.FontColor = [0.149 0.149 0.149];
+            app.LKMaxOrig.BackgroundColor = [0.9412 0.9412 0.9412];
+            app.LKMaxOrig.Position = [41 35 47 21];
+
+            % Create LKEditField_2Label_2
+            app.LKEditField_2Label_2 = uilabel(app.LeftLegAnglesPanel);
+            app.LKEditField_2Label_2.HorizontalAlignment = 'right';
+            app.LKEditField_2Label_2.FontColor = [0.149 0.149 0.149];
+            app.LKEditField_2Label_2.Position = [92 35 28 22];
+            app.LKEditField_2Label_2.Text = 'LK';
+
+            % Create LKMinOrig
+            app.LKMinOrig = uieditfield(app.LeftLegAnglesPanel, 'numeric');
+            app.LKMinOrig.FontColor = [0.149 0.149 0.149];
+            app.LKMinOrig.BackgroundColor = [0.9412 0.9412 0.9412];
+            app.LKMinOrig.Position = [132 35 47 21];
+
+            % Create LAEditFieldLabel_2
+            app.LAEditFieldLabel_2 = uilabel(app.LeftLegAnglesPanel);
+            app.LAEditFieldLabel_2.HorizontalAlignment = 'right';
+            app.LAEditFieldLabel_2.FontColor = [0.149 0.149 0.149];
+            app.LAEditFieldLabel_2.Position = [1 4 28 22];
+            app.LAEditFieldLabel_2.Text = 'LA';
+
+            % Create LAMaxOrig
+            app.LAMaxOrig = uieditfield(app.LeftLegAnglesPanel, 'numeric');
+            app.LAMaxOrig.FontColor = [0.149 0.149 0.149];
+            app.LAMaxOrig.BackgroundColor = [0.9412 0.9412 0.9412];
+            app.LAMaxOrig.Position = [41 4 47 21];
+
+            % Create LAEditField_2Label_2
+            app.LAEditField_2Label_2 = uilabel(app.LeftLegAnglesPanel);
+            app.LAEditField_2Label_2.HorizontalAlignment = 'right';
+            app.LAEditField_2Label_2.FontColor = [0.149 0.149 0.149];
+            app.LAEditField_2Label_2.Position = [92 5 28 22];
+            app.LAEditField_2Label_2.Text = 'LA';
+
+            % Create LAMinOrig
+            app.LAMinOrig = uieditfield(app.LeftLegAnglesPanel, 'numeric');
+            app.LAMinOrig.FontColor = [0.149 0.149 0.149];
+            app.LAMinOrig.BackgroundColor = [0.9412 0.9412 0.9412];
+            app.LAMinOrig.Position = [132 5 47 21];
+
+            % Create RightLegAnglesPanel
+            app.RightLegAnglesPanel = uipanel(app.PatientsOriginalRangeofMotionPanel);
+            app.RightLegAnglesPanel.ForegroundColor = [0.149 0.149 0.149];
+            app.RightLegAnglesPanel.BorderType = 'none';
+            app.RightLegAnglesPanel.Title = 'Right Leg Angles ';
+            app.RightLegAnglesPanel.BackgroundColor = [0.8 0.8 0.8];
+            app.RightLegAnglesPanel.Position = [200 6 192 136];
+
+            % Create ExtensionLabel_7
+            app.ExtensionLabel_7 = uilabel(app.RightLegAnglesPanel);
+            app.ExtensionLabel_7.FontColor = [0.149 0.149 0.149];
+            app.ExtensionLabel_7.Position = [14 91 76 23];
+            app.ExtensionLabel_7.Text = 'Extension (+)';
+
+            % Create FlexionLabel_6
+            app.FlexionLabel_6 = uilabel(app.RightLegAnglesPanel);
+            app.FlexionLabel_6.FontColor = [0.149 0.149 0.149];
+            app.FlexionLabel_6.Position = [111 91 76 23];
+            app.FlexionLabel_6.Text = 'Flexion (-)';
+
+            % Create RHEditFieldLabel_2
+            app.RHEditFieldLabel_2 = uilabel(app.RightLegAnglesPanel);
+            app.RHEditFieldLabel_2.HorizontalAlignment = 'right';
+            app.RHEditFieldLabel_2.FontColor = [0.149 0.149 0.149];
+            app.RHEditFieldLabel_2.Position = [8 66 28 22];
+            app.RHEditFieldLabel_2.Text = 'RH';
+
+            % Create RHMaxOrig
+            app.RHMaxOrig = uieditfield(app.RightLegAnglesPanel, 'numeric');
+            app.RHMaxOrig.FontColor = [0.149 0.149 0.149];
+            app.RHMaxOrig.BackgroundColor = [0.9412 0.9412 0.9412];
+            app.RHMaxOrig.Position = [48 66 47 21];
+
+            % Create RHEditField_2Label_2
+            app.RHEditField_2Label_2 = uilabel(app.RightLegAnglesPanel);
+            app.RHEditField_2Label_2.HorizontalAlignment = 'right';
+            app.RHEditField_2Label_2.FontColor = [0.149 0.149 0.149];
+            app.RHEditField_2Label_2.Position = [97 66 28 22];
+            app.RHEditField_2Label_2.Text = 'RH';
+
+            % Create RHMinOrig
+            app.RHMinOrig = uieditfield(app.RightLegAnglesPanel, 'numeric');
+            app.RHMinOrig.FontColor = [0.149 0.149 0.149];
+            app.RHMinOrig.BackgroundColor = [0.9412 0.9412 0.9412];
+            app.RHMinOrig.Position = [137 66 47 21];
+
+            % Create RKEditFieldLabel_2
+            app.RKEditFieldLabel_2 = uilabel(app.RightLegAnglesPanel);
+            app.RKEditFieldLabel_2.HorizontalAlignment = 'right';
+            app.RKEditFieldLabel_2.FontColor = [0.149 0.149 0.149];
+            app.RKEditFieldLabel_2.Position = [6 36 28 22];
+            app.RKEditFieldLabel_2.Text = 'RK';
+
+            % Create RKMaxOrig
+            app.RKMaxOrig = uieditfield(app.RightLegAnglesPanel, 'numeric');
+            app.RKMaxOrig.FontColor = [0.149 0.149 0.149];
+            app.RKMaxOrig.BackgroundColor = [0.9412 0.9412 0.9412];
+            app.RKMaxOrig.Position = [46 36 47 21];
+
+            % Create RKEditField_2Label_2
+            app.RKEditField_2Label_2 = uilabel(app.RightLegAnglesPanel);
+            app.RKEditField_2Label_2.HorizontalAlignment = 'right';
+            app.RKEditField_2Label_2.FontColor = [0.149 0.149 0.149];
+            app.RKEditField_2Label_2.Position = [97 36 28 22];
+            app.RKEditField_2Label_2.Text = 'RK';
+
+            % Create RKMinOrig
+            app.RKMinOrig = uieditfield(app.RightLegAnglesPanel, 'numeric');
+            app.RKMinOrig.FontColor = [0.149 0.149 0.149];
+            app.RKMinOrig.BackgroundColor = [0.9412 0.9412 0.9412];
+            app.RKMinOrig.Position = [137 36 47 21];
+
+            % Create RAEditFieldLabel_2
+            app.RAEditFieldLabel_2 = uilabel(app.RightLegAnglesPanel);
+            app.RAEditFieldLabel_2.HorizontalAlignment = 'right';
+            app.RAEditFieldLabel_2.FontColor = [0.149 0.149 0.149];
+            app.RAEditFieldLabel_2.Position = [6 5 28 22];
+            app.RAEditFieldLabel_2.Text = 'RA';
+
+            % Create RAMaxOrig
+            app.RAMaxOrig = uieditfield(app.RightLegAnglesPanel, 'numeric');
+            app.RAMaxOrig.FontColor = [0.149 0.149 0.149];
+            app.RAMaxOrig.BackgroundColor = [0.9412 0.9412 0.9412];
+            app.RAMaxOrig.Position = [46 5 47 21];
+
+            % Create RAEditField_2Label_2
+            app.RAEditField_2Label_2 = uilabel(app.RightLegAnglesPanel);
+            app.RAEditField_2Label_2.HorizontalAlignment = 'right';
+            app.RAEditField_2Label_2.FontColor = [0.149 0.149 0.149];
+            app.RAEditField_2Label_2.Position = [97 6 28 22];
+            app.RAEditField_2Label_2.Text = 'RA';
+
+            % Create RAMinOrig
+            app.RAMinOrig = uieditfield(app.RightLegAnglesPanel, 'numeric');
+            app.RAMinOrig.FontColor = [0.149 0.149 0.149];
+            app.RAMinOrig.BackgroundColor = [0.9412 0.9412 0.9412];
+            app.RAMinOrig.Position = [137 6 47 21];
+
+            % Create PatientsGoalRangeofMotionPanel
+            app.PatientsGoalRangeofMotionPanel = uipanel(app.OverallTab);
+            app.PatientsGoalRangeofMotionPanel.BorderType = 'none';
+            app.PatientsGoalRangeofMotionPanel.Title = 'Patient''s Goal Range of Motion';
+            app.PatientsGoalRangeofMotionPanel.BackgroundColor = [0.902 0.902 0.902];
+            app.PatientsGoalRangeofMotionPanel.Position = [515 2 402 167];
+
+            % Create LeftLegAnglesPanel_2
+            app.LeftLegAnglesPanel_2 = uipanel(app.PatientsGoalRangeofMotionPanel);
+            app.LeftLegAnglesPanel_2.ForegroundColor = [0.149 0.149 0.149];
+            app.LeftLegAnglesPanel_2.BorderType = 'none';
+            app.LeftLegAnglesPanel_2.Title = 'Left Leg Angles';
+            app.LeftLegAnglesPanel_2.BackgroundColor = [0.8 0.8 0.8];
+            app.LeftLegAnglesPanel_2.Position = [7 6 188 136];
+
+            % Create ExtensionLabel_8
+            app.ExtensionLabel_8 = uilabel(app.LeftLegAnglesPanel_2);
+            app.ExtensionLabel_8.FontColor = [0.149 0.149 0.149];
+            app.ExtensionLabel_8.Position = [14 91 76 23];
+            app.ExtensionLabel_8.Text = 'Extension (+)';
+
+            % Create FlexionLabel_7
+            app.FlexionLabel_7 = uilabel(app.LeftLegAnglesPanel_2);
+            app.FlexionLabel_7.FontColor = [0.149 0.149 0.149];
+            app.FlexionLabel_7.Position = [110 91 76 23];
+            app.FlexionLabel_7.Text = 'Flexion (-)';
+
+            % Create LHEditField_3Label
+            app.LHEditField_3Label = uilabel(app.LeftLegAnglesPanel_2);
+            app.LHEditField_3Label.HorizontalAlignment = 'right';
+            app.LHEditField_3Label.FontColor = [0.149 0.149 0.149];
+            app.LHEditField_3Label.Position = [1 65 28 22];
+            app.LHEditField_3Label.Text = 'LH';
+
+            % Create LHMaxGoal
+            app.LHMaxGoal = uieditfield(app.LeftLegAnglesPanel_2, 'numeric');
+            app.LHMaxGoal.FontColor = [0.149 0.149 0.149];
+            app.LHMaxGoal.BackgroundColor = [0.9412 0.9412 0.9412];
+            app.LHMaxGoal.Position = [41 65 47 21];
+
+            % Create LHEditField_4Label
+            app.LHEditField_4Label = uilabel(app.LeftLegAnglesPanel_2);
+            app.LHEditField_4Label.HorizontalAlignment = 'right';
+            app.LHEditField_4Label.FontColor = [0.149 0.149 0.149];
+            app.LHEditField_4Label.Position = [92 66 28 22];
+            app.LHEditField_4Label.Text = 'LH';
+
+            % Create LHMinGoal
+            app.LHMinGoal = uieditfield(app.LeftLegAnglesPanel_2, 'numeric');
+            app.LHMinGoal.FontColor = [0.149 0.149 0.149];
+            app.LHMinGoal.BackgroundColor = [0.9412 0.9412 0.9412];
+            app.LHMinGoal.Position = [132 66 47 21];
+
+            % Create LKEditField_3Label
+            app.LKEditField_3Label = uilabel(app.LeftLegAnglesPanel_2);
+            app.LKEditField_3Label.HorizontalAlignment = 'right';
+            app.LKEditField_3Label.FontColor = [0.149 0.149 0.149];
+            app.LKEditField_3Label.Position = [1 35 28 22];
+            app.LKEditField_3Label.Text = 'LK';
+
+            % Create LKMaxGoal
+            app.LKMaxGoal = uieditfield(app.LeftLegAnglesPanel_2, 'numeric');
+            app.LKMaxGoal.FontColor = [0.149 0.149 0.149];
+            app.LKMaxGoal.BackgroundColor = [0.9412 0.9412 0.9412];
+            app.LKMaxGoal.Position = [41 35 47 21];
+
+            % Create LKEditField_4Label
+            app.LKEditField_4Label = uilabel(app.LeftLegAnglesPanel_2);
+            app.LKEditField_4Label.HorizontalAlignment = 'right';
+            app.LKEditField_4Label.FontColor = [0.149 0.149 0.149];
+            app.LKEditField_4Label.Position = [92 35 28 22];
+            app.LKEditField_4Label.Text = 'LK';
+
+            % Create LKMinGoal
+            app.LKMinGoal = uieditfield(app.LeftLegAnglesPanel_2, 'numeric');
+            app.LKMinGoal.FontColor = [0.149 0.149 0.149];
+            app.LKMinGoal.BackgroundColor = [0.9412 0.9412 0.9412];
+            app.LKMinGoal.Position = [132 35 47 21];
+
+            % Create LAEditField_3Label
+            app.LAEditField_3Label = uilabel(app.LeftLegAnglesPanel_2);
+            app.LAEditField_3Label.HorizontalAlignment = 'right';
+            app.LAEditField_3Label.FontColor = [0.149 0.149 0.149];
+            app.LAEditField_3Label.Position = [1 4 28 22];
+            app.LAEditField_3Label.Text = 'LA';
+
+            % Create LAMaxGoal
+            app.LAMaxGoal = uieditfield(app.LeftLegAnglesPanel_2, 'numeric');
+            app.LAMaxGoal.FontColor = [0.149 0.149 0.149];
+            app.LAMaxGoal.BackgroundColor = [0.9412 0.9412 0.9412];
+            app.LAMaxGoal.Position = [41 4 47 21];
+
+            % Create LAEditField_4Label
+            app.LAEditField_4Label = uilabel(app.LeftLegAnglesPanel_2);
+            app.LAEditField_4Label.HorizontalAlignment = 'right';
+            app.LAEditField_4Label.FontColor = [0.149 0.149 0.149];
+            app.LAEditField_4Label.Position = [92 5 28 22];
+            app.LAEditField_4Label.Text = 'LA';
+
+            % Create LAMinGoal
+            app.LAMinGoal = uieditfield(app.LeftLegAnglesPanel_2, 'numeric');
+            app.LAMinGoal.FontColor = [0.149 0.149 0.149];
+            app.LAMinGoal.BackgroundColor = [0.9412 0.9412 0.9412];
+            app.LAMinGoal.Position = [132 5 47 21];
+
+            % Create RightLegAnglesPanel_2
+            app.RightLegAnglesPanel_2 = uipanel(app.PatientsGoalRangeofMotionPanel);
+            app.RightLegAnglesPanel_2.BorderType = 'none';
+            app.RightLegAnglesPanel_2.Title = 'Right Leg Angles ';
+            app.RightLegAnglesPanel_2.BackgroundColor = [0.8 0.8 0.8];
+            app.RightLegAnglesPanel_2.Position = [200 6 192 136];
+
+            % Create ExtensionLabel_9
+            app.ExtensionLabel_9 = uilabel(app.RightLegAnglesPanel_2);
+            app.ExtensionLabel_9.FontColor = [0.149 0.149 0.149];
+            app.ExtensionLabel_9.Position = [14 91 76 23];
+            app.ExtensionLabel_9.Text = 'Extension (+)';
+
+            % Create FlexionLabel_8
+            app.FlexionLabel_8 = uilabel(app.RightLegAnglesPanel_2);
+            app.FlexionLabel_8.FontColor = [0.149 0.149 0.149];
+            app.FlexionLabel_8.Position = [111 91 76 23];
+            app.FlexionLabel_8.Text = 'Flexion (-)';
+
+            % Create RHEditField_3Label
+            app.RHEditField_3Label = uilabel(app.RightLegAnglesPanel_2);
+            app.RHEditField_3Label.HorizontalAlignment = 'right';
+            app.RHEditField_3Label.FontColor = [0.149 0.149 0.149];
+            app.RHEditField_3Label.Position = [8 66 28 22];
+            app.RHEditField_3Label.Text = 'RH';
+
+            % Create RHMaxGoal
+            app.RHMaxGoal = uieditfield(app.RightLegAnglesPanel_2, 'numeric');
+            app.RHMaxGoal.FontColor = [0.149 0.149 0.149];
+            app.RHMaxGoal.BackgroundColor = [0.9412 0.9412 0.9412];
+            app.RHMaxGoal.Position = [48 66 47 21];
+
+            % Create RHEditField_4Label
+            app.RHEditField_4Label = uilabel(app.RightLegAnglesPanel_2);
+            app.RHEditField_4Label.HorizontalAlignment = 'right';
+            app.RHEditField_4Label.FontColor = [0.149 0.149 0.149];
+            app.RHEditField_4Label.Position = [97 66 28 22];
+            app.RHEditField_4Label.Text = 'RH';
+
+            % Create RHMinGoal
+            app.RHMinGoal = uieditfield(app.RightLegAnglesPanel_2, 'numeric');
+            app.RHMinGoal.FontColor = [0.149 0.149 0.149];
+            app.RHMinGoal.BackgroundColor = [0.9412 0.9412 0.9412];
+            app.RHMinGoal.Position = [137 66 47 21];
+
+            % Create RKEditField_3Label
+            app.RKEditField_3Label = uilabel(app.RightLegAnglesPanel_2);
+            app.RKEditField_3Label.HorizontalAlignment = 'right';
+            app.RKEditField_3Label.FontColor = [0.149 0.149 0.149];
+            app.RKEditField_3Label.Position = [6 36 28 22];
+            app.RKEditField_3Label.Text = 'RK';
+
+            % Create RKMaxGoal
+            app.RKMaxGoal = uieditfield(app.RightLegAnglesPanel_2, 'numeric');
+            app.RKMaxGoal.FontColor = [0.149 0.149 0.149];
+            app.RKMaxGoal.BackgroundColor = [0.9412 0.9412 0.9412];
+            app.RKMaxGoal.Position = [46 36 47 21];
+
+            % Create RKEditField_4Label
+            app.RKEditField_4Label = uilabel(app.RightLegAnglesPanel_2);
+            app.RKEditField_4Label.HorizontalAlignment = 'right';
+            app.RKEditField_4Label.FontColor = [0.149 0.149 0.149];
+            app.RKEditField_4Label.Position = [97 36 28 22];
+            app.RKEditField_4Label.Text = 'RK';
+
+            % Create RKMinGoal
+            app.RKMinGoal = uieditfield(app.RightLegAnglesPanel_2, 'numeric');
+            app.RKMinGoal.FontColor = [0.149 0.149 0.149];
+            app.RKMinGoal.BackgroundColor = [0.9412 0.9412 0.9412];
+            app.RKMinGoal.Position = [137 36 47 21];
+
+            % Create RAEditField_3Label
+            app.RAEditField_3Label = uilabel(app.RightLegAnglesPanel_2);
+            app.RAEditField_3Label.HorizontalAlignment = 'right';
+            app.RAEditField_3Label.FontColor = [0.149 0.149 0.149];
+            app.RAEditField_3Label.Position = [6 5 28 22];
+            app.RAEditField_3Label.Text = 'RA';
+
+            % Create RAMaxGoal
+            app.RAMaxGoal = uieditfield(app.RightLegAnglesPanel_2, 'numeric');
+            app.RAMaxGoal.FontColor = [0.149 0.149 0.149];
+            app.RAMaxGoal.BackgroundColor = [0.9412 0.9412 0.9412];
+            app.RAMaxGoal.Position = [46 5 47 21];
+
+            % Create RAEditField_4Label
+            app.RAEditField_4Label = uilabel(app.RightLegAnglesPanel_2);
+            app.RAEditField_4Label.HorizontalAlignment = 'right';
+            app.RAEditField_4Label.FontColor = [0.149 0.149 0.149];
+            app.RAEditField_4Label.Position = [97 6 28 22];
+            app.RAEditField_4Label.Text = 'RA';
+
+            % Create RAMinGoal
+            app.RAMinGoal = uieditfield(app.RightLegAnglesPanel_2, 'numeric');
+            app.RAMinGoal.FontColor = [0.149 0.149 0.149];
+            app.RAMinGoal.BackgroundColor = [0.9412 0.9412 0.9412];
+            app.RAMinGoal.Position = [137 6 47 21];
+
+            % Create ExporttoPatientFolderButton
+            app.ExporttoPatientFolderButton = uibutton(app.OverallTab, 'push');
+            app.ExporttoPatientFolderButton.ButtonPushedFcn = createCallbackFcn(app, @onExportFolder, true);
+            app.ExporttoPatientFolderButton.BackgroundColor = [0.651 0.651 0.651];
+            app.ExporttoPatientFolderButton.FontColor = [0.850980392156863 0.850980392156863 0.850980392156863];
+            app.ExporttoPatientFolderButton.Position = [413 17 90 43];
+            app.ExporttoPatientFolderButton.Text = {'Export to'; 'Patient Folder'};
+
+            % Create OpenPatientFolderButton
+            app.OpenPatientFolderButton = uibutton(app.OverallTab, 'push');
+            app.OpenPatientFolderButton.ButtonPushedFcn = createCallbackFcn(app, @onLoadFolder, true);
+            app.OpenPatientFolderButton.BackgroundColor = [0.651 0.651 0.651];
+            app.OpenPatientFolderButton.FontColor = [0.850980392156863 0.850980392156863 0.850980392156863];
+            app.OpenPatientFolderButton.Position = [414 110 90 43];
+            app.OpenPatientFolderButton.Text = {'Open '; 'Patient Folder'};
+
+            % Create ExoskeletonRelianceDevelopmentPanel
+            app.ExoskeletonRelianceDevelopmentPanel = uipanel(app.OverallTab);
+            app.ExoskeletonRelianceDevelopmentPanel.ForegroundColor = [0.149 0.149 0.149];
+            app.ExoskeletonRelianceDevelopmentPanel.BorderType = 'none';
+            app.ExoskeletonRelianceDevelopmentPanel.Title = 'Exoskeleton Reliance Development ';
+            app.ExoskeletonRelianceDevelopmentPanel.BackgroundColor = [0.129411764705882 0.129411764705882 0.129411764705882];
+            app.ExoskeletonRelianceDevelopmentPanel.Position = [463 414 454 239];
+
+            % Create UIAxes3_2
+            app.UIAxes3_2 = uiaxes(app.ExoskeletonRelianceDevelopmentPanel);
+            title(app.UIAxes3_2, 'Work Bore Session to Session')
+            xlabel(app.UIAxes3_2, 'Session #')
+            ylabel(app.UIAxes3_2, '% of Work Done')
+            zlabel(app.UIAxes3_2, 'Z')
+            app.UIAxes3_2.Color = [0.0705882352941176 0.0705882352941176 0.0705882352941176];
+            app.UIAxes3_2.ColorOrder = [0.149 0.549 0.866;0.96 0.466 0.16;1 0.909 0.392;0.752 0.36 0.984;0.286 0.858 0.25;0.423 0.956 1;0.949 0.403 0.772];
+            app.UIAxes3_2.Position = [10 1 434 215];
+
+            % Create SessionSummaryTable
+            app.SessionSummaryTable = uitable(app.OverallTab);
+            app.SessionSummaryTable.BackgroundColor = [0.0705882352941176 0.0705882352941176 0.0705882352941176;0.129411764705882 0.129411764705882 0.129411764705882];
+            app.SessionSummaryTable.ColumnName = {'Session #'; '% Change from Original'; '% Change from Goal'; 'PLEGS Left Leg Work Done %'; 'PLEGS Right Leg Work Done %'};
+            app.SessionSummaryTable.RowName = {};
+            app.SessionSummaryTable.ForegroundColor = [0.850980392156863 0.850980392156863 0.850980392156863];
+            app.SessionSummaryTable.FontSize = 10;
+            app.SessionSummaryTable.Position = [120 181 677 234];
+
+            % Create RangeofMotionGrowthPanel
+            app.RangeofMotionGrowthPanel = uipanel(app.OverallTab);
+            app.RangeofMotionGrowthPanel.ForegroundColor = [0.850980392156863 0.850980392156863 0.850980392156863];
+            app.RangeofMotionGrowthPanel.BorderType = 'none';
+            app.RangeofMotionGrowthPanel.Title = 'Range of Motion Growth';
+            app.RangeofMotionGrowthPanel.BackgroundColor = [0.129411764705882 0.129411764705882 0.129411764705882];
+            app.RangeofMotionGrowthPanel.Position = [1 414 462 239];
+
+            % Create UIAxes3
+            app.UIAxes3 = uiaxes(app.RangeofMotionGrowthPanel);
+            title(app.UIAxes3, 'Range of Motion Growth Session to Session')
+            xlabel(app.UIAxes3, 'Session #')
+            ylabel(app.UIAxes3, '% of Goal')
+            zlabel(app.UIAxes3, 'Z')
+            app.UIAxes3.Color = [0.0706 0.0706 0.0706];
+            app.UIAxes3.ColorOrder = [0.149 0.549 0.866;0.96 0.466 0.16;1 0.909 0.392;0.752 0.36 0.984;0.286 0.858 0.25;0.423 0.956 1;0.949 0.403 0.772];
+            app.UIAxes3.Position = [10 10 450 206];
+
+            % Create ApplyROMButton
+            app.ApplyROMButton = uibutton(app.OverallTab, 'push');
+            app.ApplyROMButton.ButtonPushedFcn = createCallbackFcn(app, @ApplyROMButtonPushed, true);
+            app.ApplyROMButton.BackgroundColor = [0.651 0.651 0.651];
+            app.ApplyROMButton.FontColor = [0.149 0.149 0.149];
+            app.ApplyROMButton.Position = [414 73 89 23];
+            app.ApplyROMButton.Text = 'Apply ROM ';
+
+            % Create ROMVisibilityPanel
+            app.ROMVisibilityPanel = uipanel(app.OverallTab);
+            app.ROMVisibilityPanel.ForegroundColor = [0.850980392156863 0.850980392156863 0.850980392156863];
+            app.ROMVisibilityPanel.BorderType = 'none';
+            app.ROMVisibilityPanel.Title = 'ROM Visibility';
+            app.ROMVisibilityPanel.BackgroundColor = [0.129411764705882 0.129411764705882 0.129411764705882];
+            app.ROMVisibilityPanel.Position = [11 295 101 101];
+
+            % Create LeftLegJointsCheckBox
+            app.LeftLegJointsCheckBox = uicheckbox(app.ROMVisibilityPanel);
+            app.LeftLegJointsCheckBox.ValueChangedFcn = createCallbackFcn(app, @LeftLegJointsCheckBoxValueChanged, true);
+            app.LeftLegJointsCheckBox.Text = 'Left Leg Joints';
+            app.LeftLegJointsCheckBox.FontColor = [0.850980392156863 0.850980392156863 0.850980392156863];
+            app.LeftLegJointsCheckBox.Position = [5 46 100 30];
+
+            % Create RightLegJointsCheckBox
+            app.RightLegJointsCheckBox = uicheckbox(app.ROMVisibilityPanel);
+            app.RightLegJointsCheckBox.ValueChangedFcn = createCallbackFcn(app, @RightLegJointsCheckBoxValueChanged, true);
+            app.RightLegJointsCheckBox.Text = 'Right Leg Joints';
+            app.RightLegJointsCheckBox.FontColor = [0.850980392156863 0.850980392156863 0.850980392156863];
+            app.RightLegJointsCheckBox.Position = [3 8 108 30];
+
+            % Create ROMVisibilityPanel_2
+            app.ROMVisibilityPanel_2 = uipanel(app.OverallTab);
+            app.ROMVisibilityPanel_2.ForegroundColor = [0.850980392156863 0.850980392156863 0.850980392156863];
+            app.ROMVisibilityPanel_2.BorderType = 'none';
+            app.ROMVisibilityPanel_2.Title = 'ROM Visibility';
+            app.ROMVisibilityPanel_2.BackgroundColor = [0.129411764705882 0.129411764705882 0.129411764705882];
+            app.ROMVisibilityPanel_2.Position = [805 280 108 101];
+
+            % Create PLEGSWorkCheckBox
+            app.PLEGSWorkCheckBox = uicheckbox(app.ROMVisibilityPanel_2);
+            app.PLEGSWorkCheckBox.ValueChangedFcn = createCallbackFcn(app, @PLEGSWorkCheckBoxValueChanged, true);
+            app.PLEGSWorkCheckBox.Text = 'PLEGS'' Work';
+            app.PLEGSWorkCheckBox.FontColor = [0.850980392156863 0.850980392156863 0.850980392156863];
+            app.PLEGSWorkCheckBox.Position = [5 46 100 30];
+
+            % Create PatientsWorkCheckBox
+            app.PatientsWorkCheckBox = uicheckbox(app.ROMVisibilityPanel_2);
+            app.PatientsWorkCheckBox.ValueChangedFcn = createCallbackFcn(app, @PatientsWorkCheckBoxValueChanged, true);
+            app.PatientsWorkCheckBox.Text = 'Patient''s Work';
+            app.PatientsWorkCheckBox.FontColor = [0.850980392156863 0.850980392156863 0.850980392156863];
+            app.PatientsWorkCheckBox.Position = [3 8 108 30];
+
+            % Show the figure after all components are created
+            app.UIFigure.Visible = 'on';
+        end
+    end
+
+    % App creation and deletion
+    methods (Access = public)
+
+        % Construct app
+        function app = BRAIN_Center_GUI
+
+            % Create UIFigure and components
+            createComponents(app)
+
+            % Register the app with App Designer
+            registerApp(app, app.UIFigure)
+
+            % Execute the startup function
+            runStartupFcn(app, @startupFcn2)
+
+            if nargout == 0
+                clear app
+            end
+        end
+
+        % Code that executes before app deletion
+        function delete(app)
+
+            % Delete UIFigure when app is deleted
+            delete(app.UIFigure)
+        end
+    end
+end
