@@ -1,0 +1,233 @@
+%Parameters 
+eeglab
+template20 = {'F7','Fp1','Fp2','F8','F3','Fz','F4','C3','Cz','P8','P7','Pz','P4','T3','P3','O1','O2','C4','T4','A2'}
+chanlocs_lookup = 'standard_1005.elc';
+subjects = {};
+%Subject 00
+eeglab
+EEG = pop_loadset('filename','subject_00_pre.set','filepath','C:\\Users\\meowm\\Downloads\\');
+EEG = pop_select(EEG, 'channel',1:20);
+EEG = pop_select(EEG, 'point',[1:194560]);
+[ALLEEG EEG CURRENTSET] = pop_newset(ALLEEG, EEG, 1,'gui','off');
+[path_to_dipfit,~]=fileparts(which('pop_dipfit_settings'));
+ALLEEG(1) =pop_chanedit(ALLEEG(1), 'lookup','C:\Users\meowm\Downloads\sccn-eeglab-7a5f884\plugins\dipfit5.5\standard_BEM\elec\standard_1005.elc');
+ALLEEG(1) = pop_eegfiltnew(ALLEEG(1), 'locutoff',1,'hicutoff',100,'plotfreqz',0);
+ALLEEG(1) = pop_basicfilter(ALLEEG(1),1:length(EEG.chanlocs),'Cutoff',[.2 30],'Design','butter', 'Filter','bandpass','Order',2,'RemoveDC','off')
+ALLEEG(1) = pop_runica(ALLEEG(1), 1, 'icatype', 'runica','extended',1, 'verbose','off','lrate', 1e-5, 'maxsteps', 2000);
+
+EEG = pop_loadset('filename','subject_00_post.set','filepath','C:\\Users\\meowm\\Downloads\\');
+EEG = pop_select(EEG, 'channel',1:20);
+EEG = pop_select(EEG, 'point',[1:69367]);
+[ALLEEG EEG CURRENTSET] = pop_newset(ALLEEG, EEG, 3,'gui','off');[path_to_dipfit,~]=fileparts(which('pop_dipfit_settings'));
+ALLEEG(2) = pop_chanedit(ALLEEG(2), 'lookup','C:\Users\meowm\Downloads\sccn-eeglab-7a5f884\plugins\dipfit5.5\standard_BEM\elec\standard_1005.elc');
+ALLEEG(2) = pop_eegfiltnew(ALLEEG(2), 'locutoff',1,'hicutoff',100,'plotfreqz',0);
+ALLEEG(2) = pop_basicfilter(ALLEEG(2),1:length(EEG.chanlocs),'Cutoff',[.2 30],'Design','butter', 'Filter','bandpass','Order',2,'RemoveDC','off')
+ALLEEG(2)  = pop_runica(ALLEEG(2), 1, 'icatype', 'runica','extended',1, 'verbose','off','lrate', 1e-5, 'maxsteps', 2000);
+%pop_saveset(ALLEEG(1),[pwd '/cleandata/' "subject_00_pre.set"]);
+%pop_saveset(ALLEEG(2),[pwd '/cleandata/' "subject_00_post.set"]);
+subjects{end+1}.pre = ALLEEG(1);
+subjects{end}.post = ALLEEG(2);
+
+%Subject 01
+eeglab
+EEG = pop_loadbv(pwd, 'subject_01_01.vhdr', [1 208896], [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 ]);
+[ALLEEG EEG CURRENTSET] = pop_newset(ALLEEG, EEG, 1,'gui','off');
+ALLEEG(1)=pop_chanedit(EEG, 'lookup','C:\Users\meowm\Downloads\sccn-eeglab-7a5f884\plugins\dipfit5.5\standard_BEM\elec\standard_1005.elc');
+ALLEEG(1) = pop_eegfiltnew(ALLEEG(1), 'locutoff',1,'hicutoff',100,'plotfreqz',0);
+ALLEEG(1) = pop_basicfilter(ALLEEG(1),1:length(EEG.chanlocs),'Cutoff',[.2 30],'Design','butter', 'Filter','bandpass','Order',2,'RemoveDC','off')
+ALLEEG(1) = eeg_eegrej( ALLEEG(1), [27 1772;2870 3197;4666 8244;8933 9439;11056 11457;12407 18232;18269 28081;28531 28932;29265 30387;31143 33303;35565 48483;50763 53658;54076 54277;54836 63995;64559 68456;70344 72593;73323 73843;74325 74659;75401 75439;75579 77257;80132 80474;80948 82626;82967 83338;83798 86797;87306 87811;88516 107234;107865 108845;108960 109122;109442 110318;110911 111053;111349 114949;115857 117580;118047 118299;118648 120541;121033 123253;123728 124314;124841 125999;126879 127622;128542 128780;129113 129292;129633 133923;135588 138565;139099 149516;150221 150986;151482 157012;160648 177846;180796 180952;181234 181687;181939 182355;182525 182719;185175 185576;186414 187446;188022 188357;189336 189544;190019 190427;190790 190969;191585 191882;192394 192617;193114 193619;193989 194843;195118 195786;196335 196632;197169 197496;198119 200309;200818 208896]);
+ALLEEG(1)  = pop_runica(ALLEEG(1), 1, 'icatype', 'runica','extended',1, 'verbose','off','lrate', 1e-5, 'maxsteps', 2000);
+
+EEG = pop_loadbv(pwd, 'subject_01_03.vhdr', [1 299008], [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 ]);
+[ALLEEG EEG CURRENTSET] = pop_newset(ALLEEG, EEG, 3,'gui','off');
+ALLEEG(3)=pop_chanedit(EEG, 'lookup','C:\Users\meowm\Downloads\sccn-eeglab-7a5f884\plugins\dipfit5.5\standard_BEM\elec\standard_1005.elc');
+%ALLEEG(3) = pop_reref( ALLEEG(3), []);
+ALLEEG(3) = pop_eegfiltnew(ALLEEG(3), 'locutoff',1,'hicutoff',100,'plotfreqz',0);
+ALLEEG(3) = pop_basicfilter(ALLEEG(3),1:length(EEG.chanlocs),'Cutoff',[.2 30],'Design','butter', 'Filter','bandpass','Order',2,'RemoveDC','off')
+ALLEEG(3) = eeg_eegrej( ALLEEG(3), [13 1415;1875 16338;17421 25088;25102 35151;36446 37144;43076 43530;51826 52479;56835 61531;66011 70450;70910 72401;73091 74984;77861 78433;80318 80659;80993 81446;82551 84326;84993 85543;87998 90707;92867 99267;101108 102645;105403 107748;109154 112598;112983 113355;114230 114379;118685 119865;121632 121847;122110 123988;126210 126589;127278 128355;128637 130856;131813 134025;134853 135596;135944 147609;148878 157819;158576 159407;161095 161429;162238 162490;164809 167733;168438 169040;170702 171259;172082 172416;175130 175962;176926 181068;184011 184427;184872 186186;187076 188739;190405 192023;192832 193158;193970 194461;195529 201363;202599 220899;222159 223065;228597 234609;235826 239263;241071 241516;250115 250316;251124 251830;252980 255155;256223 256313;256654 256943;257819 258866;259184 259638;259986 260165;261010 266970;268197 272243;279084 281052;283271 284799;285415 286736;290801 291981;293799 293933;294814 295438;296870 299008]);
+ALLEEG(3)  = pop_runica(ALLEEG(3), 1, 'icatype', 'runica','extended',1, 'verbose','off','lrate', 1e-5, 'maxsteps', 2000);
+%pop_saveset(ALLEEG(1),[pwd '/cleandata/' "subject_01_pre.set"]);
+%pop_saveset(ALLEEG(3),[pwd '/cleandata/' "subject_01_post.set"]);
+subjects{end+1}.pre = ALLEEG(1);
+subjects{end}.post = ALLEEG(3);
+
+%Subject 02
+eeglab
+EEG = pop_loadbv(pwd, 'subject_02_01.vhdr', [1 309760], [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 ]);
+[ALLEEG EEG CURRENTSET] = pop_newset(ALLEEG, EEG, 1,'gui','off');
+ALLEEG(1)=pop_chanedit(EEG, 'lookup','C:\Users\meowm\Downloads\sccn-eeglab-7a5f884\plugins\dipfit5.5\standard_BEM\elec\standard_1005.elc');
+%ALLEEG(1) = pop_reref( ALLEEG(1), []);
+ALLEEG(1) = pop_eegfiltnew(ALLEEG(1), 'locutoff',1,'hicutoff',100,'plotfreqz',0);
+%pop_eegplot( EEG, 1, 0, 1);
+ALLEEG(1) = eeg_eegrej( ALLEEG(1), [2121 5542;11249 12162;16016 16394;19456 21223;23205 23806;27201 27973;28514 28997;30069 40626;41191 48780;49908 52869;54245 55003;55730 56435;57570 59396;59933 60134;61210 62398;63184 63934;64342 64951;67195 67678;68546 71025;71896 73337;75125 76053;76961 80027;83056 83301;83947 84400;86078 86465;87386 91789;93699 98420;99088 101441;102713 103463;104242 104747;105199 105838;106676 107381;107933 108223;111006 112238;117340 117808;121010 122888;124850 127886;128539 131470;132999 133007;133043 133326;133748 134691;135581 136020;136301 137103;137556 139842;140977 142981;144258 145163;146075 146358;148829 150240;151746 152036;154396 154693;156971 157179;158255 158493;175176 175934;179369 179748;180379 180713;182316 183474;189811 190191;191199 191927;195215 196143;198282 198861;200196 200916;201228 203382;203909 204473;205770 207664;209415 211182;212121 224085;234172 235753;236836 237504;238514 240302;240777 241364;241836 243380;245480 245814;246734 248479;249414 250520;251213 252935;254864 255577;256517 258655;261727 265995;265999 286066;287091 289228;290287 296321;303391 303933;304794 305595;309433 309760]);
+ALLEEG(1) = pop_basicfilter(ALLEEG(1),1:length(EEG.chanlocs),'Cutoff',[.2 30],'Design','butter', 'Filter','bandpass','Order',2,'RemoveDC','off')
+ALLEEG(1)  = pop_runica(ALLEEG(1), 1, 'icatype', 'runica','extended',1, 'verbose','off','lrate', 1e-5, 'maxsteps', 2000);
+
+EEG = pop_loadbv(pwd, 'subject_02_03.vhdr', [1 345088], [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 ]);
+[ALLEEG EEG CURRENTSET] = pop_newset(ALLEEG, EEG, 3,'gui','off');
+ALLEEG(3)=pop_chanedit(EEG, 'lookup','C:\Users\meowm\Downloads\sccn-eeglab-7a5f884\plugins\dipfit5.5\standard_BEM\elec\standard_1005.elc');
+%ALLEEG(3) = pop_reref( ALLEEG(3), []);
+ALLEEG(3) = pop_eegfiltnew(ALLEEG(3), 'locutoff',1,'hicutoff',100,'plotfreqz',0);
+%pop_eegplot( EEG, 1, 0, 1);
+ALLEEG(3) = eeg_eegrej( ALLEEG(3), [1323 3383;4199 14301;14316 16625;16954 17298;17844 34225;34427 34761;35123 43091;45013 51247;54184 56188;57165 59670;60876 61451;62238 62683;63351 64251;65336 66941;67386 67729;68703 69928;71171 71523;72499 72936;73427 73817;74225 75060;75969 76321;78084 79280;80512 82358;83026 83472;84058 86322;86952 87769;88482 91433;93416 99612;102364 112401;113572 115260;117579 118340;118703 119122;121384 121635;123314 123481;127423 130445;131670 132700;133720 133980;134527 136113;142074 144579;147037 147900;148503 148939;150202 150500;150740 154507;155137 155982;157215 157392;157725 158022;158623 161611;162455 165542;168158 168668;170781 173147;179892 180746;186824 187251;189412 190015;194123 194624;197768 198195;199243 200013;200655 201240;206592 208464;210709 211729;213241 213548;214206 214661;218661 219051;220256 220488;224887 225333;227067 227429;230462 231279;232030 233078;233531 234218;235599 235980;240662 241201;244928 246616;248230 250726;255481 256446;257818 258589;259859 260425;262586 263143;263701 264379;267059 267542]);
+ALLEEG(3) = pop_basicfilter(ALLEEG(3),1:length(EEG.chanlocs),'Cutoff',[.2 30],'Design','butter', 'Filter','bandpass','Order',2,'RemoveDC','off')
+ALLEEG(3)  = pop_runica(ALLEEG(3), 1, 'icatype', 'runica','extended',1, 'verbose','off','lrate', 1e-5, 'maxsteps', 2000);
+%pop_saveset(ALLEEG(1),[pwd '/cleandata/' "subject_02_pre.set"]);
+%pop_saveset(ALLEEG(3),[pwd '/cleandata/' "subject_02_post.set"]);
+subjects{end+1}.pre = ALLEEG(1);
+subjects{end}.post = ALLEEG(3);
+
+%Subject 03
+eeglab
+EEG = pop_loadbv(pwd, 'subject_03_01.vhdr', [1 261632], [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 ]);
+[ALLEEG EEG CURRENTSET] = pop_newset(ALLEEG, EEG, 1,'gui','off');
+ALLEEG(1)=pop_chanedit(EEG, 'lookup','C:\Users\meowm\Downloads\sccn-eeglab-7a5f884\plugins\dipfit5.5\standard_BEM\elec\standard_1005.elc');
+ALLEEG(1) = pop_eegfiltnew(ALLEEG(1), 'locutoff',1,'hicutoff',100,'plotfreqz',0);
+ALLEEG(1) = eeg_eegrej( ALLEEG(1), [220 933;1675 2084;2983 4134;4403 4867;5108 6231;6573 7251;8160 8717;9143 9449;9913 10943;11239 11833;11991 13902;14310 14458;15018 16864;19026 19322;19693 20074;20222 20389;20732 20872;21354 22411;22773 24526;24897 25157;25723 27198;27533 29705;30084 31115;31884 32135;32784 33081;33554 33888;34073 34278;34565 35650;36049 36476;36882 39294;39702 40111;40713 41669;42122 43384;43597 43745;44376 44636;44997 45471;45591 45860;46101 46463;46853 47576;48029 51712;52120 52259;52528 53641;54901 56070;56782 62571;63368 63582;64739 65705;66122 66308;66676 70146;70777 72549;72789 72966;73374 74070;75044 75730;76398 76890;77140 77335;77808 78467;79921 80478;81535 81953;82621 82899;83205 83697;84420 84736;85526 85712;86602 87011;87604 89302;90303 90870;91129 91695;92491 93642;93966 96155;97739 97953;98435 99141;100298 104909;105608 112454;112879 113129;113825 115263;115819 116172;116732 120619;121027 121231;121704 121946;122196 122437;123493 124356;125107 126081;127489 128130;128704 129085;129418 129632;130049 130300;131033 134279;135021 135318;136381 136595;137133 137402;137828 138293;140231 140510;141567 141892;142522 142866;143858 144044;144860 145055;145843 146150;146613 147216;147643 147931;148433 148777;151133 153721;155585 155771;156420 156875;157582 161376;162869 165328;165821 166063;166916 168799;169483 178046;178825 180049;180227 180349;180951 181165;183140 184782;185441 185691;186211 186638;187248 187638;188843 189187;189725 190198;190587 190857;192572 193315;194641 194975;196068 196504;197153 197571;198851 199092;200038 200780;201448 201977;203704 204150;204567 205096;205856 206543;210047 210317;213350 213628;215457 215671;216925 217417;218483 218743;219530 219799;221469 221933;222211 222387;224263 225302;225914 226869;227092 227297;228038 229170;230088 230654;231248 231684;232231 232704;233149 233446;235526 235926;236574 237011;238272 239367;240582 240888;241083 241268;241630 242827;243550 243903;244758 244907;246187 246994;247253 247486;248200 249832;250398 250779;254997 255341;257887 258128;258898 261632]);
+ALLEEG(1) = pop_basicfilter(ALLEEG(1),1:length(EEG.chanlocs),'Cutoff',[.2 30],'Design','butter', 'Filter','bandpass','Order',2,'RemoveDC','off')
+ALLEEG(1)  = pop_runica(ALLEEG(1), 1, 'icatype', 'runica','extended',1, 'verbose','off','lrate', 1e-5, 'maxsteps', 2000);
+
+EEG = pop_loadbv(pwd, 'subject_03_03.vhdr', [1 194560], [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 ]);
+[ALLEEG EEG CURRENTSET] = pop_newset(ALLEEG, EEG, 3,'gui','off');
+ALLEEG(3)=pop_chanedit(EEG, 'lookup','C:\Users\meowm\Downloads\sccn-eeglab-7a5f884\plugins\dipfit5.5\standard_BEM\elec\standard_1005.elc');
+ALLEEG(3) = pop_eegfiltnew(ALLEEG(3), 'locutoff',1,'hicutoff',100,'plotfreqz',0);
+ALLEEG(3) = eeg_eegrej( ALLEEG(3), [34 970;1462 2251;2613 7334;8095 8457;9412 9811;11638 11991;12566 13058;13772 14162;14588 15173;15828 16051;16486 17396;17859 18296;18620 19075;21635 22089;25918 26429;28015 28423;29620 30084;30993 31447;34399 34761;40123 40596;44067 44429;46078 46301;46857 52368;52905 53212;55130 56921;62067 62939;63950 64544;66807 67846;69642 69800;72119 72407;74865 75691;77481 77843;78937 79317;80078 80421;81629 81871;82390 82808;98423 100622;101058 101271;101855 102171;104238 107856;108161 108403;108792 109117;109386 110620;112048 112457;112735 113329;114078 114394;115748 116527;117102 118123;119178 119763;120384 121099;121757 122045;123640 124355;126373 126661;126911 127181;127978 128739;129638 130307;131289 131782;135501 136419;137961 138620;139445 141153;141737 143870;144334 144696;145317 145596;146577 146809;148405 148961;152516 152767;153499 153861;155076 155420;156171 158110;158462 159158;160354 160661;161293 161962;163622 166368;166989 167351;167907 168455;170254 170551;171128 172066;172844 173930;174931 175377;177085 182892;183419 183773;187102 187474;188113 188967;190479 191184;193271 194560]);
+ALLEEG(3) = pop_basicfilter(ALLEEG(3),1:length(EEG.chanlocs),'Cutoff',[.2 30],'Design','butter', 'Filter','bandpass','Order',2,'RemoveDC','off')
+ALLEEG(3)  = pop_runica(ALLEEG(3), 1, 'icatype', 'runica','extended',1, 'verbose','off','lrate', 1e-5, 'maxsteps', 2000);
+%pop_saveset(ALLEEG(1),[pwd '/cleandata/' "subject_03_pre.set"]);
+%pop_saveset(ALLEEG(3),[pwd '/cleandata/' "subject_03_post.set"]);
+subjects{end+1}.pre = ALLEEG(1);
+subjects{end}.post = ALLEEG(3);
+
+%Subject 04 
+eeglab
+EEG = pop_loadset('filename','subject_04_01.set','filepath','C:\\Users\\meowm\\Downloads\\Subject04\\');
+[ALLEEG EEG CURRENTSET] = pop_newset(ALLEEG, EEG, 1,'gui','off');
+[path_to_dipfit,~]=fileparts(which('pop_dipfit_settings'));
+ALLEEG(1)=pop_chanedit(ALLEEG(1), 'lookup',[path_to_dipfit '/standard_BESA/standard-10-5-cap385.elp']);
+ALLEEG(1) = pop_eegfiltnew(ALLEEG(1), 'locutoff',1,'hicutoff',100,'plotfreqz',0);
+ALLEEG(1) = pop_basicfilter(ALLEEG(1),1:length(EEG.chanlocs),'Cutoff',[.2 30],'Design','butter', 'Filter','bandpass','Order',2,'RemoveDC','off')
+ALLEEG(1)  = pop_runica(pop_resample(ALLEEG(1),250), 1, 'icatype', 'runica','extended',1, 'verbose','off','lrate', 1e-5, 'maxsteps', 2000);
+
+EEG = pop_loadset('filename','subject_04_post.set','filepath','C:\\Users\\meowm\\Downloads\\Subject04\\');
+[ALLEEG EEG CURRENTSET] = pop_newset(ALLEEG, EEG, 3,'gui','off');
+ALLEEG(2) = pop_chanedit(ALLEEG(2), 'lookup',[path_to_dipfit '/standard_BESA/standard-10-5-cap385.elp']);
+ALLEEG(2) = pop_eegfiltnew(ALLEEG(2), 'locutoff',1,'hicutoff',100,'plotfreqz',0);
+ALLEEG(2) = pop_basicfilter(ALLEEG(2),1:length(EEG.chanlocs),'Cutoff',[.2 30],'Design','butter', 'Filter','bandpass','Order',2,'RemoveDC','off')
+ALLEEG(2) = pop_runica(pop_resample(ALLEEG(2),250), 1, 'icatype', 'runica','extended',1, 'verbose','off','lrate', 1e-5, 'maxsteps', 2000);
+%pop_saveset(ALLEEG(1),[pwd '/cleandata/' "subject_04_pre.set"]);
+%pop_saveset(ALLEEG(3),[pwd '/cleandata/' "subject_04_post.set"]);
+subjects{end+1}.pre = ALLEEG(1);
+subjects{end}.post = ALLEEG(2);
+nSubj = numel(subjects);
+
+templatechanlocs = [];
+template_chanlocs_full = readlocs('standard_1005.elc');
+for iChan = 1:length(template20)
+    idx = find(strcmpi({template_chanlocs_full.labels},template20{iChan}),1);
+    if ~isempty(idx)
+        templatechanlocs = [templatechanlocs,template_chanlocs_full(idx)];
+    else
+        warning(['Channel' template20{iChan} 'not found in standard_1005.elc']);
+    end
+end
+% Subject Differences
+delta = nan(numel(template20),nSubj);
+theta = nan(numel(template20),nSubj);
+alpha = nan(numel(template20),nSubj);
+beta = nan(numel(template20),nSubj);
+gamma = nan(numel(template20),nSubj);
+for s = 1:nSubj
+    EEG_pre = subjects{s}.pre;
+    EEG_post = subjects{s}.post;
+    if isempty(EEG_pre.chanlocs)
+        EEG_pre = pop_chanedit(EEG_pre,'lookup',chanlocs_lookup);
+    end
+    if isempty(EEG_post.chanlocs)
+        EEG_post = pop_chanedit(EEG_post,'lookup',chanlocs_lookup);
+    end
+    figure('Name',['Subject ' num2str(s) ' PRE channel layout']);
+    topoplot([], EEG_pre.chanlocs, 'style','blank','electrodes','labelpoint','chaninfo',EEG_pre.chaninfo);
+    title(['Subject ' num2str(s) ' PRE']);
+    figure('Name',['Subject ' num2str(s) ' POST channel layout']);
+    topoplot([], EEG_post.chanlocs, 'style','blank','electrodes','labelpoint','chaninfo',EEG_post.chaninfo);
+    title(['Subject ' num2str(s) ' POST']);
+    commonChans = intersect({EEG_pre.chanlocs.labels},{EEG_post.chanlocs.labels},'stable');
+    EEG_pre = pop_select(EEG_pre,'channel',commonChans);
+    EEG_post = pop_select(EEG_post,'channel',commonChans);
+    tPre = [5000 (EEG_pre.xmax*1000)-5000];
+    tPost = [5000 (EEG_post.xmax*1000)-5000];
+    [SPEC_pre,FREQ] = pop_spectopo(EEG_pre,1,tPre,'EEG','freqrange',[.1 40],'plot','off','nfft',10000);
+    [SPEC_post,~] = pop_spectopo(EEG_post,1,tPost,'EEG','freqrange',[.1 40],'plot','off','nfft',10000);
+    FREQ = FREQ(:);
+    % Band Indices 
+    [~, idxDeltaLow] = min(abs(FREQ - 0.1));
+    [~, idxDeltaHigh] = min(abs(FREQ - 3.9));
+    idx_delta = idxDeltaLow:idxDeltaHigh;
+
+    [~, idxThetaLow] = min(abs(FREQ - 4));
+    [~, idxThetaHigh] = min(abs(FREQ - 7));
+    idx_theta = idxThetaLow:idxThetaHigh;
+
+    [~, idxAlphaLow] = min(abs(FREQ - 8));
+    [~, idxAlphaHigh] = min(abs(FREQ - 13));
+    idx_alpha = idxAlphaLow:idxAlphaHigh;
+
+    [~, idxBetaLow] = min(abs(FREQ - 14));
+    [~, idxBetaHigh] = min(abs(FREQ - 28));
+    idx_beta = idxBetaLow:idxBetaHigh;
+
+    [~, idxGammaLow] = min(abs(FREQ - 30));
+    [~, idxGammaHigh] = min(abs(FREQ - 40));
+    idx_gamma = idxGammaLow:idxGammaHigh;
+    
+    diff_delta = mean(SPEC_post(:,idx_delta(1):idx_delta(2)),2) - mean(SPEC_pre(:,idx_delta(1):idx_delta(2)),2);
+    diff_theta = mean(SPEC_post(:,idx_theta(1):idx_theta(2)),2) - mean(SPEC_pre(:,idx_theta(1):idx_theta(2)),2);
+    diff_alpha = mean(SPEC_post(:,idx_alpha(1):idx_alpha(2)),2) - mean(SPEC_pre(:,idx_alpha(1):idx_alpha(2)),2);
+    diff_beta = mean(SPEC_post(:,idx_beta(1):idx_beta(2)),2) - mean(SPEC_pre(:,idx_beta(1):idx_beta(2)),2);
+    diff_gamma = mean(SPEC_post(:,idx_gamma(1):idx_gamma(2)),2) - mean(SPEC_pre(:,idx_gamma(1):idx_gamma(2)),2);
+    %Mapping
+    subj_delta = nan(numel(template20),1);
+    subj_theta = nan(numel(template20),1);
+    subj_alpha = nan(numel(template20),1);
+    subj_beta = nan(numel(template20),1);
+    subj_gamma = nan(numel(template20),1);
+
+    for k = 1:numel(commonChans)
+        lbl = commonChans{k};
+        tidx = find(strcmpi(template20,lbl),1);
+        if ~isempty(tidx)
+            subj_delta(tidx) = diff_delta(k);
+            subj_theta(tidx) = diff_theta(k);
+            subj_alpha(tidx) = diff_alpha(k);
+            subj_beta(tidx) = diff_beta(k);
+            subj_gamma(tidx) = diff_gamma(k);
+        end
+    end
+
+    all_delta(:,s) = subj_delta;
+    all_theta(:,s) = subj_theta;
+    all_alpha(:,s) = subj_alpha;
+    all_beta(:,s) = subj_beta;
+    all_gamma(:,s) = subj_gamma;
+end
+
+group_delta = nanmean(all_delta,2);
+group_theta = nanmean(all_theta,2);
+group_alpha = nanmean(all_alpha,2);
+group_beta = nanmean(all_beta,2);
+group_gamma = nanmean(all_gamma,2);
+
+%Plotting
+figure("Name","Group Average EEG Band Differences","Position",[100 100 800 1200]);
+clims = {[-10 10],[-5 5],[-5 5],[-5 5],[-5 5]};
+group_data = {group_delta,group_theta,group_alpha,group_beta,group_gamma};
+titles = {'delta','theta','alpha','beta','gamma'};
+for i = 1:5
+    subplot(5,1,i)
+    data = group_data{i};
+    topoplot(data,templatechanlocs,'electrodes','off','maplimits',clims{i});
+    title(titles{i},'FontWeight','bold','FontSize',14);
+    colorbar
+    colormap(jet);
+end
